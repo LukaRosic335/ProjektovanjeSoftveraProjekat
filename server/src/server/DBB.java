@@ -14,26 +14,31 @@ public class DBB {
     
     private static Connection connection;
     
-    public static void connect(String adresa,String port,String imeBaze,String ussername,String password){
+    public static boolean connect(String adresa,String port,String imeBaze,String ussername,String password){
         connection=null;
         String url="jdbc:mysql://"+adresa+":"+port+"/"+imeBaze;
         try{
             connection=DriverManager.getConnection(url, ussername, password);
             System.out.println("Uspesno uspostavljena konekcija");
+            return true;
         }catch(SQLException ex){
             System.out.println("Neuspesno uspostavljanje konekcije "+ex);
+            return false;
         }
     }
-    public static void disconnect(){
+    public static boolean disconnect(){
         try{
             if(connection!=null&&!connection.isClosed()){
                 System.out.println("Konekcija uspesno zatvorena");
                 connection.close();
+                return true;
             }else{
                 System.out.println("konekcija nikad nije bila uspostavljena");
+                return true;
             }
         }catch(SQLException ex){
             System.out.println("Konekcija neuspesno zatvorena "+ex);
+            return false;
         }
     }
     

@@ -172,15 +172,17 @@ public class ServerFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void connectbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectbtnActionPerformed
-        DBB.connect(adresatxt.getText(), porttxt.getText(), bazatxt.getText(), ussernametxt.getText(), passwordtxt.getText());
+        if(DBB.connect(adresatxt.getText(), porttxt.getText(), bazatxt.getText(), ussernametxt.getText(), passwordtxt.getText())){
         connectedlabel.setText("Connected");
-        connectedlabel.setForeground(Color.GREEN);
+        connectedlabel.setForeground(Color.GREEN);    
+        }
     }//GEN-LAST:event_connectbtnActionPerformed
 
     private void disconnectbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disconnectbtnActionPerformed
-        DBB.disconnect();
+        if(DBB.disconnect()){
         connectedlabel.setText("Disconnected");
-        connectedlabel.setForeground(Color.red);
+        connectedlabel.setForeground(Color.red);    
+        }
     }//GEN-LAST:event_disconnectbtnActionPerformed
 
     /**
