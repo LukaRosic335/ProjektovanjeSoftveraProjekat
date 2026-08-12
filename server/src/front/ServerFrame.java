@@ -4,7 +4,7 @@
  */
 package front;
 import java.awt.Color;
-import server.DBB;
+import dbb.DBB;
 
 /**
  *
