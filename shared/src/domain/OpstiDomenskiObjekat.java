@@ -11,5 +11,6 @@ import java.io.Serializable;
  * @author jevrozim
  */
 public abstract class OpstiDomenskiObjekat implements Serializable{
-    public abstract void nesto();
+
+    //ovde se svasta savade
 }

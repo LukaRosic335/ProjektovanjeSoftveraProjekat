@@ -1,0 +1,10 @@
+
+treba povezati klijenta i server tj uspostaviti komunikaciju medju njima
+postoji request i response klase i prilicno sam siguran da sam ih regulisao
+
+ofc operacije koje ce biti neophodne cu saznati kasnije
+
+sve iznad je korak 1
+
+korak 2
+treba srediti opsti domenski objekat i apstraktnu sistemsku operaciju i dbb(najopstiji deo ovog sranjeta)
