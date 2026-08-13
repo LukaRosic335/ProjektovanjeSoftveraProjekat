@@ -16,7 +16,7 @@ import java.net.Socket;
 public class Session {
     private Socket socket;
     private static Session instance;
-    private Zaposleni zaposleni;
+    private Zaposleni ulogovani;
 
     private Session() {
         try {
@@ -42,12 +42,12 @@ public class Session {
         Session.instance = instance;
     }
 
-    public Zaposleni getZaposleni() {
-        return zaposleni;
+    public Zaposleni getUlogovani() {
+        return ulogovani;
     }
 
-    public void setZaposleni(Zaposleni zaposleni) {
-        this.zaposleni = zaposleni;
+    public void setUlogovani(Zaposleni ulogovani) {
+        this.ulogovani = ulogovani;
     }
     
     public static Session getInstace(){

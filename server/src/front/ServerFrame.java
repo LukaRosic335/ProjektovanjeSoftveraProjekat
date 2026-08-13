@@ -5,6 +5,7 @@
 package front;
 import java.awt.Color;
 import dbb.DBB;
+import threads.MainThread;
 
 /**
  *
@@ -51,6 +52,9 @@ public class ServerFrame extends javax.swing.JFrame {
         connectbtn = new javax.swing.JButton();
         disconnectbtn = new javax.swing.JButton();
         connectedlabel = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        Serverbtn = new javax.swing.JButton();
+        ServerAcctivitylbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,6 +96,17 @@ public class ServerFrame extends javax.swing.JFrame {
 
         connectedlabel.setText("Disconnected");
 
+        jLabel8.setText("Aktiviraj server");
+
+        Serverbtn.setText("ukljuci");
+        Serverbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ServerbtnActionPerformed(evt);
+            }
+        });
+
+        ServerAcctivitylbl.setText("Server nije aktivan");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,22 +124,32 @@ public class ServerFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(adresatxt, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                    .addComponent(ussernametxt)
-                                    .addComponent(passwordtxt))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(connectbtn)
-                                .addGap(76, 76, 76)
-                                .addComponent(disconnectbtn)
-                                .addGap(20, 20, 20))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(porttxt)
                                     .addComponent(bazatxt, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
                                 .addGap(135, 135, 135)
                                 .addComponent(connectedlabel)
-                                .addGap(118, 118, 118))))
+                                .addGap(118, 118, 118))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(adresatxt, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                                    .addComponent(ussernametxt)
+                                    .addComponent(passwordtxt))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(connectbtn)
+                                        .addGap(76, 76, 76)
+                                        .addComponent(disconnectbtn)
+                                        .addGap(20, 20, 20))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(135, 135, 135)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(ServerAcctivitylbl)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(Serverbtn)
+                                                .addComponent(jLabel8)))
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -160,12 +185,16 @@ public class ServerFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(ussernametxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ussernametxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(passwordtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(218, Short.MAX_VALUE))
+                    .addComponent(passwordtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Serverbtn))
+                .addGap(18, 18, 18)
+                .addComponent(ServerAcctivitylbl)
+                .addContainerGap(184, Short.MAX_VALUE))
         );
 
         pack();
@@ -185,12 +214,20 @@ public class ServerFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_disconnectbtnActionPerformed
 
+    private void ServerbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServerbtnActionPerformed
+        // TODO add your handling code here:
+        //pali i gasi server i njegovu nit
+        if()
+    }//GEN-LAST:event_ServerbtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel ServerAcctivitylbl;
+    private javax.swing.JButton Serverbtn;
     private javax.swing.JTextField adresatxt;
     private javax.swing.JTextField bazatxt;
     private javax.swing.JButton connectbtn;
@@ -203,6 +240,7 @@ public class ServerFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField passwordtxt;
     private javax.swing.JTextField porttxt;
     private javax.swing.JTextField ussernametxt;

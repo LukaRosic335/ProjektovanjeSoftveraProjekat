@@ -34,13 +34,15 @@ public class KlijentKontroler {
         return instance;
     }
     
-    public static void login(Zaposleni z){
+    public Zaposleni login(Zaposleni z){
         //ovo pozivam iz forme za login
-        
+        Zaposleni za=(Zaposleni) sendRequest(Operation.LOGIN,z);
+        return za;
     }
     
     
     private synchronized Object sendRequest(Operation operation,Object data){
+    //ukoliko nesto nije kako treba trenutno vraca null
         Request request=new Request(data, operation);
         try {
             ObjectOutputStream out=new ObjectOutputStream(Session.getInstace().getSocket().getOutputStream());
@@ -51,14 +53,18 @@ public class KlijentKontroler {
             
             if(response.getStatus().equals(ResponseStatus.Fail)){
                 System.out.println("NEUSPESNO IZVRSENA STVAR JOS MISLIM KAKO CU DA NAPRAVIM OVO");
+                return null;
+            }else{
+                return response.getData();
             }
         } catch (IOException ex) {
             System.out.println("Nesto se desilo pri stvaranju kanala kod klijenta "+ex.getMessage());
+            return null;
         } catch (ClassNotFoundException ex) {
             System.getLogger(KlijentKontroler.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            return null;
         }
         
-        return null;
     }
 }
 

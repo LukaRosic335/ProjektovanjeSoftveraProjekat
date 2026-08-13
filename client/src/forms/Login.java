@@ -5,6 +5,8 @@
 package forms;
 
 import controler.KlijentKontroler;
+import domain.Zaposleni;
+import clientsession.Session;
 
 /**
  *
@@ -15,7 +17,7 @@ public class Login extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Login.class.getName());
 
     /**
-     * Creates new form Forma
+     * Creates new form Login
      */
     public Login() {
         initComponents();
@@ -88,11 +90,23 @@ public class Login extends javax.swing.JFrame {
 
     private void loginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtnActionPerformed
         // TODO add your handling code here:
-        if(usernametxt.equals("")||passwordtxt.equals("")){
+        if(usernametxt.getText().isEmpty()||passwordtxt.getText().isEmpty()){
             System.out.println("Mora nesto stajati u polja");
+        }else{
+            Zaposleni zaposleni=new Zaposleni();
+            zaposleni.setKorisnickoIme(usernametxt.getText());
+            zaposleni.setSifra(passwordtxt.getText());
+            zaposleni=KlijentKontroler.getInstance().login(zaposleni);
+            if(zaposleni!=null){
+                Session.getInstace().setUlogovani(zaposleni);
+                //radi stvari ukoliko je logovanje zaposlenog uspelo TRENUTNO NEUSPEH DAJE NULL
+            }else{
+                //radi ukoliko nije uspelo
+            }
+
         }
         //OVO JE DEO GDE JA MORAM DA SKONTAM KAKO ZELIM DA MI RADI LOGIN
-        KlijentKontroler.getInstance().login(z);
+        
         
     }//GEN-LAST:event_loginbtnActionPerformed
 
