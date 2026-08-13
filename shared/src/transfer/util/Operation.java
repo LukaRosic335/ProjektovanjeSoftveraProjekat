@@ -8,6 +8,7 @@ package transfer.util;
  *
  * @author jevrozim
  */
-public interface Operation {
+public enum Operation {
     //kako mi bude trebalo tako cu ovde dopunjavati operacije koje su neophodne
+    GROK,MORK
 }

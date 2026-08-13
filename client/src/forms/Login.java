@@ -2,20 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package client;
+package forms;
+
+import controler.KlijentKontroler;
 
 /**
  *
  * @author jevrozim
  */
-public class Forma extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Forma.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Login.class.getName());
 
     /**
      * Creates new form Forma
      */
-    public Forma() {
+    public Login() {
         initComponents();
     }
 
@@ -41,6 +43,11 @@ public class Forma extends javax.swing.JFrame {
         jLabel2.setText("password");
 
         loginbtn.setText("uloguj se");
+        loginbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginbtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,6 +86,16 @@ public class Forma extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void loginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtnActionPerformed
+        // TODO add your handling code here:
+        if(usernametxt.equals("")||passwordtxt.equals("")){
+            System.out.println("Mora nesto stajati u polja");
+        }
+        //OVO JE DEO GDE JA MORAM DA SKONTAM KAKO ZELIM DA MI RADI LOGIN
+        KlijentKontroler.getInstance().login(z);
+        
+    }//GEN-LAST:event_loginbtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -101,7 +118,7 @@ public class Forma extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Forma().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new Login().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

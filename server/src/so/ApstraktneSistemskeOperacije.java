@@ -4,10 +4,12 @@
  */
 package so;
 
+import transfer.util.Operation;
+
 /**
  *
  * @author jevrozim
  */
-public abstract class ApstraktneSistemskeOperacije {
-    
+public  class ApstraktneSistemskeOperacije {
+//    public void NekiKurac(Operation)
 }
