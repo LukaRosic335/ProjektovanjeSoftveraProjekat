@@ -8,7 +8,7 @@ package domain;
  *
  * @author jevrozim
  */
-public class Zaposleni {
+public class Zaposleni extends OpstiDomenskiObjekat{
    private long idZaposleni;
    private String ime;
    private String prezime;

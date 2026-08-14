@@ -4,15 +4,17 @@
  */
 package front;
 import java.awt.Color;
-import dbb.DBB;
 import threads.MainThread;
+import dbb.DBB;
+import java.io.IOException;
+
 
 /**
  *
  * @author jevrozim
  */
 public class ServerFrame extends javax.swing.JFrame {
-    
+    private MainThread mthread;
 
     /**
      * Creates new form ServerFrame
@@ -21,6 +23,7 @@ public class ServerFrame extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         connectedlabel.setForeground(Color.red);
+        serverDiscbtn.setEnabled(false);
         
     }
 
@@ -53,8 +56,9 @@ public class ServerFrame extends javax.swing.JFrame {
         disconnectbtn = new javax.swing.JButton();
         connectedlabel = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        Serverbtn = new javax.swing.JButton();
-        ServerAcctivitylbl = new javax.swing.JLabel();
+        serverbtn = new javax.swing.JButton();
+        serverAcctivitylbl = new javax.swing.JLabel();
+        serverDiscbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,14 +102,21 @@ public class ServerFrame extends javax.swing.JFrame {
 
         jLabel8.setText("Aktiviraj server");
 
-        Serverbtn.setText("ukljuci");
-        Serverbtn.addActionListener(new java.awt.event.ActionListener() {
+        serverbtn.setText("ukljuci");
+        serverbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ServerbtnActionPerformed(evt);
+                serverbtnActionPerformed(evt);
             }
         });
 
-        ServerAcctivitylbl.setText("Server nije aktivan");
+        serverAcctivitylbl.setText("Server nije aktivan");
+
+        serverDiscbtn.setText("iskljuci");
+        serverDiscbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                serverDiscbtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,19 +148,25 @@ public class ServerFrame extends javax.swing.JFrame {
                                     .addComponent(passwordtxt))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(142, 142, 142)
+                                        .addComponent(serverbtn)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(serverDiscbtn)
+                                        .addContainerGap(32, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(connectbtn)
-                                        .addGap(76, 76, 76)
-                                        .addComponent(disconnectbtn)
-                                        .addGap(20, 20, 20))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(135, 135, 135)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(ServerAcctivitylbl)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(Serverbtn)
-                                                .addComponent(jLabel8)))
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(connectbtn)
+                                                .addGap(76, 76, 76)
+                                                .addComponent(disconnectbtn)
+                                                .addGap(20, 20, 20))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jLabel8)
+                                                .addGap(69, 69, 69))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(serverAcctivitylbl)
+                                                .addGap(58, 58, 58))))))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -191,9 +208,10 @@ public class ServerFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(passwordtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Serverbtn))
+                    .addComponent(serverbtn)
+                    .addComponent(serverDiscbtn))
                 .addGap(18, 18, 18)
-                .addComponent(ServerAcctivitylbl)
+                .addComponent(serverAcctivitylbl)
                 .addContainerGap(184, Short.MAX_VALUE))
         );
 
@@ -214,11 +232,32 @@ public class ServerFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_disconnectbtnActionPerformed
 
-    private void ServerbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServerbtnActionPerformed
+    private void serverbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serverbtnActionPerformed
         // TODO add your handling code here:
         //pali i gasi server i njegovu nit
-        if()
-    }//GEN-LAST:event_ServerbtnActionPerformed
+        mthread=new MainThread();
+
+        mthread.start();
+        serverbtn.setEnabled(false);
+        serverDiscbtn.setEnabled(true);
+        serverAcctivitylbl.setText("Server radi JEEEEEEEEEEEEEEEEEEEEEEEEek");
+        serverAcctivitylbl.setForeground(Color.GREEN);
+    }//GEN-LAST:event_serverbtnActionPerformed
+
+    private void serverDiscbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serverDiscbtnActionPerformed
+        try {
+            // TODO add your handling code here:
+            mthread.getServerSocket().close();
+            serverAcctivitylbl.setText("Umro server :/");
+            serverAcctivitylbl.setForeground(Color.RED);
+            serverbtn.setEnabled(true);
+            serverDiscbtn.setEnabled(false);
+        } catch (IOException ex) {
+//            System.getLogger(ServerFrame.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.out.println("Problem pri zatvaranju konekcije "+ex.getMessage() );
+        }
+        
+    }//GEN-LAST:event_serverDiscbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,8 +265,6 @@ public class ServerFrame extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel ServerAcctivitylbl;
-    private javax.swing.JButton Serverbtn;
     private javax.swing.JTextField adresatxt;
     private javax.swing.JTextField bazatxt;
     private javax.swing.JButton connectbtn;
@@ -243,6 +280,9 @@ public class ServerFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField passwordtxt;
     private javax.swing.JTextField porttxt;
+    private javax.swing.JLabel serverAcctivitylbl;
+    private javax.swing.JButton serverDiscbtn;
+    private javax.swing.JButton serverbtn;
     private javax.swing.JTextField ussernametxt;
     // End of variables declaration//GEN-END:variables
 }

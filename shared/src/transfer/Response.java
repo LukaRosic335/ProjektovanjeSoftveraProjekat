@@ -4,13 +4,14 @@
  */
 package transfer;
 
+import java.io.Serializable;
 import transfer.util.ResponseStatus;
 
 /**
  *
  * @author jevrozim
  */
-public class Response {
+public class Response implements Serializable{
     private ResponseStatus status;
     private Object data;
 

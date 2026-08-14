@@ -34,10 +34,6 @@ public class Session {
         this.socket = socket;
     }
 
-    public static Session getInstance() {
-        return instance;
-    }
-
     public static void setInstance(Session instance) {
         Session.instance = instance;
     }

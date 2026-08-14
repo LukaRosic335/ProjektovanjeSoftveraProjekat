@@ -21,15 +21,15 @@ import transfer.util.ResponseStatus;
  *
  * @author jevrozim
  */
-public class KlijentKontroler {
-    private static KlijentKontroler instance;
+public class ClientControler {
+    private static ClientControler instance;
 
-    private KlijentKontroler() {
+    private ClientControler() {
     }
     
-    public static KlijentKontroler getInstance(){
+    public static ClientControler getInstance(){
         if(instance==null){
-            instance=new KlijentKontroler();
+            instance=new ClientControler();
         }
         return instance;
     }
@@ -61,7 +61,7 @@ public class KlijentKontroler {
             System.out.println("Nesto se desilo pri stvaranju kanala kod klijenta "+ex.getMessage());
             return null;
         } catch (ClassNotFoundException ex) {
-            System.getLogger(KlijentKontroler.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.getLogger(ClientControler.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             return null;
         }
         

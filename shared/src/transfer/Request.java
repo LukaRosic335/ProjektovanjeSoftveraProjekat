@@ -4,13 +4,14 @@
  */
 package transfer;
 
+import java.io.Serializable;
 import transfer.util.Operation;
 
 /**
  *
  * @author jevrozim
  */
-public class Request {
+public class Request implements Serializable {
     private Object data;
     private Operation operation;
 

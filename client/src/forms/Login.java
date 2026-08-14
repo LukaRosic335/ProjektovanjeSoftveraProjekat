@@ -4,7 +4,7 @@
  */
 package forms;
 
-import controler.KlijentKontroler;
+import controler.ClientControler;
 import domain.Zaposleni;
 import clientsession.Session;
 
@@ -61,13 +61,15 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(usernametxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(usernametxt, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(loginbtn)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(passwordtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(loginbtn))
-                .addContainerGap(251, Short.MAX_VALUE))
+                        .addComponent(passwordtxt)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,12 +98,14 @@ public class Login extends javax.swing.JFrame {
             Zaposleni zaposleni=new Zaposleni();
             zaposleni.setKorisnickoIme(usernametxt.getText());
             zaposleni.setSifra(passwordtxt.getText());
-            zaposleni=KlijentKontroler.getInstance().login(zaposleni);
+            zaposleni=ClientControler.getInstance().login(zaposleni);
             if(zaposleni!=null){
                 Session.getInstace().setUlogovani(zaposleni);
+                System.out.println("IMAMO ZAPOSLENOG " + zaposleni.getKorisnickoIme());
                 //radi stvari ukoliko je logovanje zaposlenog uspelo TRENUTNO NEUSPEH DAJE NULL
             }else{
                 //radi ukoliko nije uspelo
+                System.out.println("Nisam dobio zaposlenog natrag");
             }
 
         }
