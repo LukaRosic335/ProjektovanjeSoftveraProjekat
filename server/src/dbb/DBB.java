@@ -13,6 +13,28 @@ import java.sql.*;
 public class DBB {
     
     private static Connection connection;
+    private static DBB instance;
+
+    private DBB() {//NIJE GOTOVO NISAM SIGURAN DA TREBA OVAKO
+    }
+    //PROVERICU DA LI TREBA 
+    public static Connection getConnection() {
+        return connection;
+    }
+
+    public static void setConnection(Connection connection) {
+        DBB.connection = connection;
+    }
+
+    public static DBB getInstance() {
+        if(instance==null){
+            instance=new DBB();
+        }
+        return instance;
+    }
+
+   
+    
     
     public static boolean connect(String adresa,String port,String imeBaze,String ussername,String password){
         connection=null;
