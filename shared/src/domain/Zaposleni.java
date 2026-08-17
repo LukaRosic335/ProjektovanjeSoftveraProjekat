@@ -54,5 +54,10 @@ public class Zaposleni extends OpstiDomenskiObjekat{
     public void setSifra(String sifra) {
         this.sifra = sifra;
     }
+
+    @Override
+    public String getTableName() {
+        return "Zaposleni";
+    }
    
 }

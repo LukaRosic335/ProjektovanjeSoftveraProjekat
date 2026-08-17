@@ -13,4 +13,5 @@ import java.io.Serializable;
 public abstract class OpstiDomenskiObjekat implements Serializable{
 
     //ovde se svasta savade
+    public abstract String getTableName();
 }

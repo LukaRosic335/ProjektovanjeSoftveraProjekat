@@ -5,7 +5,8 @@
 package dbb;
 
 import java.sql.*;
-
+import java.util.ArrayList;
+import domain.OpstiDomenskiObjekat;
 /**
  *
  * @author jevrozim
@@ -34,7 +35,19 @@ public class DBB {
     }
 
    
-    
+    public ArrayList<OpstiDomenskiObjekat> select(OpstiDomenskiObjekat odo){
+        String upit="SELECT * FROM "+odo.getTableName();
+        return null;
+    }
+    public void insert(){
+        
+    }
+    public void update(){
+        
+    }
+    public void delete(){
+        
+    }
     
     public static boolean connect(String adresa,String port,String imeBaze,String ussername,String password){
         connection=null;

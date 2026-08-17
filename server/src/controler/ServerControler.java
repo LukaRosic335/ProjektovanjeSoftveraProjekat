@@ -4,8 +4,10 @@
  */
 package controler;
 
+import domain.OpstiDomenskiObjekat;
 import domain.Zaposleni;
 import java.util.ArrayList;
+import so.Login.Login;
 
 /**
  *
@@ -23,5 +25,17 @@ public class ServerControler {
             instance=new ServerControler();
         }
         return instance;
+    }
+    
+    public void login(Zaposleni zaposleni){
+        Login login=new Login();
+        OpstiDomenskiObjekat odo=(OpstiDomenskiObjekat) zaposleni;
+        try {//PRIVREMENO RESENJE ZA EXCEPTION HANDELING
+            login.executeTamplate(odo);
+        } catch (Exception ex) {
+            System.out.println("PRIVREMENO RESENJE ZA EXC HANDELING "+ex.getMessage());
+        }
+        
+        
     }
 }
