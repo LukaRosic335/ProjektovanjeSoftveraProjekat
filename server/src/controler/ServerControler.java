@@ -29,9 +29,8 @@ public class ServerControler {
     
     public void login(Zaposleni zaposleni){
         Login login=new Login();
-        OpstiDomenskiObjekat odo=(OpstiDomenskiObjekat) zaposleni;
         try {//PRIVREMENO RESENJE ZA EXCEPTION HANDELING
-            login.executeTamplate(odo);
+            login.executeTamplate(zaposleni);
         } catch (Exception ex) {
             System.out.println("PRIVREMENO RESENJE ZA EXC HANDELING "+ex.getMessage());
         }

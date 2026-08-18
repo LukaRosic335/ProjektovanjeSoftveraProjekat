@@ -5,6 +5,9 @@
 package domain;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,4 +17,5 @@ public abstract class OpstiDomenskiObjekat implements Serializable{
 
     //ovde se svasta savade
     public abstract String getTableName();
+    public abstract ArrayList<OpstiDomenskiObjekat> vratiListu(ResultSet rs) throws SQLException;
 }

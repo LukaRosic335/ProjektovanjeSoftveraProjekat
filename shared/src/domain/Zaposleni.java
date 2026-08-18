@@ -4,16 +4,29 @@
  */
 package domain;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  *
  * @author jevrozim
  */
-public class Zaposleni extends OpstiDomenskiObjekat{
-   private long idZaposleni;
-   private String ime;
-   private String prezime;
-   private String korisnickoIme;
-   private String sifra;
+public class Zaposleni extends OpstiDomenskiObjekat {
+
+    private long idZaposleni;
+    private String ime;
+    private String prezime;
+    private String korisnickoIme;
+    private String sifra;
+
+    public Zaposleni(long idZaposleni, String ime, String prezime, String korisnickoIme, String sifra) {
+        this.idZaposleni = idZaposleni;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.korisnickoIme = korisnickoIme;
+        this.sifra = sifra;
+    }
 
     public long getIdZaposleni() {
         return idZaposleni;
@@ -59,5 +72,30 @@ public class Zaposleni extends OpstiDomenskiObjekat{
     public String getTableName() {
         return "Zaposleni";
     }
-   
+
+    @Override
+    public ArrayList<OpstiDomenskiObjekat> vratiListu(ResultSet rs) throws SQLException {
+        ArrayList<OpstiDomenskiObjekat> list = new ArrayList();
+        while (rs.next()) {
+            Zaposleni zaposleni = new Zaposleni(rs.getLong("idZaposlenog"), rs.getString("ime"), rs.getString("prezime"), rs.getString("korisnickoIme"), rs.getString("sifra"));
+            list.add(zaposleni);
+        }
+        rs.close();
+        return list;
+    }
+
 }
+
+//ArrayList<OpstiDomenskiObjekat> lista = new ArrayList<>();
+//
+//        while (rs.next()) {
+//            Predavac p = new Predavac(rs.getLong("predavacID"),
+//                    rs.getString("Ime"), rs.getString("Prezime"),
+//                    rs.getString("korisnickoIme"), rs.getString("lozinka"));
+//
+//            lista.add(p);
+//        }
+//
+//        rs.close();
+//        return lista;
+

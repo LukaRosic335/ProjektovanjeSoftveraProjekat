@@ -27,7 +27,6 @@ public abstract class ApstraktneSistemskeOperacije {
     protected abstract void validate(OpstiDomenskiObjekat odo) throws Exception;
 
     public void executeTamplate(OpstiDomenskiObjekat odo) throws Exception {
-        //nesto nesto validate execute i rollback
         try {
             validate(odo);
             execute(odo);

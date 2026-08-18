@@ -34,10 +34,13 @@ public class DBB {
         return instance;
     }
 
-   
-    public ArrayList<OpstiDomenskiObjekat> select(OpstiDomenskiObjekat odo){
-        String upit="SELECT * FROM "+odo.getTableName();
-        return null;
+   //TRENUTNO BACAJU SQL Izuzetke
+    public ArrayList<OpstiDomenskiObjekat> select(OpstiDomenskiObjekat odo) throws SQLException{
+        String query="SELECT * FROM "+odo.getTableName();
+        System.out.println(query);
+        Statement s=connection.createStatement();
+        ResultSet rs= s.executeQuery(query);
+        return odo.vratiListu(rs);
     }
     public void insert(){
         
@@ -54,7 +57,7 @@ public class DBB {
         String url="jdbc:mysql://"+adresa+":"+port+"/"+imeBaze;
         try{
             connection=DriverManager.getConnection(url, ussername, password);
-            System.out.println("Uspesno uspostavljena konekcija");
+            System.out.println("queUspesno uspostavljena konekcija");
             return true;
         }catch(SQLException ex){
             System.out.println("Neuspesno uspostavljanje konekcije "+ex);
