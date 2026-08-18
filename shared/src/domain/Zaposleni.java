@@ -28,6 +28,9 @@ public class Zaposleni extends OpstiDomenskiObjekat {
         this.sifra = sifra;
     }
 
+    public Zaposleni() {
+    }
+
     public long getIdZaposleni() {
         return idZaposleni;
     }
@@ -69,6 +72,25 @@ public class Zaposleni extends OpstiDomenskiObjekat {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Zaposleni)){
+            return false;
+        }
+        Zaposleni z =(Zaposleni) obj;
+        if(prezime.equals(z.getPrezime()) && ime.equals(z.getIme())){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return ime+" "+prezime;
+    }
+    
+    
+
+    @Override
     public String getTableName() {
         return "Zaposleni";
     }
@@ -81,6 +103,9 @@ public class Zaposleni extends OpstiDomenskiObjekat {
             list.add(zaposleni);
         }
         rs.close();
+        for(OpstiDomenskiObjekat z:list){
+            System.out.println(z);
+        }
         return list;
     }
 

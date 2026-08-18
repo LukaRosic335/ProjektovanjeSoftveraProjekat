@@ -14,10 +14,15 @@ import so.Login.Login;
  * @author jevrozim
  */
 public class ServerControler {
-    public static ServerControler instance;
+    private static ServerControler instance;
     private ArrayList<Zaposleni> ulogovani;
 
+    public ArrayList<Zaposleni> getUlogovani() {
+        return ulogovani;
+    }
+
     private ServerControler() {
+        ulogovani=new ArrayList();
     }
     
     public static ServerControler getInstance(){
@@ -27,12 +32,14 @@ public class ServerControler {
         return instance;
     }
     
-    public void login(Zaposleni zaposleni){
+    public Zaposleni login(Zaposleni zaposleni){
         Login login=new Login();
         try {//PRIVREMENO RESENJE ZA EXCEPTION HANDELING
             login.executeTamplate(zaposleni);
+            return login.getUlogovan();
         } catch (Exception ex) {
-            System.out.println("PRIVREMENO RESENJE ZA EXC HANDELING "+ex.getMessage());
+            System.out.println("Zaposleni koji je vracen je null, loginso vratio exc "+ex.getMessage());
+            return null;
         }
         
         

@@ -16,7 +16,13 @@ public class DBB {
     private static Connection connection;
     private static DBB instance;
 
-    private DBB() {//NIJE GOTOVO NISAM SIGURAN DA TREBA OVAKO
+    private DBB() {try {
+        //NIJE GOTOVO NISAM SIGURAN DA TREBA OVAKO
+        //autocommit resavanje problema
+        connection.setAutoCommit(false);
+        } catch (SQLException ex) {
+            System.out.println("Iz nekog razloga ne radi iskljucivanje autocommita");
+        }
     }
     //PROVERICU DA LI TREBA 
     public static Connection getConnection() {
@@ -51,6 +57,9 @@ public class DBB {
     public void delete(){
         
     }
+    
+    
+    //OVO NE TREBA DA VRACCA boolean TREBA DA BUDU NE STATICKE METODE KOJIMA SE JEDNOM USPOSTAVLJA VEZA SA BAZOM I TJT
     
     public static boolean connect(String adresa,String port,String imeBaze,String ussername,String password){
         connection=null;

@@ -4,6 +4,7 @@
  */
 package threads;
 
+import controler.ServerControler;
 import domain.Zaposleni;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -39,12 +40,8 @@ public class ClientHandler extends Thread {
             ObjectOutputStream out= new ObjectOutputStream(socket.getOutputStream());
             out.writeObject(res);
         } catch (IOException ex) {
-//            System.getLogger(ClientHandler.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             System.out.println("IO problem kod client handler "+ex.getMessage());
-            //stvaranje input streama izuzetak
         } catch (ClassNotFoundException ex) {
-            //readObject izuzetak
-//            System.getLogger(ClientHandler.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             System.out.println("Klasa nije nadjena? izuzetak "+ex.getMessage());
         }
     }
@@ -52,13 +49,16 @@ public class ClientHandler extends Thread {
         Response res=new Response(ResponseStatus.Success, null);
         switch (req.getOperation()) {
             case LOGIN:
-                System.out.println("OVO ZA SADA RADI");
-                Zaposleni zaposleni = (Zaposleni) req.getData();
-                res.setData(zaposleni);
-                return res;
+                //PRIVREMENO RESENJE ZA ONO STO BI TREBALO DA IZGLEDA OVAJ HANDLE REQUEST
+                //trenutno login iz servcontrolera vraca null ukoliko nesto nije kako treba
+                Zaposleni z=ServerControler.getInstance().login((Zaposleni)req.getData());
+                if(z==null){
+                    res.setStatus(ResponseStatus.Fail);
+                    res.setData(z);
+                    return res;
+                }
             default:
-//                throw new AssertionError();
-                System.out.println("handleRequest zakinuo");
+                System.out.println("handleRequest u client handler zakinuo");
                 res.setStatus(ResponseStatus.Fail);
                 res.setData(null);
                 return res ;
