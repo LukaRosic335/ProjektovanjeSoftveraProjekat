@@ -35,7 +35,9 @@ public class ClientHandler extends Thread {
             ObjectInputStream in=new ObjectInputStream(socket.getInputStream());
             Request req =(Request) in.readObject();
             
+            
             Response res = handleRequest(req);
+            
             
             ObjectOutputStream out= new ObjectOutputStream(socket.getOutputStream());
             out.writeObject(res);
@@ -52,11 +54,16 @@ public class ClientHandler extends Thread {
                 //PRIVREMENO RESENJE ZA ONO STO BI TREBALO DA IZGLEDA OVAJ HANDLE REQUEST
                 //trenutno login iz servcontrolera vraca null ukoliko nesto nije kako treba
                 Zaposleni z=ServerControler.getInstance().login((Zaposleni)req.getData());
+                
                 if(z==null){
+                    System.out.println("Zaposleni koji je poslat je null");
                     res.setStatus(ResponseStatus.Fail);
                     res.setData(z);
                     return res;
                 }
+                res.setData(z);
+                return res;
+            
             default:
                 System.out.println("handleRequest u client handler zakinuo");
                 res.setStatus(ResponseStatus.Fail);

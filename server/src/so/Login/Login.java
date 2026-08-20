@@ -41,18 +41,16 @@ public class Login extends ApstraktneSistemskeOperacije {
                 sviZaposleni.add((Zaposleni) o);
             }
             for (Zaposleni s : sviZaposleni) {
-                System.out.println(s + " test iz login execute");
             }
             for (Zaposleni z : sviZaposleni) {
 //                if (z.equals(ulogovan)) {
                 if (z.getKorisnickoIme().equals(ulogovan.getKorisnickoIme())&&z.getSifra().equals(ulogovan.getSifra())) {
-                    System.out.println("DA LI JA DODJEM DO OVE LINIJE UOPSTE");
                     ServerControler.getInstance().getUlogovani().add(ulogovan);
                     return;
                 }
             }
         } catch (SQLException e) {
-            throw new SQLException("EVIDENTNO PROBLEM Sa SELECT U DBB");
+            throw new SQLException("greska pri selektovanju u dbb select");
         }
         throw new Exception("Ne postoji zaposleni s tim kredencijalima");
     }
