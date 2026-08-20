@@ -44,4 +44,7 @@ public class ServerControler {
         
         
     }
+    public void logout(Zaposleni zaposleni){
+        ulogovani.remove(zaposleni);
+    }
 }

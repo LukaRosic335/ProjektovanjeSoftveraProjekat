@@ -40,12 +40,12 @@ public class Login extends ApstraktneSistemskeOperacije {
             for (OpstiDomenskiObjekat o : problem) {
                 sviZaposleni.add((Zaposleni) o);
             }
-            for (Zaposleni s : sviZaposleni) {
-            }
+            
             for (Zaposleni z : sviZaposleni) {
-//                if (z.equals(ulogovan)) {
                 if (z.getKorisnickoIme().equals(ulogovan.getKorisnickoIme())&&z.getSifra().equals(ulogovan.getSifra())) {
-                    ServerControler.getInstance().getUlogovani().add(ulogovan);
+                    Zaposleni zaposleni=new Zaposleni(z.getIdZaposleni(), z.getIme(), z.getPrezime(), z.getKorisnickoIme(), z.getSifra());
+                    ServerControler.getInstance().getUlogovani().add(zaposleni);
+                    ulogovan=zaposleni;
                     return;
                 }
             }

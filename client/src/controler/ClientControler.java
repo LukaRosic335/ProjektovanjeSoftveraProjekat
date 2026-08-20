@@ -39,6 +39,10 @@ public class ClientControler {
         Zaposleni za=(Zaposleni) sendRequest(Operation.LOGIN,z);
         return za;
     }
+    //trenutno vraca null nisam siguran kako cu implementirati metodu
+    public void logout(Zaposleni z){
+        sendRequest(Operation.LOGOUT, z);
+    }
     
     
     private synchronized Object sendRequest(Operation operation,Object data){
@@ -50,8 +54,6 @@ public class ClientControler {
             
             ObjectInputStream in=new ObjectInputStream(Session.getInstace().getSocket().getInputStream());
             Response response= (Response) in.readObject();
-            System.out.println(response.getStatus()+"Status nadam se");
-            System.out.println(response.getData()+"Korisnicko ime i sifra nadam se ");
             if(response.getStatus().equals(ResponseStatus.Fail)){
                 System.out.println("Status je fail, vraca se null");
                 return null;
@@ -70,16 +72,3 @@ public class ClientControler {
 }
 
 
-//Request request = new Request(operation, data);
-//
-//        ObjectOutputStream out = new ObjectOutputStream(Session.getInstance().getSocket().getOutputStream());
-//        out.writeObject(request);
-//
-//        ObjectInputStream in = new ObjectInputStream(Session.getInstance().getSocket().getInputStream());
-//        Response response = (Response) in.readObject();
-//
-//        if (response.getResponseStatus().equals(ResponseStatus.Error)) {
-//            throw response.getException();
-//        } else {
-//            return response.getData();
-//        }

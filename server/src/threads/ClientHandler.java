@@ -63,6 +63,11 @@ public class ClientHandler extends Thread {
                 }
                 res.setData(z);
                 return res;
+                
+                
+            case LOGOUT:
+                ServerControler.getInstance().logout((Zaposleni)req.getData());
+                return res;
             
             default:
                 System.out.println("handleRequest u client handler zakinuo");

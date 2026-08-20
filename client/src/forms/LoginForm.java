@@ -1,4 +1,4 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -15,7 +15,9 @@ import clientsession.Session;
 public class LoginForm extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginForm.class.getName());
-
+    
+    private static LoginForm instance;
+    
     /**
      * Creates new form Login
      */
@@ -23,6 +25,13 @@ public class LoginForm extends javax.swing.JFrame {
         initComponents();
     }
 
+    public static LoginForm getInstance(){
+        if(instance==null){
+            instance=new LoginForm();
+        }
+        return instance;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,12 +46,14 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         passwordtxt = new javax.swing.JTextField();
         loginbtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        messagetxt = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("username");
+        jLabel1.setText("Korisnicko Ime:");
 
-        jLabel2.setText("password");
+        jLabel2.setText("Lozinka:");
 
         loginbtn.setText("uloguj se");
         loginbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -50,6 +61,12 @@ public class LoginForm extends javax.swing.JFrame {
                 loginbtnActionPerformed(evt);
             }
         });
+
+        messagetxt.setEditable(false);
+        messagetxt.setColumns(20);
+        messagetxt.setRows(5);
+        messagetxt.setText("Unesite korisnicko ime i lozinku.");
+        jScrollPane1.setViewportView(messagetxt);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -61,15 +78,19 @@ public class LoginForm extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(usernametxt, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE))
+                        .addComponent(usernametxt, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(loginbtn)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
+                        .addGap(59, 59, 59)
                         .addComponent(passwordtxt)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -84,16 +105,17 @@ public class LoginForm extends javax.swing.JFrame {
                     .addComponent(passwordtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(loginbtn)
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addGap(42, 42, 42)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtnActionPerformed
-        // TODO add your handling code here:
         if(usernametxt.getText().isEmpty()||passwordtxt.getText().isEmpty()){
-            System.out.println("Mora nesto stajati u polja");
+            System.out.println("Polja za ussername i password ne smeju ostati nepopunjena!");
         }else{
             Zaposleni zaposleni=new Zaposleni();
             zaposleni.setKorisnickoIme(usernametxt.getText());
@@ -101,15 +123,17 @@ public class LoginForm extends javax.swing.JFrame {
             zaposleni=ClientControler.getInstance().login(zaposleni);
             if(zaposleni!=null){
                 Session.getInstace().setUlogovani(zaposleni);
-                System.out.println("IMAMO ZAPOSLENOG " + zaposleni.getKorisnickoIme());
-                //radi stvari ukoliko je logovanje zaposlenog uspelo TRENUTNO NEUSPEH DAJE NULL
+                System.out.println(Session.getInstace().getUlogovani());
+                System.out.println("IMAMO ZAPOSLENOG " + zaposleni.getIme()+" "+zaposleni.getPrezime()+" "+zaposleni.getKorisnickoIme());
+                MainFrame mainFrame=new MainFrame();
+                mainFrame.setVisible(true);
+                this.setVisible(false);
             }else{
-                //radi ukoliko nije uspelo
-                System.out.println("Nisam dobio zaposlenog natrag");
+                System.out.println("Klijent kao odgovor nije dobio zaposlenog natrag");
+                messagetxt.setText("Neispravano korisnicko ime ili sifra");
             }
 
         }
-        //OVO JE DEO GDE JA MORAM DA SKONTAM KAKO ZELIM DA MI RADI LOGIN
         
         
     }//GEN-LAST:event_loginbtnActionPerformed
@@ -142,7 +166,9 @@ public class LoginForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton loginbtn;
+    private javax.swing.JTextArea messagetxt;
     private javax.swing.JTextField passwordtxt;
     private javax.swing.JTextField usernametxt;
     // End of variables declaration//GEN-END:variables

@@ -21,7 +21,9 @@ public class DBB {
         try {
             //NIJE GOTOVO NISAM SIGURAN DA TREBA OVAKO
             //autocommit resavanje problema
-            connection.setAutoCommit(false);
+            if (connection != null) {
+                connection.setAutoCommit(false);
+            }
         } catch (SQLException ex) {
             System.out.println("Iz nekog razloga ne radi iskljucivanje autocommita");
         }
@@ -82,6 +84,7 @@ public class DBB {
         try {
             connection = DriverManager.getConnection(url, ussername, password);
             System.out.println("Uspesno uspostavljena konekcija");
+            connection.setAutoCommit(false);
             return true;
         } catch (SQLException ex) {
             System.out.println("Neuspesno uspostavljanje konekcije " + ex.getMessage());

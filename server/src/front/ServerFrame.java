@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package front;
+import controler.ServerControler;
 import java.awt.Color;
 import threads.MainThread;
 import dbb.DBB;
@@ -259,6 +260,11 @@ public class ServerFrame extends javax.swing.JFrame {
             serverAcctivitylbl.setForeground(Color.RED);
             serverbtn.setEnabled(true);
             serverDiscbtn.setEnabled(false);
+            
+            ServerControler.getInstance().getUlogovani().clear();
+            //OBAVEZNO OVO URADITI ISPOD HAUBE I NE DOZVOLITI KORISNIKU DA MOZE DA SE ZEZA SA OVIM STVARIMA
+            //ILI KADA SE OVO DESI DA ODE SVIM KLIJENTIMA DA MORA DA SE UBIJU
+            
         } catch (IOException ex) {
 //            System.getLogger(ServerFrame.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             System.out.println("Problem pri zatvaranju konekcije "+ex.getMessage() );
