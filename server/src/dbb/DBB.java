@@ -40,22 +40,33 @@ public class DBB {
         return instance;
     }
 
-   //TRENUTNO BACAJU SQL Izuzetke
+   //TRENUTNO BACAJU SQL Izuzetke sve CRUD operacije
     public ArrayList<OpstiDomenskiObjekat> select(OpstiDomenskiObjekat odo) throws SQLException{
-        String query="SELECT * FROM "+odo.getTableName();
+        String query="SELECT * FROM "+odo.getTableName()+";";
         System.out.println(query);
         Statement s=connection.createStatement();
         ResultSet rs= s.executeQuery(query);
         return odo.vratiListu(rs);
     }
-    public void insert(){
-        
+    //Trenutno insert vraca PS kao tip podatka jos uvek nisam siguran da li mi se to svidja
+    public PreparedStatement insert(OpstiDomenskiObjekat odo) throws SQLException{
+        String query="INSERT INTO "+odo.getTableName()+" ("+odo.getColumnNames()+") VALUES "+odo.getInsertValues()+";";
+        System.out.println(query);
+        PreparedStatement ps=connection.prepareStatement( query,Statement.RETURN_GENERATED_KEYS);
+        ps.executeUpdate();
+        return ps;
     }
-    public void update(){
-        
+    public void update(OpstiDomenskiObjekat odo) throws SQLException{
+        String query="UPDATE "+odo.getTableName()+" SET "+odo.getUpdateValues()+" WHERE "+odo.getWhere()+";";
+        System.out.println(query);
+        Statement s=connection.createStatement();
+        s.executeUpdate(query);
     }
-    public void delete(){
-        
+    public void delete(OpstiDomenskiObjekat odo) throws SQLException{
+        String query="DELETE FROM "+odo.getTableName()+"WHERE "+odo.getWhere()+";";
+        System.out.println(query);
+        Statement s =connection.createStatement();
+        s.executeUpdate(query);
     }
     
     

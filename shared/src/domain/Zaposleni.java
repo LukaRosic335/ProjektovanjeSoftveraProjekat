@@ -73,11 +73,11 @@ public class Zaposleni extends OpstiDomenskiObjekat {
 
     @Override
     public boolean equals(Object obj) {
-        if(!(obj instanceof Zaposleni)){
+        if (!(obj instanceof Zaposleni)) {
             return false;
         }
-        Zaposleni z =(Zaposleni) obj;
-        if(prezime.equals(z.getPrezime()) && ime.equals(z.getIme())){
+        Zaposleni z = (Zaposleni) obj;
+        if (prezime.equals(z.getPrezime()) && ime.equals(z.getIme())) {
             return true;
         }
         return false;
@@ -85,10 +85,8 @@ public class Zaposleni extends OpstiDomenskiObjekat {
 
     @Override
     public String toString() {
-        return ime+" "+prezime;
+        return ime + " " + prezime;
     }
-    
-    
 
     @Override
     public String getTableName() {
@@ -103,24 +101,32 @@ public class Zaposleni extends OpstiDomenskiObjekat {
             list.add(zaposleni);
         }
         rs.close();
-        for(OpstiDomenskiObjekat z:list){
+        for (OpstiDomenskiObjekat z : list) {
             System.out.println(z);
         }
         return list;
     }
 
+    @Override
+    public String getColumnNames() {
+        return "ime, prezime, korisnickoIme, sifra";
+    }
+
+    @Override
+    public String getInsertValues() {
+        return "(" + ime + ", " + prezime + ", " + korisnickoIme + ", " + sifra + ")";
+    }
+
+    @Override
+    public String getUpdateValues() {
+        return "ime = "+ime+", "+"prezime = "+prezime+", "+"korisnickoIme = "+korisnickoIme+", "+"sifra = "+sifra;
+    }
+
+    @Override
+    public String getWhere() {
+        return "idZaposlenog = "+idZaposleni;
+    }
+
+    
+    
 }
-
-//ArrayList<OpstiDomenskiObjekat> lista = new ArrayList<>();
-//
-//        while (rs.next()) {
-//            Predavac p = new Predavac(rs.getLong("predavacID"),
-//                    rs.getString("Ime"), rs.getString("Prezime"),
-//                    rs.getString("korisnickoIme"), rs.getString("lozinka"));
-//
-//            lista.add(p);
-//        }
-//
-//        rs.close();
-//        return lista;
-
