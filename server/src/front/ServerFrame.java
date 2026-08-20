@@ -6,6 +6,8 @@ package front;
 import java.awt.Color;
 import threads.MainThread;
 import dbb.DBB;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
 
 
@@ -29,6 +31,11 @@ public class ServerFrame extends javax.swing.JFrame {
 
     public static void main(String[] args) {
         ServerFrame frame=new ServerFrame();
+        frame.setLocation(100, 200);
+        Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize();
+        int width=screenSize.width-frame.getWidth();
+        frame.setLocation(width, 0);
+        
     }
 
     /**
@@ -219,14 +226,14 @@ public class ServerFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void connectbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectbtnActionPerformed
-        if(DBB.connect(adresatxt.getText(), porttxt.getText(), bazatxt.getText(), ussernametxt.getText(), passwordtxt.getText())){
+        if(DBB.getInstance().connect(adresatxt.getText(), porttxt.getText(), bazatxt.getText(), ussernametxt.getText(), passwordtxt.getText())){
         connectedlabel.setText("Connected");
         connectedlabel.setForeground(Color.GREEN);    
         }
     }//GEN-LAST:event_connectbtnActionPerformed
 
     private void disconnectbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disconnectbtnActionPerformed
-        if(DBB.disconnect()){
+        if(DBB.getInstance().disconnect()){
         connectedlabel.setText("Disconnected");
         connectedlabel.setForeground(Color.red);    
         }
@@ -240,7 +247,7 @@ public class ServerFrame extends javax.swing.JFrame {
         mthread.start();
         serverbtn.setEnabled(false);
         serverDiscbtn.setEnabled(true);
-        serverAcctivitylbl.setText("Server radi JEEEEEEEEEEEEEEEEEEEEEEEEek");
+        serverAcctivitylbl.setText("Server radi");
         serverAcctivitylbl.setForeground(Color.GREEN);
     }//GEN-LAST:event_serverbtnActionPerformed
 
@@ -248,7 +255,7 @@ public class ServerFrame extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             mthread.getServerSocket().close();
-            serverAcctivitylbl.setText("Umro server :/");
+            serverAcctivitylbl.setText("Server ne radi");
             serverAcctivitylbl.setForeground(Color.RED);
             serverbtn.setEnabled(true);
             serverDiscbtn.setEnabled(false);
