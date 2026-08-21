@@ -34,19 +34,21 @@ public class ClientHandler extends Thread {
         try {
             ObjectInputStream in=new ObjectInputStream(socket.getInputStream());
             Request req =(Request) in.readObject();
-            
+            System.out.println("Primio "+req.getOperation());
             
             Response res = handleRequest(req);
-            
+            System.out.println("Saljem "+res.getStatus()+res.getData());
             
             ObjectOutputStream out= new ObjectOutputStream(socket.getOutputStream());
             out.writeObject(res);
+            out.flush();
         } catch (IOException ex) {
             System.out.println("IO problem kod client handler "+ex.getMessage());
         } catch (ClassNotFoundException ex) {
             System.out.println("Klasa nije nadjena? izuzetak "+ex.getMessage());
         }
     }
+    //lako moguce da cu staviti ovde kompletan exception handeling jer je svakako beskoristan u javi
     private Response handleRequest(Request req){
         Response res=new Response(ResponseStatus.Success, null);
         switch (req.getOperation()) {
@@ -66,7 +68,10 @@ public class ClientHandler extends Thread {
                 
                 
             case LOGOUT:
+                System.out.println("Switch case se izvrsava");
                 ServerControler.getInstance().logout((Zaposleni)req.getData());
+                res.setData(req.getData());
+                System.out.println("Switch case se izvrsio");
                 return res;
             
             default:

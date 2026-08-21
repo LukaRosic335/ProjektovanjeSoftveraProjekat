@@ -41,7 +41,8 @@ public class ClientControler {
     }
     //trenutno vraca null nisam siguran kako cu implementirati metodu
     public void logout(Zaposleni z){
-        sendRequest(Operation.LOGOUT, z);
+        Object o=sendRequest(Operation.LOGOUT, z);
+        System.out.println(o);
     }
     
     
@@ -51,9 +52,15 @@ public class ClientControler {
         try {
             ObjectOutputStream out=new ObjectOutputStream(Session.getInstace().getSocket().getOutputStream());
             out.writeObject(request);
+            out.flush();
             
             ObjectInputStream in=new ObjectInputStream(Session.getInstace().getSocket().getInputStream());
             Response response= (Response) in.readObject();
+            
+            
+            
+            //posalji zahtev
+            //primi odgovor
             if(response.getStatus().equals(ResponseStatus.Fail)){
                 System.out.println("Status je fail, vraca se null");
                 return null;

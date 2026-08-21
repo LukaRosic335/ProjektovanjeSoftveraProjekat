@@ -14,7 +14,6 @@ import clientsession.Session;
  */
 public class LoginForm extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginForm.class.getName());
     
     private static LoginForm instance;
     
@@ -125,9 +124,8 @@ public class LoginForm extends javax.swing.JFrame {
                 Session.getInstace().setUlogovani(zaposleni);
                 System.out.println(Session.getInstace().getUlogovani());
                 System.out.println("IMAMO ZAPOSLENOG " + zaposleni.getIme()+" "+zaposleni.getPrezime()+" "+zaposleni.getKorisnickoIme());
-                MainFrame mainFrame=new MainFrame();
-                mainFrame.setVisible(true);
                 this.setVisible(false);
+                MainFrame.getInstance().setVisible(true);
             }else{
                 System.out.println("Klijent kao odgovor nije dobio zaposlenog natrag");
                 messagetxt.setText("Neispravano korisnicko ime ili sifra");
@@ -141,27 +139,7 @@ public class LoginForm extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new LoginForm().setVisible(true));
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

@@ -15,15 +15,25 @@ import javax.swing.SwingConstants;
  * @author jevrozim
  */
 public class MainFrame extends javax.swing.JFrame {
-
+    
+    private static MainFrame instance;
     /**
      * Creates new form LogedIn
      */
-    public MainFrame() {
+    private MainFrame() {
         initComponents();
         ussertxt.setHorizontalAlignment(SwingConstants.CENTER);
-        ussertxt.setText(Session.getInstace().getUlogovani().toString());
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        if(Session.getInstace().getUlogovani()!=null){
+            ussertxt.setText(Session.getInstace().getUlogovani().toString());
+        }
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//najverovatnije nije potrebno
+    }
+    
+    public static MainFrame getInstance(){
+        if(instance==null){
+            instance = new MainFrame();
+        }
+        return instance;
     }
 
     /**
@@ -70,8 +80,11 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //IZ NEKOG RAZLOGA KLIKTANJE DUGMETA NIJE KLIKTANJE DUGMETA I STVARI NIKADA NECE VISE RADITI WRGFRIOWIGTJWEIPGIOARHGIOAFJGIOJGAREIOJFOWHRJOWEFOHGOHGJRJOBGFIOGJONGREPFK
+    
     private void logoutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutbtnActionPerformed
         // TODO add your handling code here:
+        try{
         System.out.println("1");
         ClientControler.getInstance().logout(Session.getInstace().getUlogovani());
         System.out.println("2");
@@ -81,9 +94,17 @@ public class MainFrame extends javax.swing.JFrame {
         System.out.println("4");
         this.dispose();
         System.out.println("5");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
     }//GEN-LAST:event_logoutbtnActionPerformed
 
+    public static void main(String[] args) {//privremeno resenje za main metodu
+        MainFrame.getInstance().setVisible(false);
+        LoginForm.getInstance().setVisible(true);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton logoutbtn;
     private javax.swing.JLabel ussertxt;

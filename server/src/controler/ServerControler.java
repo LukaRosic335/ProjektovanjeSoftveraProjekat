@@ -46,5 +46,8 @@ public class ServerControler {
     }
     public void logout(Zaposleni zaposleni){
         ulogovani.remove(zaposleni);
+        if(ulogovani.size()==0){
+            System.out.println("Nema vise nikog od klijenata");
+        }
     }
 }

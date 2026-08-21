@@ -72,7 +72,7 @@ public class Zaposleni extends OpstiDomenskiObjekat {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object obj) {                 //OBAVEZNO OBRATITI PAZNJU NA OVU METODU NEGDE U BUDUCNOSTI
         if (!(obj instanceof Zaposleni)) {
             return false;
         }
@@ -85,6 +85,9 @@ public class Zaposleni extends OpstiDomenskiObjekat {
 
     @Override
     public String toString() {
+        if(this==null){
+            return "Niko";
+        }
         return ime + " " + prezime;
     }
 
