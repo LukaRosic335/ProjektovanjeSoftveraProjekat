@@ -7,6 +7,7 @@ package threads;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,6 +15,7 @@ import java.net.Socket;
  */
 public class MainThread extends Thread{
     private ServerSocket serverSocket;
+    private ArrayList<ClientHandler> clientHandlers;
 
     public MainThread() {
         try {
@@ -35,9 +37,14 @@ public class MainThread extends Thread{
                 System.out.println("Cekanje klijenta...");
                 Socket socket= serverSocket.accept();
                 ClientHandler clientHandler=new ClientHandler(socket);//onde moras da pravis konstruktor za klijent hendlera
+                clientHandlers.add(clientHandler);//mora da ga sklonis po logoutu
+                
                 clientHandler.start();
             } catch (IOException ex) {
                 System.out.println("server soket nije povezan "+ex.getMessage());
+            }
+            if(serverSocket.isClosed()){
+                //OBAVESTI SVE KLIJENT HENDLERE DA VEZA UMIRE
             }
         }
     }

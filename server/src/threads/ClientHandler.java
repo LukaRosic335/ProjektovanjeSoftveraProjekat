@@ -45,11 +45,13 @@ public class ClientHandler extends Thread {
                 out.flush();
             
         }
+        
         }catch(IOException ex){
             System.out.println("IO izuzetak klijent handler "+ex.getMessage());
         }catch(ClassNotFoundException e){
             System.out.println("Klasa nije nadjena klijent handler readObject "+e.getMessage());
         }
+        
     }
 
     //lako moguce da cu staviti ovde kompletan exception handeling jer je svakako beskoristan u javi
@@ -83,6 +85,10 @@ public class ClientHandler extends Thread {
                 res.setData(null);
                 return res;
         }
+    }
+    
+    public void kill(){
+        
     }
 
 }
