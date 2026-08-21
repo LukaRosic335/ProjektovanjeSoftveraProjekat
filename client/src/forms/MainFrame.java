@@ -23,9 +23,12 @@ public class MainFrame extends javax.swing.JFrame {
     private MainFrame() {
         initComponents();
         ussertxt.setHorizontalAlignment(SwingConstants.CENTER);
+        System.out.println("Linija 25");
         if(Session.getInstace().getUlogovani()!=null){
             ussertxt.setText(Session.getInstace().getUlogovani().toString());
+            System.out.println("Linija 28");
         }
+        System.out.println("Linija 30");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//najverovatnije nije potrebno
     }
     
@@ -86,7 +89,9 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         try{
         System.out.println("1");
-        ClientControler.getInstance().logout(Session.getInstace().getUlogovani());
+        Zaposleni z=Session.getInstace().getUlogovani();
+            System.out.println("1.5");
+        ClientControler.getInstance().logout(z);
         System.out.println("2");
         Session.getInstace().setUlogovani(null);
         System.out.println("3");
@@ -102,6 +107,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     public static void main(String[] args) {//privremeno resenje za main metodu
         MainFrame.getInstance().setVisible(false);
+        
         LoginForm.getInstance().setVisible(true);
     }
     

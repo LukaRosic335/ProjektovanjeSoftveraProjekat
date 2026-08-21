@@ -6,23 +6,35 @@ package clientsession;
 
 import domain.Zaposleni;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
-
 
 /**
  *
  * @author jevrozim
  */
 public class Session {
+
     private Socket socket;
     private static Session instance;
     private Zaposleni ulogovani;
+    private ObjectOutputStream out;
+    private ObjectInputStream in;
 
     private Session() {
         try {
             socket = new Socket("localhost", 7259);
+            System.out.println("pre out");
+            out = new ObjectOutputStream(socket.getOutputStream());
+            System.out.println("Posle out pre in,");
+            in = new ObjectInputStream(socket.getInputStream());
+            System.out.println("Posle in");
+
         } catch (IOException ex) {
-            System.out.println("Problem pri stvaranju soketa "+ex.getMessage());
+            System.out.println("Problem pri stvaranju soketa " + ex.getMessage());
+        } catch (Exception e) {
+            System.out.println("Nesto se savade");
         }
     }
 
@@ -34,8 +46,12 @@ public class Session {
         this.socket = socket;
     }
 
-    public static void setInstance(Session instance) {
-        Session.instance = instance;
+    public ObjectOutputStream getOut() {
+        return out;
+    }
+
+    public ObjectInputStream getIn() {
+        return in;
     }
 
     public Zaposleni getUlogovani() {
@@ -45,12 +61,12 @@ public class Session {
     public void setUlogovani(Zaposleni ulogovani) {
         this.ulogovani = ulogovani;
     }
-    
-    public static Session getInstace(){
-        if(instance==null){
-            instance=new Session();
+
+    public static Session getInstace() {
+        if (instance == null) {
+            instance = new Session();
         }
         return instance;
     }
-    
+
 }

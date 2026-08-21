@@ -23,41 +23,45 @@ import transfer.util.Operation;
 public class ClientHandler extends Thread {
 
     private Socket socket;
-    
 
     public ClientHandler(Socket socket) {
         this.socket = socket;
     }
-    
+
     @Override
-    public void run() { 
-        try {
-            ObjectInputStream in=new ObjectInputStream(socket.getInputStream());
-            Request req =(Request) in.readObject();
-            System.out.println("Primio "+req.getOperation());
+    public void run() {
+        try{
+        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+        while (!socket.isClosed()) {
+
+                Request req = (Request) in.readObject();
+                System.out.println("Primio " + req.getOperation());
+
+                Response res = handleRequest(req);
+                System.out.println("Saljem " + res.getStatus() + res.getData());
+
+                out.writeObject(res);
+                out.flush();
             
-            Response res = handleRequest(req);
-            System.out.println("Saljem "+res.getStatus()+res.getData());
-            
-            ObjectOutputStream out= new ObjectOutputStream(socket.getOutputStream());
-            out.writeObject(res);
-            out.flush();
-        } catch (IOException ex) {
-            System.out.println("IO problem kod client handler "+ex.getMessage());
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Klasa nije nadjena? izuzetak "+ex.getMessage());
+        }
+        }catch(IOException ex){
+            System.out.println("IO izuzetak klijent handler "+ex.getMessage());
+        }catch(ClassNotFoundException e){
+            System.out.println("Klasa nije nadjena klijent handler readObject "+e.getMessage());
         }
     }
+
     //lako moguce da cu staviti ovde kompletan exception handeling jer je svakako beskoristan u javi
-    private Response handleRequest(Request req){
-        Response res=new Response(ResponseStatus.Success, null);
+    private Response handleRequest(Request req) {
+        Response res = new Response(ResponseStatus.Success, null);
         switch (req.getOperation()) {
             case LOGIN:
                 //PRIVREMENO RESENJE ZA ONO STO BI TREBALO DA IZGLEDA OVAJ HANDLE REQUEST
                 //trenutno login iz servcontrolera vraca null ukoliko nesto nije kako treba
-                Zaposleni z=ServerControler.getInstance().login((Zaposleni)req.getData());
-                
-                if(z==null){
+                Zaposleni z = ServerControler.getInstance().login((Zaposleni) req.getData());
+
+                if (z == null) {
                     System.out.println("Zaposleni koji je poslat je null");
                     res.setStatus(ResponseStatus.Fail);
                     res.setData(z);
@@ -65,21 +69,20 @@ public class ClientHandler extends Thread {
                 }
                 res.setData(z);
                 return res;
-                
-                
+
             case LOGOUT:
                 System.out.println("Switch case se izvrsava");
-                ServerControler.getInstance().logout((Zaposleni)req.getData());
+                ServerControler.getInstance().logout((Zaposleni) req.getData());
                 res.setData(req.getData());
                 System.out.println("Switch case se izvrsio");
                 return res;
-            
+
             default:
                 System.out.println("handleRequest u client handler zakinuo");
                 res.setStatus(ResponseStatus.Fail);
                 res.setData(null);
-                return res ;
+                return res;
         }
     }
-    
+
 }

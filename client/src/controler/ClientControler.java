@@ -50,13 +50,18 @@ public class ClientControler {
     //ukoliko nesto nije kako treba trenutno vraca null
         Request request=new Request(data, operation);
         try {
-            ObjectOutputStream out=new ObjectOutputStream(Session.getInstace().getSocket().getOutputStream());
-            out.writeObject(request);
-            out.flush();
+//            ObjectOutputStream out=new ObjectOutputStream(Session.getInstace().getSocket().getOutputStream());
+//            ObjectOutputStream out=Session.getInstace().getOut();
+//            out.writeObject(request);
+//            out.flush();
+
+            Session.getInstace().getOut().writeObject(request);
+            Session.getInstace().getOut().flush();
             
-            ObjectInputStream in=new ObjectInputStream(Session.getInstace().getSocket().getInputStream());
-            Response response= (Response) in.readObject();
-            
+//            ObjectInputStream in=new ObjectInputStream(Session.getInstace().getSocket().getInputStream());
+//            ObjectInputStream in=Session.getInstace().getIn();
+//            Response response= (Response) in.readObject();
+            Response response =(Response)Session.getInstace().getIn().readObject();
             
             
             //posalji zahtev
