@@ -23,17 +23,24 @@ import transfer.util.Operation;
 public class ClientHandler extends Thread {
 
     private Socket socket;
+    private ObjectOutputStream out;
+    private ObjectInputStream in;
 
     public ClientHandler(Socket socket) {
         this.socket = socket;
+        try {
+            out = new ObjectOutputStream(socket.getOutputStream());
+            in = new ObjectInputStream(socket.getInputStream());
+        } catch (IOException ex) {
+            System.getLogger(ClientHandler.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }
 
     @Override
     public void run() {
-        try{
-        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-        ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-        while (!socket.isClosed()) {
+        try {
+
+            while (!socket.isClosed()) {
 
                 Request req = (Request) in.readObject();
                 System.out.println("Primio " + req.getOperation());
@@ -43,15 +50,15 @@ public class ClientHandler extends Thread {
 
                 out.writeObject(res);
                 out.flush();
-            
+
+            }
+
+        } catch (IOException ex) {
+            System.out.println("IO izuzetak klijent handler " + ex.getMessage());
+        } catch (ClassNotFoundException e) {
+            System.out.println("Klasa nije nadjena klijent handler readObject " + e.getMessage());
         }
-        
-        }catch(IOException ex){
-            System.out.println("IO izuzetak klijent handler "+ex.getMessage());
-        }catch(ClassNotFoundException e){
-            System.out.println("Klasa nije nadjena klijent handler readObject "+e.getMessage());
-        }
-        
+
     }
 
     //lako moguce da cu staviti ovde kompletan exception handeling jer je svakako beskoristan u javi
@@ -86,9 +93,9 @@ public class ClientHandler extends Thread {
                 return res;
         }
     }
-    
-    public void kill(){
-        
+
+    public void kill() {
+
     }
 
 }
