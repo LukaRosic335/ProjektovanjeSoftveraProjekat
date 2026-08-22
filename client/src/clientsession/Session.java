@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import transfer.Request;
 
 /**
  *
@@ -69,7 +70,10 @@ public class Session extends Thread{
     @Override
     public void run() {
         //salje zahtev serveru
-        //
+        //nemam pojma sta dalje
+        //mislim da ovde samo prima od servera poruku
     }
-    
+    public void send(Request request){
+        //posalje serveru request
+    }
 }
