@@ -94,8 +94,10 @@ public class ClientHandler extends Thread {
         }
     }
 
-    public void kill() {
-
+    public void kill() throws IOException {//obavesti klijenta da je veza umrla i onda se ubije
+        Response kill=new Response(ResponseStatus.ConnectionClose, null);
+        out.writeObject(kill);
+        socket.close();
     }
 
 }

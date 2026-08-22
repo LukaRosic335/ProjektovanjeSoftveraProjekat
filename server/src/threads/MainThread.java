@@ -43,10 +43,23 @@ public class MainThread extends Thread{
             } catch (IOException ex) {
                 System.out.println("server soket nije povezan "+ex.getMessage());
             }
-            if(serverSocket.isClosed()){
-                //OBAVESTI SVE KLIJENT HENDLERE DA VEZA UMIRE
-            }
+            
         }
     }
     
+    public void death(){
+        //OBAVESTI SVE KLIJENT HENDLERE DA VEZA UMIRE
+                for(ClientHandler c:clientHandlers){
+                    try {
+                        c.kill();
+                    } catch (IOException ex) {//TRENUTNO RESENJE OVOG PROBLEMA
+                        System.out.println("Neuspelo ubijanje nekog klijent hendlera "+ex.getMessage());
+                    }
+                }
+        try {
+            serverSocket.close();
+        } catch (IOException ex) {//TRENURNO RESENJE
+            System.out.println("Neuspelo zatvaranje server soketa "+ex.getMessage());
+        }
+    }
 }

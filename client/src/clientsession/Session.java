@@ -14,7 +14,7 @@ import java.net.Socket;
  *
  * @author jevrozim
  */
-public class Session {
+public class Session extends Thread{
 
     private Socket socket;
     private static Session instance;
@@ -42,9 +42,6 @@ public class Session {
         return socket;
     }
 
-    public void setSocket(Socket socket) {
-        this.socket = socket;
-    }
 
     public ObjectOutputStream getOut() {
         return out;
@@ -69,4 +66,10 @@ public class Session {
         return instance;
     }
 
+    @Override
+    public void run() {
+        //salje zahtev serveru
+        //
+    }
+    
 }

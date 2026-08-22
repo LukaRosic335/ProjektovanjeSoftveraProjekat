@@ -253,9 +253,9 @@ public class ServerFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_serverbtnActionPerformed
 
     private void serverDiscbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serverDiscbtnActionPerformed
-        try {
+        
             // TODO add your handling code here:
-            mthread.getServerSocket().close();
+            mthread.death();
             serverAcctivitylbl.setText("Server ne radi");
             serverAcctivitylbl.setForeground(Color.RED);
             serverbtn.setEnabled(true);
@@ -265,10 +265,7 @@ public class ServerFrame extends javax.swing.JFrame {
             //OBAVEZNO OVO URADITI ISPOD HAUBE I NE DOZVOLITI KORISNIKU DA MOZE DA SE ZEZA SA OVIM STVARIMA
             //ILI KADA SE OVO DESI DA ODE SVIM KLIJENTIMA DA MORA DA SE UBIJU
             
-        } catch (IOException ex) {
-//            System.getLogger(ServerFrame.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-            System.out.println("Problem pri zatvaranju konekcije "+ex.getMessage() );
-        }
+        
         
     }//GEN-LAST:event_serverDiscbtnActionPerformed
 
