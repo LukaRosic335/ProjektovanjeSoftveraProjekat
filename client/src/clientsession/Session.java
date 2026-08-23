@@ -4,18 +4,20 @@
  */
 package clientsession;
 
+import controler.ClientControler;
 import domain.Zaposleni;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import transfer.Request;
+import transfer.Response;
 
 /**
  *
  * @author jevrozim
  */
-public class Session extends Thread{
+public class Session {
 
     private Socket socket;
     private static Session instance;
@@ -67,13 +69,19 @@ public class Session extends Thread{
         return instance;
     }
 
-    @Override
-    public void run() {
-        //salje zahtev serveru
-        //nemam pojma sta dalje
-        //mislim da ovde samo prima od servera poruku
-    }
-    public void send(Request request){
+    
+    public void send(Request request) throws IOException{
         //posalje serveru request
+            out.writeObject(request);
+            out.flush();
+    }
+    
+    public Response recieve() throws IOException, ClassNotFoundException{
+        Response res=(Response)in.readObject();
+        return res;
+    }
+
+    public void kill() throws IOException {
+        socket.close();//prica za sebe
     }
 }

@@ -42,7 +42,7 @@ public class ClientControler {
     //trenutno vraca null nisam siguran kako cu implementirati metodu
     public void logout(Zaposleni z){
         Object o=sendRequest(Operation.LOGOUT, z);
-        System.out.println(o);
+        System.out.println("klijent kontroler logout "+o);
     }
     
     
@@ -50,35 +50,47 @@ public class ClientControler {
     //ukoliko nesto nije kako treba trenutno vraca null
         Request request=new Request(data, operation);
         try {
-//            ObjectOutputStream out=new ObjectOutputStream(Session.getInstace().getSocket().getOutputStream());
-//            ObjectOutputStream out=Session.getInstace().getOut();
-//            out.writeObject(request);
-//            out.flush();
-
-            Session.getInstace().getOut().writeObject(request);
-            Session.getInstace().getOut().flush();
-            
-//            ObjectInputStream in=new ObjectInputStream(Session.getInstace().getSocket().getInputStream());
-//            ObjectInputStream in=Session.getInstace().getIn();
-//            Response response= (Response) in.readObject();
-            Response response =(Response)Session.getInstace().getIn().readObject();
+            Session.getInstace().send(request);
+            Response response=(Response)Session.getInstace().recieve();
             
             
-            //posalji zahtev
-            //primi odgovor
+            if(response.getStatus()==ResponseStatus.ConnectionClose){
+                Session.getInstace().kill();
+                return null;
+                //vrati klijenta na login
+            }
             if(response.getStatus().equals(ResponseStatus.Fail)){
                 System.out.println("Status je fail, vraca se null");
                 return null;
-            }else{
-                return response.getData();
             }
+            return response.getData();
+            
         } catch (IOException ex) {
-            System.out.println("Nesto se desilo pri stvaranju kanala kod klijenta "+ex.getMessage());
+            System.out.println("Nesto se desilo pri stvaranju kanala kod klijenta lako moguce da je server zatvoren"+ex.getMessage());
             return null;
         } catch (ClassNotFoundException ex) {
             System.getLogger(ClientControler.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             return null;
         }
+        
+    }
+
+    public Object handleResponse(Response res) {
+        if(res.getStatus()==ResponseStatus.ConnectionClose){
+            try {
+                //umre soket i samim tim konekcija
+                Session.getInstace().kill();
+            } catch (IOException ex) {
+                System.getLogger(ClientControler.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+        }
+        if(res.getStatus()==ResponseStatus.Fail){
+            //nesto nesto vratio se fail
+        }
+        if(res.getStatus()==ResponseStatus.Success){
+            return null;//vrati vrednost kojuu si dobio
+        }
+        return null;
         
     }
 }

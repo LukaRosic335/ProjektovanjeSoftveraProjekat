@@ -20,6 +20,7 @@ public class MainThread extends Thread{
     public MainThread() {
         try {
             serverSocket=new ServerSocket(7259);
+            clientHandlers=new ArrayList();
         } catch (IOException ex) {
 //            System.getLogger(MainThread.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             System.out.println("Problem pri kreiranju server soketa");
