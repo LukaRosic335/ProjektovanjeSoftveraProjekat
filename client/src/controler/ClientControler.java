@@ -11,7 +11,10 @@ import transfer.Request;
 import transfer.Response;
 import clientsession.Session;
 import domain.Zaposleni;
+import forms.LoginForm;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import javax.swing.JFrame;
 import transfer.util.Operation;
 import transfer.util.ResponseStatus;
 
@@ -23,8 +26,11 @@ import transfer.util.ResponseStatus;
  */
 public class ClientControler {
     private static ClientControler instance;
+    private ArrayList<JFrame> frames;
+    private static LoginForm loginForm;
 
     private ClientControler() {
+        frames=new ArrayList();
     }
     
     public static ClientControler getInstance(){
@@ -32,6 +38,13 @@ public class ClientControler {
             instance=new ClientControler();
         }
         return instance;
+    }
+    public ArrayList<JFrame> getFrames(){
+        return frames;
+    }
+    
+    public static void main(String[] args) {
+        LoginForm login=new LoginForm("Unesite korisnicko ime i lozinku");
     }
     
     public Zaposleni login(Zaposleni z){
@@ -50,11 +63,18 @@ public class ClientControler {
     //ukoliko nesto nije kako treba trenutno vraca null
         Request request=new Request(data, operation);
         try {
+            System.out.println("Poslato "+request.getOperation()+" "+request.getData());
             Session.getInstace().send(request);
             Response response=(Response)Session.getInstace().recieve();
+            System.out.println("Primljeno "+response.getStatus()+" "+response.getData());
             
             
             if(response.getStatus()==ResponseStatus.ConnectionClose){
+                for(JFrame j:frames){//zatvara sve prozore koji bi mogli biti otvoreni
+                    j.dispose();
+                }
+                loginForm=new LoginForm("Server je prestao sa radom");//otvara ponovo login formu
+                Session.getInstace().setUlogovani(null);
                 Session.getInstace().kill();
                 return null;
                 //vrati klijenta na login
@@ -63,6 +83,7 @@ public class ClientControler {
                 System.out.println("Status je fail, vraca se null");
                 return null;
             }
+            System.out.println("Primljeno "+response.getData());
             return response.getData();
             
         } catch (IOException ex) {

@@ -68,10 +68,21 @@ public class Session {
         }
         return instance;
     }
+//      nekada u buducnosti cu se zezam s ovim trenutno radi sve dokle god radi konekcija s obe strane
+//    @Override
+//    public void run() {
+//        while(!socket.isClosed()){
+//            //slusaj server
+//        }
+//    }
 
+    
     
     public void send(Request request) throws IOException{
         //posalje serveru request
+        if(socket.isClosed()){
+         socket=new Socket("localhost", 7259);
+        }
             out.writeObject(request);
             out.flush();
     }

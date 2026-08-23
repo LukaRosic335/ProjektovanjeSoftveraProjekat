@@ -46,7 +46,7 @@ public class ClientHandler extends Thread {
                 System.out.println("Primio " + req.getOperation());
 
                 Response res = handleRequest(req);
-                System.out.println("Saljem " + res.getStatus() + res.getData());
+                System.out.println("Saljem " + res.getStatus() +" "+ res.getData());
 
                 out.writeObject(res);
                 out.flush();
