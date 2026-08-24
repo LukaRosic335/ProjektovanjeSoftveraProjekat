@@ -11,7 +11,7 @@ import transfer.Request;
 import transfer.Response;
 import clientsession.Session;
 import domain.Zaposleni;
-import forms.LoginForm;
+import front.LoginForm;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -44,7 +44,8 @@ public class ClientControler {
     }
     
     public static void main(String[] args) {
-        LoginForm login=new LoginForm("Unesite korisnicko ime i lozinku");
+        LoginForm login=new LoginForm();
+        login.getMessageTxt().setText("Unesite korisnicko ime i lozinku");
     }
     
     public Zaposleni login(Zaposleni z){
@@ -56,6 +57,12 @@ public class ClientControler {
     public void logout(Zaposleni z){
         Object o=sendRequest(Operation.LOGOUT, z);
         System.out.println("klijent kontroler logout "+o);
+    }
+    
+    public Zaposleni newZaposleni(Zaposleni zaposleni) {
+       Zaposleni z=(Zaposleni) sendRequest(Operation.NEW_ZAPOSLENI, zaposleni);
+       
+       return z;
     }
     
     
@@ -73,7 +80,8 @@ public class ClientControler {
                 for(JFrame j:frames){//zatvara sve prozore koji bi mogli biti otvoreni
                     j.dispose();
                 }
-                loginForm=new LoginForm("Server je prestao sa radom");//otvara ponovo login formu
+                loginForm=new LoginForm();
+                loginForm.getMessageTxt().setText("Server je prestao sa radom");
                 Session.getInstace().setUlogovani(null);
                 Session.getInstace().kill();
                 return null;
@@ -96,6 +104,9 @@ public class ClientControler {
         
     }
 
+    
+    //NISAM SIGURAN KOLIKO MI OVO TREBA U BUDUCE, TJ DA LI CU GA UOPSTE KORISTITI ALI ZASAD NEKA GA
+    
     public Object handleResponse(Response res) {
         if(res.getStatus()==ResponseStatus.ConnectionClose){
             try {
@@ -114,6 +125,7 @@ public class ClientControler {
         return null;
         
     }
+
 }
 
 

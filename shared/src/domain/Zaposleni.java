@@ -27,6 +27,12 @@ public class Zaposleni extends OpstiDomenskiObjekat {
         this.korisnickoIme = korisnickoIme;
         this.sifra = sifra;
     }
+    public Zaposleni(String ime, String prezime, String korisnickoIme, String sifra){
+        this.ime=ime;
+        this.prezime=prezime;
+        this.korisnickoIme=korisnickoIme;
+        this.sifra=sifra;
+    }
 
     public Zaposleni() {
     }

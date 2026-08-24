@@ -2,11 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package forms;
+package front;
 
 import controler.ClientControler;
 import domain.Zaposleni;
 import clientsession.Session;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -14,10 +15,12 @@ import clientsession.Session;
  */
 public class LoginForm extends javax.swing.JFrame {
     
-    public LoginForm(String poruka) {
+    public LoginForm() {
         initComponents();
         this.setVisible(true);
-        messagetxt.setText(poruka);
+    }
+    public JTextArea getMessageTxt(){
+        return messagetxt;
     }
 
     @SuppressWarnings("unchecked")
