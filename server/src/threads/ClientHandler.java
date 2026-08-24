@@ -46,7 +46,7 @@ public class ClientHandler extends Thread {
                 System.out.println("Primio " + req.getOperation());
 
                 Response res = handleRequest(req);
-                System.out.println("Saljem " + res.getStatus() +" "+ res.getData());
+                System.out.println("Saljem " + res.getStatus() + " " + res.getData());
 
                 out.writeObject(res);
                 out.flush();
@@ -80,10 +80,15 @@ public class ClientHandler extends Thread {
                 return res;
 
             case LOGOUT:
-                System.out.println("Switch case se izvrsava");
                 ServerControler.getInstance().logout((Zaposleni) req.getData());
                 res.setData(req.getData());
-                System.out.println("Switch case se izvrsio");
+                return res;
+
+            //nisam siguran da je to to
+            case NEW_ZAPOSLENI:
+                System.out.println("Novi zaposleni metoda");
+                Zaposleni za = ServerControler.getInstance().newZaposleni((Zaposleni) req.getData());
+                res.setData(za);
                 return res;
 
             default:
@@ -95,7 +100,7 @@ public class ClientHandler extends Thread {
     }
 
     public void kill() throws IOException {//obavesti klijenta da je veza umrla i onda se ubije
-        Response kill=new Response(ResponseStatus.ConnectionClose, null);
+        Response kill = new Response(ResponseStatus.ConnectionClose, null);
         out.writeObject(kill);
         socket.close();
     }

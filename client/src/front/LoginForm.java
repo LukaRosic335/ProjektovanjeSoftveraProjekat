@@ -39,7 +39,11 @@ public class LoginForm extends javax.swing.JFrame {
 
         jLabel1.setText("Korisnicko Ime:");
 
+        usernametxt.setText("Mnjau");
+
         jLabel2.setText("Lozinka:");
+
+        passwordtxt.setText("Mnjau");
 
         loginbtn.setText("uloguj se");
         loginbtn.addActionListener(new java.awt.event.ActionListener() {

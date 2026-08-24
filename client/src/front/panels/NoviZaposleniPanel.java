@@ -22,9 +22,17 @@ public class NoviZaposleniPanel extends javax.swing.JPanel {
     /**
      * Creates new form NoviZaposleniPanel
      */
-    public NoviZaposleniPanel(PanelFrame frame) {
+    public NoviZaposleniPanel() {
         initComponents();
-        this.frame=frame;
+
+    }
+
+    public void setFrame(PanelFrame frame) {
+        this.frame = frame;
+    }
+
+    public String titleSetting() {
+        return "Dodavanje novog zaposlenog";
     }
 
     /**
@@ -46,6 +54,7 @@ public class NoviZaposleniPanel extends javax.swing.JPanel {
         imetxt = new javax.swing.JTextField();
         prezimetxt = new javax.swing.JTextField();
         passwordtxt = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         jTextField3.setText("jTextField1");
 
@@ -61,6 +70,13 @@ public class NoviZaposleniPanel extends javax.swing.JPanel {
         continuebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 continuebtnActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -86,11 +102,12 @@ public class NoviZaposleniPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(continuebtn))
-                            .addComponent(passwordtxt))))
+                        .addComponent(passwordtxt))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(continuebtn)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -113,7 +130,9 @@ public class NoviZaposleniPanel extends javax.swing.JPanel {
                     .addComponent(jLabel4)
                     .addComponent(passwordtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                .addComponent(continuebtn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(continuebtn)
+                    .addComponent(jButton1))
                 .addGap(25, 25, 25))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -125,20 +144,39 @@ public class NoviZaposleniPanel extends javax.swing.JPanel {
         } else {
             Zaposleni zaposleni = new Zaposleni(imetxt.getText(), prezimetxt.getText(), ussernametxt.getText(), passwordtxt.getText());
             zaposleni = ClientControler.getInstance().newZaposleni(zaposleni);
+
             //NESTO TREBA DA URADI OVA METODA NPR DA ISPISE DA JE DODAT NOVI ZAPOSLENI ILI TAKO NESSTO
             if (zaposleni != null) {
                 System.out.println("NAPRAVLJEN JE NOVI ZAPOSLENI " + zaposleni);
-                MainFrame mainForm = new MainFrame();
-                mainForm.getMessage().setText("Unet je novi zaposleni " + zaposleni);
-                frame.dispose();
+                frame.getMessagetxt().setText("Dodat je novi zaposleni " + zaposleni);
+                imetxt.setEditable(false);
+                prezimetxt.setEditable(false);
+                ussernametxt.setEditable(false);
+                passwordtxt.setEditable(false);
+                continuebtn.setEnabled(false);
+
+            }else{
+                System.out.println("Vracen je null");
+                frame.getMessagetxt().setText("Neuspesno kreiranje zaposlenog");
             }
         }
     }//GEN-LAST:event_continuebtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.out.println("NAPRAVLJEN JE NOVI ZAPOSLENI " );
+                frame.getMessagetxt().setText("Dodat je novi zaposleni " );
+                imetxt.setEditable(false);
+                prezimetxt.setEditable(false);
+                ussernametxt.setEditable(false);
+                passwordtxt.setEditable(false);
+                continuebtn.setEnabled(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton continuebtn;
     private javax.swing.JTextField imetxt;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

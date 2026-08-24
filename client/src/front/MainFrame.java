@@ -19,7 +19,7 @@ import javax.swing.SwingConstants;
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    private JFrame interactionFrame;
+    private PanelFrame interactionFrame;
 
     public MainFrame() {
         initComponents();
@@ -34,8 +34,8 @@ public class MainFrame extends javax.swing.JFrame {
         System.out.println("Linija 30");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//najverovatnije nije potrebno
     }
-    
-    public JTextArea getMessage(){
+
+    public JTextArea getMessage() {
         return messagetxt;
     }
 
@@ -131,12 +131,10 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutbtnActionPerformed
 
     private void newZaposlenibtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newZaposlenibtnActionPerformed
-        // TODO add your handling code here:
-        //treba mi popup koji dodaje novog zaposlenog
-        NoviZaposleniPanel p=new NoviZaposleniPanel((PanelFrame)interactionFrame);
-        interactionFrame = new PanelFrame(p);
+        NoviZaposleniPanel p=new NoviZaposleniPanel();
+        interactionFrame=new PanelFrame(p);
+        p.setFrame(interactionFrame);
         this.dispose();
-
     }//GEN-LAST:event_newZaposlenibtnActionPerformed
 
 

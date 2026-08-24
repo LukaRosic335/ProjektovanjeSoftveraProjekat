@@ -5,6 +5,10 @@
         <group name="projektovanjeSoftveraProjekatSoftvera">
             <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/client/src/clientsession/Session.java</file>
             <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/client/src/controler/ClientControler.java</file>
+            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/client/src/front/panels/NoviZaposleniPanel.java</file>
+            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/client/src/front/panels/PanelFrame.java</file>
+            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/client/src/front/MainFrame.java</file>
+            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/client/src/front/LoginForm.java</file>
         </group>
     </open-files>
 </project-private>

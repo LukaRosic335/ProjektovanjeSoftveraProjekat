@@ -61,7 +61,6 @@ public class ClientControler {
     
     public Zaposleni newZaposleni(Zaposleni zaposleni) {
        Zaposleni z=(Zaposleni) sendRequest(Operation.NEW_ZAPOSLENI, zaposleni);
-       
        return z;
     }
     
