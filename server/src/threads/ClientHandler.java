@@ -88,6 +88,10 @@ public class ClientHandler extends Thread {
             case NEW_ZAPOSLENI:
                 System.out.println("Novi zaposleni metoda");
                 Zaposleni za = ServerControler.getInstance().newZaposleni((Zaposleni) req.getData());
+                if(za==null){
+                    res.setStatus(ResponseStatus.Fail);
+                    return res;
+                }
                 res.setData(za);
                 return res;
 

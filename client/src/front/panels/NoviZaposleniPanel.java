@@ -154,6 +154,7 @@ public class NoviZaposleniPanel extends javax.swing.JPanel {
                 ussernametxt.setEditable(false);
                 passwordtxt.setEditable(false);
                 continuebtn.setEnabled(false);
+                frame.getcacnelbtn().setText("Izadji");
 
             }else{
                 System.out.println("Vracen je null");

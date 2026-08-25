@@ -8,7 +8,7 @@ import domain.OpstiDomenskiObjekat;
 import domain.Zaposleni;
 import java.util.ArrayList;
 import so.Login.Login;
-import so.newZaposleni.NewZaposleni;
+import so.Zaposleni.NewZaposleni;
 
 /**
  *
@@ -54,13 +54,11 @@ public class ServerControler {
 
     public Zaposleni newZaposleni(Zaposleni zaposleni) {
         NewZaposleni so=new NewZaposleni();
-        Zaposleni z;
         try {
             so.executeTamplate(zaposleni);
-            z=so.getZaposleni();
-            return z;
+            return so.getZaposleni();
         } catch (Exception ex) {
-            System.out.println("Postoji izuzetak kod newZaposleni SC metode");
+            System.out.println("Postoji izuzetak kod newZaposleni SC metode "+ex.getMessage());
             return null;
         }
     }

@@ -5,6 +5,7 @@
 package front.panels;
 
 import front.MainFrame;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -102,6 +103,9 @@ public class PanelFrame extends javax.swing.JFrame {
 
     public JTextArea getMessagetxt(){
         return messagetxt;
+    }
+    public JButton getcacnelbtn(){
+        return cancelbtn;
     }
     
 

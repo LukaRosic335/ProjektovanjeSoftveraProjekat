@@ -78,7 +78,7 @@ public class Zaposleni extends OpstiDomenskiObjekat {
     }
 
     @Override
-    public boolean equals(Object obj) {                 //OBAVEZNO OBRATITI PAZNJU NA OVU METODU NEGDE U BUDUCNOSTI
+    public boolean equals(Object obj) {          //OBAVEZNO OBRATITI PAZNJU NA OVU METODU NEGDE U BUDUCNOSTI
         if (!(obj instanceof Zaposleni)) {
             return false;
         }
@@ -123,7 +123,7 @@ public class Zaposleni extends OpstiDomenskiObjekat {
 
     @Override
     public String getInsertValues() {
-        return "(" + ime + ", " + prezime + ", " + korisnickoIme + ", " + sifra + ")";
+        return "('" + ime + "', '" + prezime + "', '" + korisnickoIme + "', '" + sifra + "')";
     }
 
     @Override
