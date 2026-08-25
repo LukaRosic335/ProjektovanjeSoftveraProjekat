@@ -1,0 +1,49 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package front.tableModels;
+
+import domain.Zaposleni;
+import java.util.ArrayList;
+import javax.swing.table.AbstractTableModel;
+
+/**
+ *
+ * @author jevrozim
+ */
+public class ZaposleniTableModel extends AbstractTableModel{
+
+    private ArrayList<Zaposleni> lista;
+    private String[] kolone={"Id","Korisnicko ime","Ime","Prezime"} ;//nesto nalik ovom
+    
+    @Override
+    public int getRowCount() {
+        return lista.size();
+        
+    }
+
+    @Override
+    public int getColumnCount() {
+        return kolone.length;
+    }
+
+    @Override
+    public Object getValueAt(int i, int i1) {
+        switch (i1) {
+            case 1://get id
+                
+                break;
+            case 2://get korisnickoIme
+                break;
+            case 3://get Ime
+                break;
+            case 4://get Prezime
+                break;
+            
+            default:
+                throw new AssertionError();
+        }
+    }
+    
+}
