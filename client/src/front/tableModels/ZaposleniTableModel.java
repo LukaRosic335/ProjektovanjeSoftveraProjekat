@@ -15,12 +15,23 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ZaposleniTableModel extends AbstractTableModel {
 
-    private ArrayList<Zaposleni> lista;
+    private ArrayList<Zaposleni> lista=new ArrayList(); //KAO LISTA JE NULL NE ZNAM ZASTO
     private String[] kolone = {"Id", "Korisnicko ime", "Ime", "Prezime"};//nesto nalik ovom
 
     public ZaposleniTableModel(){
+        
         lista=ClientControler.getInstance().getAllZaposleni();
     }
+
+    @Override
+    public String getColumnName(int column) {
+        return kolone[column];
+    }
+    
+    public Zaposleni getZaposleni(int row){
+        return lista.get(row);
+    }
+    
     
     @Override
     public int getRowCount() {
@@ -48,8 +59,4 @@ public class ZaposleniTableModel extends AbstractTableModel {
                 throw new AssertionError();
         }
     }
-    public void setColumnName(){
-        
-    }
-
 }
