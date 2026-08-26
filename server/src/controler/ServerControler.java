@@ -4,10 +4,10 @@
  */
 package controler;
 
-import domain.OpstiDomenskiObjekat;
 import domain.Zaposleni;
 import java.util.ArrayList;
 import so.Login.Login;
+import so.Zaposleni.GetAllZaposleni;
 import so.Zaposleni.NewZaposleni;
 
 /**
@@ -47,7 +47,7 @@ public class ServerControler {
     }
     public void logout(Zaposleni zaposleni){
         ulogovani.remove(zaposleni);
-        if(ulogovani.size()==0){
+        if(ulogovani.isEmpty()){        //OGROMAN CHECK ZA OVO NEGDE U BUDUCNOSTI
             System.out.println("Nema vise nikog od klijenata");
         }
     }
@@ -61,5 +61,11 @@ public class ServerControler {
             System.out.println("Postoji izuzetak kod newZaposleni SC metode "+ex.getMessage());
             return null;
         }
+    }
+
+    public ArrayList<Zaposleni> getAllZaposleni() throws Exception {//razmatranje ovog kao opcije
+        GetAllZaposleni so=new GetAllZaposleni();
+        so.executeTamplate(null);
+        return so.getZaposleni();
     }
 }

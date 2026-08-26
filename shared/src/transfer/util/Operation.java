@@ -10,6 +10,10 @@ package transfer.util;
  */
 public enum Operation {
     //kako mi bude trebalo tako cu ovde dopunjavati operacije koje su neophodne
-    CONNECTIONCLOSE,LOGIN, LOGOUT, NEW_ZAPOSLENI,
+    CONNECTIONCLOSE,
+    LOGIN,
+    LOGOUT,
+    NEW_ZAPOSLENI,
+    GET_ALL_ZAPOSLENI,
     
 }

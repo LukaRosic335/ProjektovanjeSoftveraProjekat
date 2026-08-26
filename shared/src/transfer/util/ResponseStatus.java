@@ -9,5 +9,5 @@ package transfer.util;
  * @author jevrozim
  */
 public enum ResponseStatus {
-    Success,Fail,ConnectionClose
+    Success,Fail,ConnectionClose, Exception//privremeno
 }

@@ -4,6 +4,7 @@
  */
 package front.tableModels;
 
+import controler.ClientControler;
 import domain.Zaposleni;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
@@ -12,15 +13,19 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author jevrozim
  */
-public class ZaposleniTableModel extends AbstractTableModel{
+public class ZaposleniTableModel extends AbstractTableModel {
 
     private ArrayList<Zaposleni> lista;
-    private String[] kolone={"Id","Korisnicko ime","Ime","Prezime"} ;//nesto nalik ovom
+    private String[] kolone = {"Id", "Korisnicko ime", "Ime", "Prezime"};//nesto nalik ovom
+
+    public ZaposleniTableModel(){
+        lista=ClientControler.getInstance().getAllZaposleni();
+    }
     
     @Override
     public int getRowCount() {
         return lista.size();
-        
+
     }
 
     @Override
@@ -32,18 +37,19 @@ public class ZaposleniTableModel extends AbstractTableModel{
     public Object getValueAt(int i, int i1) {
         switch (i1) {
             case 1://get id
-                
-                break;
+               return lista.get(i).getIdZaposleni();
             case 2://get korisnickoIme
-                break;
+               return lista.get(i).getKorisnickoIme();
             case 3://get Ime
-                break;
+                return lista.get(i).getIme();
             case 4://get Prezime
-                break;
-            
+                return lista.get(i).getPrezime();
             default:
                 throw new AssertionError();
         }
     }
-    
+    public void setColumnName(){
+        
+    }
+
 }

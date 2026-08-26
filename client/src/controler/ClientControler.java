@@ -26,7 +26,7 @@ import transfer.util.ResponseStatus;
  */
 public class ClientControler {
     private static ClientControler instance;
-    private ArrayList<JFrame> frames;
+    private ArrayList<JFrame> frames;    //Najverovatnije mi ne treba idk mozda i bude
     private static LoginForm loginForm;
 
     private ClientControler() {
@@ -64,6 +64,11 @@ public class ClientControler {
        return z;
     }
     
+    public ArrayList<Zaposleni> getAllZaposleni() {
+        ArrayList<Zaposleni> z=(ArrayList<Zaposleni>) sendRequest(Operation.GET_ALL_ZAPOSLENI, this);
+        System.out.println("getAllZaposleni CC");
+        return z;
+    }
     
     private synchronized Object sendRequest(Operation operation,Object data){
     //ukoliko nesto nije kako treba trenutno vraca null
@@ -124,6 +129,8 @@ public class ClientControler {
         return null;
         
     }
+
+    
 
 }
 
