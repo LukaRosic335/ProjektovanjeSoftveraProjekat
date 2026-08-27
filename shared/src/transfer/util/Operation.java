@@ -15,5 +15,6 @@ public enum Operation {
     LOGOUT,
     NEW_ZAPOSLENI,
     GET_ALL_ZAPOSLENI,
+    DELETE,
     
 }

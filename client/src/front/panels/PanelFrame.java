@@ -53,7 +53,7 @@ public class PanelFrame extends javax.swing.JFrame {
             .addGap(0, 232, Short.MAX_VALUE)
         );
 
-        cancelbtn.setText("Ponisti");
+        cancelbtn.setText("Nazad");
         cancelbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelbtnActionPerformed(evt);

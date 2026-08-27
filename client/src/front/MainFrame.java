@@ -10,6 +10,7 @@ import controler.ClientControler;
 import front.panels.DeleteZaposleniPanel;
 import front.panels.NoviZaposleniPanel;
 import front.panels.PanelFrame;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
@@ -27,12 +28,9 @@ public class MainFrame extends javax.swing.JFrame {
         ClientControler.getInstance().getFrames().add(this);
         this.setVisible(true);
         ussertxt.setHorizontalAlignment(SwingConstants.CENTER);
-        System.out.println("Linija 25");
         if (Session.getInstace().getUlogovani() != null) {
             ussertxt.setText(Session.getInstace().getUlogovani().toString());
-            System.out.println("Linija 28");
         }
-        System.out.println("Linija 30");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//najverovatnije nije potrebno
     }
 
@@ -124,16 +122,9 @@ public class MainFrame extends javax.swing.JFrame {
     private void logoutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutbtnActionPerformed
         // TODO add your handling code here:
         try {
-            System.out.println("1");
             Zaposleni z = Session.getInstace().getUlogovani();
-            System.out.println("1.5");
             ClientControler.getInstance().logout(z);
-            System.out.println("2");
             Session.getInstace().setUlogovani(null);//Ovo treba da radi klijent kontroler
-            System.out.println("3");
-//        LoginForm.getInstance().setVisible(true);
-            System.out.println("4");
-            System.out.println("5");
             LoginForm login = new LoginForm();
             login.getMessageTxt().setText("Uspesno odjavljivanje");
             this.dispose();
@@ -153,6 +144,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //bukv prekopiraj gore
+        ArrayList<Zaposleni> zaposleni=ClientControler.getInstance().getAllZaposleni();
         DeleteZaposleniPanel p=new DeleteZaposleniPanel();
         interactionFrame=new PanelFrame(p);
         p.setFrame(interactionFrame);

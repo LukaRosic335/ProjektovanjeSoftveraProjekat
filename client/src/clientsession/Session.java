@@ -28,12 +28,8 @@ public class Session {
     private Session() {
         try {
             socket = new Socket("localhost", 7259);
-            System.out.println("pre out");
             out = new ObjectOutputStream(socket.getOutputStream());
-            System.out.println("Posle out pre in,");
             in = new ObjectInputStream(socket.getInputStream());
-            System.out.println("Posle in");
-
         } catch (IOException ex) {
             System.out.println("Problem pri stvaranju soketa " + ex.getMessage());
         } catch (Exception e) {
@@ -83,12 +79,14 @@ public class Session {
         if(socket.isClosed()){
          socket=new Socket("localhost", 7259);
         }
+        System.out.println("Klijent salje "+request.getData()+" "+request.getOperation());
             out.writeObject(request);
             out.flush();
     }
     
     public Response recieve() throws IOException, ClassNotFoundException{
         Response res=(Response)in.readObject();
+        System.out.println("Klijent primio "+res.getData()+" "+res.getStatus());
         return res;
     }
 

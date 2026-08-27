@@ -65,19 +65,24 @@ public class ClientControler {
     }
     
     public ArrayList<Zaposleni> getAllZaposleni() {
-        ArrayList<Zaposleni> z=(ArrayList<Zaposleni>) sendRequest(Operation.GET_ALL_ZAPOSLENI, this);
+        ArrayList<Zaposleni> z=(ArrayList<Zaposleni>) sendRequest(Operation.GET_ALL_ZAPOSLENI, null);
         System.out.println("getAllZaposleni CC");
         return z;
+    }
+    
+    public void deleteZaposleni(Zaposleni pokojni) {
+        System.out.println("deleteZaposleni CC");
+        sendRequest(Operation.DELETE, pokojni);
     }
     
     private synchronized Object sendRequest(Operation operation,Object data){
     //ukoliko nesto nije kako treba trenutno vraca null
         Request request=new Request(data, operation);
         try {
-            System.out.println("Poslato "+request.getOperation()+" "+request.getData());
+            System.out.println("Poslato CC"+request.getOperation()+" "+request.getData());
             Session.getInstace().send(request);
             Response response=(Response)Session.getInstace().recieve();
-            System.out.println("Primljeno "+response.getStatus()+" "+response.getData());
+            System.out.println("Primljeno CC"+response.getStatus()+" "+response.getData());
             
             
             if(response.getStatus()==ResponseStatus.ConnectionClose){
@@ -102,7 +107,7 @@ public class ClientControler {
             System.out.println("Nesto se desilo pri stvaranju kanala kod klijenta lako moguce da je server zatvoren"+ex.getMessage());
             return null;
         } catch (ClassNotFoundException ex) {
-            System.getLogger(ClientControler.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.out.println("Klasa nije nadjena izuzetak CC "+ex.getMessage());
             return null;
         }
         
@@ -129,6 +134,8 @@ public class ClientControler {
         return null;
         
     }
+
+    
 
     
 

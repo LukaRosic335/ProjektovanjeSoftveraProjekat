@@ -4,7 +4,12 @@
  */
 package front.panels;
 
+import controler.ClientControler;
+import domain.Zaposleni;
 import front.tableModels.ZaposleniTableModel;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -13,12 +18,13 @@ import front.tableModels.ZaposleniTableModel;
 public class DeleteZaposleniPanel extends javax.swing.JPanel {
 
     private PanelFrame frame;
+    private ZaposleniTableModel model;
 
     /**
      * Creates new form DeleteZaposleniPanel
      */
     public DeleteZaposleniPanel() {
-        ZaposleniTableModel model = new ZaposleniTableModel();
+        model = new ZaposleniTableModel();
         initComponents();
         table.setModel(model);
     }
@@ -39,6 +45,7 @@ public class DeleteZaposleniPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
+        deletebtn = new javax.swing.JButton();
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -53,26 +60,56 @@ public class DeleteZaposleniPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(table);
 
+        deletebtn.setText("Ukloni");
+        deletebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletebtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(118, 118, 118)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(deletebtn)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(deletebtn)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed
+        // TODO add your handling code here:
+        int row=table.getSelectedRow();
+        Zaposleni pokojni=model.getZaposleni(row);
+        
+        int odgovor=JOptionPane.showConfirmDialog(frame, "Da li ste sigurni da zelite da uklonite "+pokojni,"", JOptionPane.YES_NO_OPTION);
+        
+        if(odgovor==JOptionPane.YES_OPTION){
+        ClientControler.getInstance().deleteZaposleni(pokojni);
+        model=new ZaposleniTableModel();
+        table.setModel(model);
+        frame.getMessagetxt().setText("Uspesno uklonjen "+pokojni);
+        }
+    }//GEN-LAST:event_deletebtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton deletebtn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables

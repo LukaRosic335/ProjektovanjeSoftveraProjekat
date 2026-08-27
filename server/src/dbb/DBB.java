@@ -71,7 +71,7 @@ public class DBB {
     }
 
     public void delete(OpstiDomenskiObjekat odo) throws SQLException {
-        String query = "DELETE FROM " + odo.getTableName() + "WHERE " + odo.getWhere() + ";";
+        String query = "DELETE FROM " + odo.getTableName() + " WHERE " + odo.getWhere() + ";";
         System.out.println(query);
         Statement s = connection.createStatement();
         s.executeUpdate(query);

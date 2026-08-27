@@ -15,24 +15,23 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ZaposleniTableModel extends AbstractTableModel {
 
-    private ArrayList<Zaposleni> lista=new ArrayList(); //KAO LISTA JE NULL NE ZNAM ZASTO
-    private String[] kolone = {"Id", "Korisnicko ime", "Ime", "Prezime"};//nesto nalik ovom
+    private ArrayList<Zaposleni> lista = new ArrayList(); //KAO LISTA JE NULL NE ZNAM ZASTO
+    private final String[] kolone = {"Id", "Korisnicko ime", "Ime", "Prezime"};//nesto nalik ovom
 
-    public ZaposleniTableModel(){
-        
-        lista=ClientControler.getInstance().getAllZaposleni();
+    public ZaposleniTableModel() {
+        lista = ClientControler.getInstance().getAllZaposleni();
+        fireTableDataChanged();
     }
 
     @Override
     public String getColumnName(int column) {
         return kolone[column];
     }
-    
-    public Zaposleni getZaposleni(int row){
+
+    public Zaposleni getZaposleni(int row) {
         return lista.get(row);
     }
-    
-    
+
     @Override
     public int getRowCount() {
         return lista.size();
@@ -47,13 +46,13 @@ public class ZaposleniTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int i, int i1) {
         switch (i1) {
-            case 1://get id
-               return lista.get(i).getIdZaposleni();
-            case 2://get korisnickoIme
-               return lista.get(i).getKorisnickoIme();
-            case 3://get Ime
+            case 0://get id
+                return lista.get(i).getIdZaposleni();
+            case 1://get korisnickoIme
+                return lista.get(i).getKorisnickoIme();
+            case 2://get Ime
                 return lista.get(i).getIme();
-            case 4://get Prezime
+            case 3://get Prezime
                 return lista.get(i).getPrezime();
             default:
                 throw new AssertionError();

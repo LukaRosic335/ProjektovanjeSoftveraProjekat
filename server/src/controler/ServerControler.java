@@ -7,6 +7,7 @@ package controler;
 import domain.Zaposleni;
 import java.util.ArrayList;
 import so.Login.Login;
+import so.Zaposleni.DeleteZaposleni;
 import so.Zaposleni.GetAllZaposleni;
 import so.Zaposleni.NewZaposleni;
 
@@ -67,5 +68,10 @@ public class ServerControler {
         GetAllZaposleni so=new GetAllZaposleni();
         so.executeTamplate(null);
         return so.getZaposleni();
+    }
+
+    public void deleteZaposleni(Zaposleni zaposleni) throws Exception {//takodje eksperiment sa throws
+        DeleteZaposleni so=new DeleteZaposleni();
+        so.executeTamplate(zaposleni);
     }
 }
