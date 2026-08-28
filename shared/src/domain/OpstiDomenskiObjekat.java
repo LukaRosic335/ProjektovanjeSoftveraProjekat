@@ -22,4 +22,5 @@ public abstract class OpstiDomenskiObjekat implements Serializable{
     public abstract String getColumnNames();
     public abstract String getUpdateValues();
     public abstract String getWhere();
+    public abstract String getSelectCondition();
 }

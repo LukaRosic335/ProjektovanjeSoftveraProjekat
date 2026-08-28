@@ -30,11 +30,11 @@ public class DBB {
     }
 
     //PROVERICU DA LI TREBA 
-    public static Connection getConnection() {
+    public Connection getConnection() {
         return connection;
     }
-
-    public static void setConnection(Connection connection) {
+//gde ja to setujem connection?
+    public void setConnection(Connection connection) {
         DBB.connection = connection;
     }
 
@@ -47,7 +47,7 @@ public class DBB {
 
     //TRENUTNO BACAJU SQL Izuzetke sve CRUD operacije
     public ArrayList<OpstiDomenskiObjekat> select(OpstiDomenskiObjekat odo) throws SQLException {
-        String query = "SELECT * FROM " + odo.getTableName() + ";";
+        String query = "SELECT * FROM " + odo.getTableName() + " WHERE 1=1 "+odo.getSelectCondition()+";";
         System.out.println(query);
         Statement s = connection.createStatement();
         ResultSet rs = s.executeQuery(query);

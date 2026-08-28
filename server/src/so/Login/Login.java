@@ -50,9 +50,13 @@ public class Login extends ApstraktneSistemskeOperacije {
                 }
             }
         } catch (SQLException e) {
-            throw new SQLException("greska pri selektovanju u dbb select");
+            throw new SQLException("greska pri selektovanju u dbb select "+e.getMessage());
         }
         throw new Exception("Ne postoji zaposleni s tim kredencijalima");
+
+//        ArrayList<OpstiDomenskiObjekat> zaposleni=DBB.getInstance().select((Zaposleni)odo);
+        
+
     }
 
     @Override

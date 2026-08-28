@@ -27,14 +27,7 @@ public class DeleteZaposleni extends ApstraktneSistemskeOperacije{
         if(!(odo instanceof Zaposleni)){
             throw new Exception("Nije prosledjen zaposleni");
         }
-        Zaposleni zaposleni=(Zaposleni)odo;
-        ArrayList<OpstiDomenskiObjekat> svi=DBB.getInstance().select(zaposleni);
-        for(OpstiDomenskiObjekat o:svi){
-            if(!o.equals(zaposleni)){
-              break;  
-            } 
-        }
-        throw new Exception("Zaposleni ne postoji");
+        
     }
     
 }

@@ -136,6 +136,25 @@ public class Zaposleni extends OpstiDomenskiObjekat {
         return "idZaposlenog = "+idZaposleni;
     }
 
+    @Override
+    public String getSelectCondition() {
+        String query="";
+        
+        if(ime!=null){
+            query+=" AND ime='"+ime+"'";
+        }
+        if(prezime!=null){
+            query+=" AND prezime='"+prezime+"'";
+        }
+        if(korisnickoIme!=null){
+            query+=" AND korisnickoIme='"+korisnickoIme+"'";
+        }
+        if(sifra!=null){
+            query+=" AND sifra='"+sifra+"'";
+        }
+        return query;
+    }
+
     
     
 }
