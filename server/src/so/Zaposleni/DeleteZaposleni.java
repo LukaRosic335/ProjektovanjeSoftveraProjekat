@@ -6,6 +6,8 @@ package so.Zaposleni;
 
 import dbb.DBB;
 import domain.OpstiDomenskiObjekat;
+import domain.Zaposleni;
+import java.util.ArrayList;
 import so.ApstraktneSistemskeOperacije;
 
 /**
@@ -21,7 +23,18 @@ public class DeleteZaposleni extends ApstraktneSistemskeOperacije{
 
     @Override
     protected void validate(OpstiDomenskiObjekat odo) throws Exception {
-        //nisam siguran da li treba ovde validacija
+        //gleda samo da li zaposleni postoji
+        if(!(odo instanceof Zaposleni)){
+            throw new Exception("Nije prosledjen zaposleni");
+        }
+        Zaposleni zaposleni=(Zaposleni)odo;
+        ArrayList<OpstiDomenskiObjekat> svi=DBB.getInstance().select(zaposleni);
+        for(OpstiDomenskiObjekat o:svi){
+            if(!o.equals(zaposleni)){
+              break;  
+            } 
+        }
+        throw new Exception("Zaposleni ne postoji");
     }
     
 }
