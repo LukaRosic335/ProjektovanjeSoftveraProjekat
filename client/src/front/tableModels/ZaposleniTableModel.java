@@ -19,8 +19,14 @@ public class ZaposleniTableModel extends AbstractTableModel {
     private final String[] kolone = {"Id", "Korisnicko ime", "Ime", "Prezime"};//nesto nalik ovom
 
     public ZaposleniTableModel() {
+        try{
         lista = ClientControler.getInstance().getAllZaposleni();
+        lista.add(new Zaposleni(24, "Gojko", "gojkovic", "komenzibite", "123"));
         fireTableDataChanged();
+        }catch(Exception e){
+            System.out.println("GRESKA PRI UZIMANJU SVIH ZAPOSLENIH");
+            //JOS NISAM SIGURAN KAKO CU OVO DA RESIM
+        }
     }
 
     @Override

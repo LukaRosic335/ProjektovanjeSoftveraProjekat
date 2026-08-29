@@ -104,28 +104,47 @@ public class LoginForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtnActionPerformed
-        if(usernametxt.getText().isEmpty()||passwordtxt.getText().isEmpty()){
-            System.out.println("Polja za ussername i password ne smeju ostati nepopunjena!");
-        }else{
-            Zaposleni zaposleni=new Zaposleni();
-            zaposleni.setKorisnickoIme(usernametxt.getText());
-            zaposleni.setSifra(passwordtxt.getText());
-            zaposleni=ClientControler.getInstance().login(zaposleni);
-            if(zaposleni!=null){
-                Session.getInstace().setUlogovani(zaposleni);
-                System.out.println(Session.getInstace().getUlogovani());
-                System.out.println("IMAMO ZAPOSLENOG " + zaposleni.getIme()+" "+zaposleni.getPrezime()+" "+zaposleni.getKorisnickoIme());
-                this.setVisible(false);
-//                MainFrame.getInstance().setVisible(true);
-                  MainFrame mainFrame=new MainFrame();
-                  this.dispose();
-            }else{
-                System.out.println("Klijent kao odgovor nije dobio zaposlenog natrag");
-                messagetxt.setText("Neuspesno prijavljivanje");
-            }
-
-        }
+//        if(usernametxt.getText().isEmpty()||passwordtxt.getText().isEmpty()){
+//            System.out.println("Polja za ussername i password ne smeju ostati nepopunjena!");
+//        }else{
+//            Zaposleni zaposleni=new Zaposleni();
+//            zaposleni.setKorisnickoIme(usernametxt.getText());
+//            zaposleni.setSifra(passwordtxt.getText());
+//            zaposleni=ClientControler.getInstance().login(zaposleni);
+//            if(zaposleni!=null){
+//                Session.getInstace().setUlogovani(zaposleni);
+//                System.out.println(Session.getInstace().getUlogovani());
+//                System.out.println("IMAMO ZAPOSLENOG " + zaposleni.getIme()+" "+zaposleni.getPrezime()+" "+zaposleni.getKorisnickoIme());
+//                this.setVisible(false);
+//                  MainFrame mainFrame=new MainFrame();
+//                  this.dispose();
+//            }else{
+//                System.out.println("Klijent kao odgovor nije dobio zaposlenog natrag");
+//                messagetxt.setText("Neuspesno prijavljivanje");
+//            }
+//
+//        }
         
+
+          if(usernametxt.getText().isEmpty()||passwordtxt.getText().isEmpty()){
+            System.out.println("Polja za ussername i password ne smeju ostati nepopunjena!");
+          }else{
+              Zaposleni zaposleni=new Zaposleni();
+              zaposleni.setKorisnickoIme(usernametxt.getText());
+              zaposleni.setSifra(passwordtxt.getText());
+              try{
+                  zaposleni=ClientControler.getInstance().login(zaposleni);
+                  Session.getInstace().setUlogovani(zaposleni);
+                  System.out.println("IMAMO ZAPOSLENOG " + zaposleni.getIme() + " " + zaposleni.getPrezime() + " " + zaposleni.getKorisnickoIme());
+                  this.setVisible(false);
+                  MainFrame mainFrame = new MainFrame();
+                  this.dispose();
+                  
+              }catch(Exception e){
+                  messagetxt.setText(e.getMessage());
+              }
+          }
+
         
     }//GEN-LAST:event_loginbtnActionPerformed
 

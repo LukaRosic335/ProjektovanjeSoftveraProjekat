@@ -140,6 +140,10 @@ public class Zaposleni extends OpstiDomenskiObjekat {
     public String getSelectCondition() {
         String query="";
         
+        if(idZaposleni!=0){
+            query+=" AND idZaposlenog= "+idZaposleni;
+        }
+        
         if(ime!=null){
             query+=" AND ime='"+ime+"'";
         }

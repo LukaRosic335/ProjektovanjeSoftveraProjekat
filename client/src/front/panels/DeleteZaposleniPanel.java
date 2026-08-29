@@ -7,9 +7,7 @@ package front.panels;
 import controler.ClientControler;
 import domain.Zaposleni;
 import front.tableModels.ZaposleniTableModel;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
 
 /**
  *
@@ -94,16 +92,31 @@ public class DeleteZaposleniPanel extends javax.swing.JPanel {
 
     private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed
         // TODO add your handling code here:
+//        int row=table.getSelectedRow();
+//        Zaposleni pokojni=model.getZaposleni(row);
+//        
+//        int odgovor=JOptionPane.showConfirmDialog(frame, "Da li ste sigurni da zelite da uklonite "+pokojni,"", JOptionPane.YES_NO_OPTION);
+//        
+//        if(odgovor==JOptionPane.YES_OPTION){
+//        ClientControler.getInstance().deleteZaposleni(pokojni);
+//        //VIDI STA VRATI KLIJENT KONTROLER JER MOZDA NEUSPESNO UKLONI ZAPOSLENOG
+//        model=new ZaposleniTableModel();
+//        table.setModel(model);
+//        frame.getMessagetxt().setText("Uspesno uklonjen "+pokojni);
+//        }
         int row=table.getSelectedRow();
         Zaposleni pokojni=model.getZaposleni(row);
-        
         int odgovor=JOptionPane.showConfirmDialog(frame, "Da li ste sigurni da zelite da uklonite "+pokojni,"", JOptionPane.YES_NO_OPTION);
         
         if(odgovor==JOptionPane.YES_OPTION){
-        ClientControler.getInstance().deleteZaposleni(pokojni);
-        model=new ZaposleniTableModel();
-        table.setModel(model);
-        frame.getMessagetxt().setText("Uspesno uklonjen "+pokojni);
+            try{
+                ClientControler.getInstance().deleteZaposleni(pokojni);
+                model=new ZaposleniTableModel();
+                table.setModel(model);
+                frame.getMessagetxt().setText("Uspesno uklonjen "+pokojni);
+            }catch(Exception e){
+                frame.getMessagetxt().setText(e.getMessage());
+            }
         }
     }//GEN-LAST:event_deletebtnActionPerformed
 

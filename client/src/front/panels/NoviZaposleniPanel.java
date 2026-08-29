@@ -32,10 +32,6 @@ public class NoviZaposleniPanel extends javax.swing.JPanel {
         frame.setTitle("Dodavanje novog zaposlenog");
     }
 
-    public String titleSetting() {
-        return "Dodavanje novog zaposlenog";
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -132,10 +128,8 @@ public class NoviZaposleniPanel extends javax.swing.JPanel {
             System.out.println("Nepravilno uneti podaci za ubacivanje novog zaposlenog");
         } else {
             Zaposleni zaposleni = new Zaposleni(imetxt.getText(), prezimetxt.getText(), ussernametxt.getText(), passwordtxt.getText());
-            zaposleni = ClientControler.getInstance().newZaposleni(zaposleni);
-
-            //NESTO TREBA DA URADI OVA METODA NPR DA ISPISE DA JE DODAT NOVI ZAPOSLENI ILI TAKO NESSTO
-            if (zaposleni != null) {
+            try {
+                zaposleni = ClientControler.getInstance().newZaposleni(zaposleni);
                 System.out.println("NAPRAVLJEN JE NOVI ZAPOSLENI " + zaposleni);
                 frame.getMessagetxt().setText("Dodat je novi zaposleni " + zaposleni);
                 imetxt.setEditable(false);
@@ -144,10 +138,9 @@ public class NoviZaposleniPanel extends javax.swing.JPanel {
                 passwordtxt.setEditable(false);
                 continuebtn.setEnabled(false);
                 frame.getcacnelbtn().setText("Izadji");
+            } catch (Exception e) {
+                frame.getMessagetxt().setText(e.getMessage());
 
-            }else{
-                System.out.println("Vracen je null");
-                frame.getMessagetxt().setText("Neuspesno kreiranje zaposlenog");
             }
         }
     }//GEN-LAST:event_continuebtnActionPerformed

@@ -5,14 +5,11 @@
 package controler;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import transfer.Request;
 import transfer.Response;
 import clientsession.Session;
 import domain.Zaposleni;
 import front.LoginForm;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import transfer.util.Operation;
@@ -48,34 +45,34 @@ public class ClientControler {
         login.getMessageTxt().setText("Unesite korisnicko ime i lozinku");
     }
     
-    public Zaposleni login(Zaposleni z){
+    public Zaposleni login(Zaposleni z)throws Exception{
         //ovo pozivam iz forme za login
         Zaposleni za=(Zaposleni) sendRequest(Operation.LOGIN,z);
         return za;
     }
     //trenutno vraca null nisam siguran kako cu implementirati metodu
-    public void logout(Zaposleni z){
+    public void logout(Zaposleni z) throws Exception{
         Object o=sendRequest(Operation.LOGOUT, z);
         System.out.println("klijent kontroler logout "+o);
     }
     
-    public Zaposleni newZaposleni(Zaposleni zaposleni) {
+    public Zaposleni newZaposleni(Zaposleni zaposleni) throws Exception{
        Zaposleni z=(Zaposleni) sendRequest(Operation.NEW_ZAPOSLENI, zaposleni);
        return z;
     }
     
-    public ArrayList<Zaposleni> getAllZaposleni() {
+    public ArrayList<Zaposleni> getAllZaposleni() throws Exception{
         ArrayList<Zaposleni> z=(ArrayList<Zaposleni>) sendRequest(Operation.GET_ALL_ZAPOSLENI, null);
         System.out.println("getAllZaposleni CC");
         return z;
     }
     
-    public void deleteZaposleni(Zaposleni pokojni) {
+    public void deleteZaposleni(Zaposleni pokojni) throws Exception{
         System.out.println("deleteZaposleni CC");
         sendRequest(Operation.DELETE, pokojni);
     }
     
-    private synchronized Object sendRequest(Operation operation,Object data){
+    private synchronized Object sendRequest(Operation operation,Object data) throws Exception{
     //ukoliko nesto nije kako treba trenutno vraca null
         Request request=new Request(data, operation);
         try {
@@ -99,6 +96,11 @@ public class ClientControler {
             if(response.getStatus().equals(ResponseStatus.Fail)){
                 System.out.println("Status je fail, vraca se null");
                 return null;
+            }
+            if(response.getStatus().equals(ResponseStatus.Exception)){
+                System.out.println("Klijent je primio exc, vraca se exc");
+                Exception e=(Exception) response.getData();
+                throw e;
             }
             System.out.println("Primljeno "+response.getData());
             return response.getData();
