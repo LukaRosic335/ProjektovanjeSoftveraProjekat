@@ -16,6 +16,7 @@ import so.Zaposleni.NewZaposleni;
  * @author jevrozim
  */
 public class ServerControler {
+
     private static ServerControler instance;
     private ArrayList<Zaposleni> ulogovani;
 
@@ -24,54 +25,44 @@ public class ServerControler {
     }
 
     private ServerControler() {
-        ulogovani=new ArrayList();
+        ulogovani = new ArrayList();
     }
-    
-    public static ServerControler getInstance(){
-        if(instance==null){
-            instance=new ServerControler();
+
+    public static ServerControler getInstance() {
+        if (instance == null) {
+            instance = new ServerControler();
         }
         return instance;
     }
-    
-    public Zaposleni login(Zaposleni zaposleni){
-        Login login=new Login();
-        try {//PRIVREMENO RESENJE ZA EXCEPTION HANDELING
-            login.executeTamplate(zaposleni);
-            return login.getUlogovan();
-        } catch (Exception ex) {
-            System.out.println("Zaposleni koji je vracen je null, loginso vratio exc "+ex.getMessage());
-            return null;
-        }
-        
-        
+
+    public Zaposleni login(Zaposleni zaposleni) throws Exception {//OGROMAN CHECK ZA BUDUCNOST STO SE TICEC LISTE ULOGOVANIH U SERVERCONTROLER
+        Login login = new Login();
+        login.executeTamplate(zaposleni);
+        ulogovani.add(zaposleni);
+        return login.getUlogovan();
     }
-    public void logout(Zaposleni zaposleni){
+
+    public void logout(Zaposleni zaposleni) {
         ulogovani.remove(zaposleni);
-        if(ulogovani.isEmpty()){        //OGROMAN CHECK ZA OVO NEGDE U BUDUCNOSTI
+        if (ulogovani.isEmpty()) {        //OGROMAN CHECK ZA OVO NEGDE U BUDUCNOSTI
             System.out.println("Nema vise nikog od klijenata");
         }
     }
 
-    public Zaposleni newZaposleni(Zaposleni zaposleni) {
-        NewZaposleni so=new NewZaposleni();
-        try {
-            so.executeTamplate(zaposleni);
-            return so.getZaposleni();
-        } catch (Exception ex) {
-            System.out.println("Postoji izuzetak kod newZaposleni SC metode "+ex.getMessage());
-            return null;
-        }
+    public Zaposleni newZaposleni(Zaposleni zaposleni) throws Exception {
+        NewZaposleni so = new NewZaposleni();
+        so.executeTamplate(zaposleni);
+        return so.getZaposleni();
     }
 
     public ArrayList<Zaposleni> getAllZaposleni() throws Exception {//razmatranje ovog kao opcije
-        GetAllZaposleni so=new GetAllZaposleni();
+        GetAllZaposleni so = new GetAllZaposleni();
         so.executeTamplate(null);
         return so.getZaposleni();
     }
 
     public void deleteZaposleni(Zaposleni zaposleni) throws Exception {//takodje eksperiment sa throws
-        DeleteZaposleni so=new DeleteZaposleni();
+        DeleteZaposleni so = new DeleteZaposleni();
         so.executeTamplate(zaposleni);
     }
 }

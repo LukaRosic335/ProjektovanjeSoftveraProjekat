@@ -18,15 +18,10 @@ public class ZaposleniTableModel extends AbstractTableModel {
     private ArrayList<Zaposleni> lista = new ArrayList(); //KAO LISTA JE NULL NE ZNAM ZASTO
     private final String[] kolone = {"Id", "Korisnicko ime", "Ime", "Prezime"};//nesto nalik ovom
 
-    public ZaposleniTableModel() {
-        try{
+    public ZaposleniTableModel() throws Exception{
         lista = ClientControler.getInstance().getAllZaposleni();
         lista.add(new Zaposleni(24, "Gojko", "gojkovic", "komenzibite", "123"));
         fireTableDataChanged();
-        }catch(Exception e){
-            System.out.println("GRESKA PRI UZIMANJU SVIH ZAPOSLENIH");
-            //JOS NISAM SIGURAN KAKO CU OVO DA RESIM
-        }
     }
 
     @Override

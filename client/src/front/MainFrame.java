@@ -123,7 +123,6 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             Zaposleni z = Session.getInstace().getUlogovani();
             ClientControler.getInstance().logout(z);
-            Session.getInstace().setUlogovani(null);//Ovo treba da radi klijent kontroler
             LoginForm login = new LoginForm();
             login.getMessageTxt().setText("Uspesno odjavljivanje");
             this.dispose();

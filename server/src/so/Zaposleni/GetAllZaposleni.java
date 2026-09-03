@@ -27,6 +27,7 @@ public class GetAllZaposleni extends ApstraktneSistemskeOperacije {
             zap.add((Zaposleni)o);
         }
         zaposleni=zap;
+        throw new Exception("Test uzmi sve zapslene");
     }
 
     @Override

@@ -17,19 +17,25 @@ public class DeleteZaposleniPanel extends javax.swing.JPanel {
 
     private PanelFrame frame;
     private ZaposleniTableModel model;
+    private String poruka="privremeno resenje za slanje poruke za gresku";
 
     /**
      * Creates new form DeleteZaposleniPanel
      */
     public DeleteZaposleniPanel() {
+        try{
         model = new ZaposleniTableModel();
         initComponents();
         table.setModel(model);
+        }catch(Exception e){
+            poruka=e.getMessage();
+        }
     }
 
     public void setFrame(PanelFrame p) {
         frame = p;
         frame.setTitle("Brisanje zaposlenog");
+        frame.getMessagetxt().setText(poruka);
     }
 
     /**
