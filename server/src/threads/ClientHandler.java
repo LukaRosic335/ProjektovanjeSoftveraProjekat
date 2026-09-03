@@ -105,6 +105,10 @@ public class ClientHandler extends Thread {
                     ServerControler.getInstance().deleteZaposleni((Zaposleni)req.getData());
                     return res;
 
+                case UPDATE_ZAPOSLENI:
+                    System.out.println("Update zaposleni metoda");
+                    ServerControler.getInstance().updateZaposleni((Zaposleni) req.getData());
+                    return res;
                 default:
                     System.out.println("handleRequest u client handler zakinuo");
                     res.setStatus(ResponseStatus.Fail);

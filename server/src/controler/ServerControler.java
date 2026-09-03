@@ -10,6 +10,7 @@ import so.Login.Login;
 import so.Zaposleni.DeleteZaposleni;
 import so.Zaposleni.GetAllZaposleni;
 import so.Zaposleni.NewZaposleni;
+import so.Zaposleni.UpdateZaposleni;
 
 /**
  *
@@ -63,6 +64,11 @@ public class ServerControler {
 
     public void deleteZaposleni(Zaposleni zaposleni) throws Exception {//takodje eksperiment sa throws
         DeleteZaposleni so = new DeleteZaposleni();
+        so.executeTamplate(zaposleni);
+    }
+    
+    public void updateZaposleni(Zaposleni zaposleni) throws Exception{//mozda treba da vrati zaposlenog kojeg je promenio???
+        UpdateZaposleni so=new UpdateZaposleni();
         so.executeTamplate(zaposleni);
     }
 }

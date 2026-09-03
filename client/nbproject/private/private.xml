@@ -3,12 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="projektovanjeSoftveraProjekatSoftvera">
-            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/client/src/controler/ClientControler.java</file>
-            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/client/src/front/LoginForm.java</file>
-            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/client/src/front/MainFrame.java</file>
             <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/client/src/front/panels/DeleteZaposleniPanel.java</file>
-            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/client/src/front/panels/NoviZaposleniPanel.java</file>
-            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/client/src/front/tableModels/ZaposleniTableModel.java</file>
+            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/client/src/front/panels/UpdateZaposleniFrame.java</file>
         </group>
     </open-files>
 </project-private>

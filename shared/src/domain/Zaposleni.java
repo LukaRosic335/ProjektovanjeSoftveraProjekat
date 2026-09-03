@@ -128,11 +128,11 @@ public class Zaposleni extends OpstiDomenskiObjekat {
 
     @Override
     public String getUpdateValues() {
-        return "ime = "+ime+", "+"prezime = "+prezime+", "+"korisnickoIme = "+korisnickoIme+", "+"sifra = "+sifra;
+        return "ime = '"+ime+"', "+"prezime = '"+prezime+"', "+"korisnickoIme = '"+korisnickoIme+"', "+"sifra = '"+sifra+"'";
     }
 
     @Override
-    public String getWhere() {
+    public String getWhere() { //mozda ovo budem radio kao select
         return "idZaposlenog = "+idZaposleni;
     }
 

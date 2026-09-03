@@ -50,6 +50,7 @@ public class DeleteZaposleniPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         deletebtn = new javax.swing.JButton();
+        izmenibtn = new javax.swing.JButton();
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -71,6 +72,13 @@ public class DeleteZaposleniPanel extends javax.swing.JPanel {
             }
         });
 
+        izmenibtn.setText("Izmeni");
+        izmenibtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                izmenibtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,7 +87,9 @@ public class DeleteZaposleniPanel extends javax.swing.JPanel {
                 .addGap(118, 118, 118)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(deletebtn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(deletebtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(izmenibtn, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -91,7 +101,9 @@ public class DeleteZaposleniPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addComponent(deletebtn)))
+                        .addComponent(deletebtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(izmenibtn)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -126,9 +138,19 @@ public class DeleteZaposleniPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_deletebtnActionPerformed
 
+    private void izmenibtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_izmenibtnActionPerformed
+        // TODO add your handling code here:
+        //izmeni stvari
+        int row=table.getSelectedRow();
+        Zaposleni izmenjeni=model.getZaposleni(row);
+        //nesto nesto prikazi novi prozor koji menja zaposlenog
+        UpdateZaposleniFrame uf=new UpdateZaposleniFrame(izmenjeni.getIme(), izmenjeni.getPrezime(), izmenjeni.getSifra(), izmenjeni.getKorisnickoIme(), izmenjeni.getIdZaposleni());
+    }//GEN-LAST:event_izmenibtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deletebtn;
+    private javax.swing.JButton izmenibtn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables

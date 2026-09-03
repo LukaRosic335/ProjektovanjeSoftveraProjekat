@@ -16,5 +16,5 @@ public enum Operation {
     NEW_ZAPOSLENI,
     GET_ALL_ZAPOSLENI,
     DELETE,
-    
+    UPDATE_ZAPOSLENI,
 }

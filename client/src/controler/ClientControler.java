@@ -73,6 +73,11 @@ public class ClientControler {
         System.out.println("deleteZaposleni CC");
         sendRequest(Operation.DELETE, pokojni);
     }
+    
+    public void updateZaposleni(Zaposleni zaposleni)throws Exception{
+        System.out.println("updatezaposleni CC");
+        sendRequest(Operation.UPDATE_ZAPOSLENI, zaposleni);
+    }
 
     private synchronized Object sendRequest(Operation operation, Object data) throws Exception {
         //ukoliko nesto nije kako treba trenutno vraca null

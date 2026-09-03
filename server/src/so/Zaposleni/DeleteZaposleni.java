@@ -32,7 +32,6 @@ public class DeleteZaposleni extends ApstraktneSistemskeOperacije{
         if(l.isEmpty()){
             throw new Exception("Taj zaposleni ne postoji u sistemu");
         }
-//        throw new Exception("Zaposleni delete exception test");
     }
     
 }
