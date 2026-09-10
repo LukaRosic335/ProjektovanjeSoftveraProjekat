@@ -47,7 +47,7 @@ public class DBB {
 
     //TRENUTNO BACAJU SQL Izuzetke sve CRUD operacije
     public ArrayList<OpstiDomenskiObjekat> select(OpstiDomenskiObjekat odo) throws SQLException {
-        String query = "SELECT * FROM " + odo.getTableName() + " WHERE 1=1 "+odo.getSelectCondition()+";";
+        String query = "SELECT * FROM " + odo.getTableName() + " "+odo.getJoinCondition()+" WHERE 1=1 "+odo.getSelectCondition()+";";
         System.out.println(query);
         Statement s = connection.createStatement();
         ResultSet rs = s.executeQuery(query);

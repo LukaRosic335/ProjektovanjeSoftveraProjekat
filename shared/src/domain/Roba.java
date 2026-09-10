@@ -115,5 +115,11 @@ public class Roba extends OpstiDomenskiObjekat{
         }
         return query;
     }
+
+    @Override
+    public String getJoinCondition() {
+        return "";
+    }
+    
     
 }

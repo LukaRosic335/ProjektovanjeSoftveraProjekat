@@ -103,4 +103,10 @@ public class Smena extends OpstiDomenskiObjekat {
         return query;
     }
 
+    @Override
+    public String getJoinCondition() {
+        return "";
+    }
+    
+
 }

@@ -159,6 +159,11 @@ public class Zaposleni extends OpstiDomenskiObjekat {
         return query;
     }
 
+    @Override
+    public String getJoinCondition() {
+        return "";
+    }
+
     
     
 }

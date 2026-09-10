@@ -15,7 +15,6 @@ import java.util.ArrayList;
  */
 public abstract class OpstiDomenskiObjekat implements Serializable{
 
-    //ovde se svasta savade
     public abstract String getTableName();
     public abstract ArrayList<OpstiDomenskiObjekat> vratiListu(ResultSet rs) throws SQLException;
     public abstract String getInsertValues();
@@ -23,4 +22,5 @@ public abstract class OpstiDomenskiObjekat implements Serializable{
     public abstract String getUpdateValues();
     public abstract String getWhere();
     public abstract String getSelectCondition();
+    public abstract String getJoinCondition();
 }

@@ -13,6 +13,15 @@ public class Sto {
     private int brMusterija;
     private TipStola tipStola;
 
+    public Sto() {
+    }
+
+    public Sto(long idSto, int brMusterija, TipStola tipStola) {
+        this.idSto = idSto;
+        this.brMusterija = brMusterija;
+        this.tipStola = tipStola;
+    }
+
     public long getIdSto() {
         return idSto;
     }
