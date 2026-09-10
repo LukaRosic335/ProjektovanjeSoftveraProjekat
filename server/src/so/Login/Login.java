@@ -16,47 +16,26 @@ import java.sql.SQLException;
  *
  * @author jevrozim
  */
-public class Login extends ApstraktneSistemskeOperacije {
-
-    private Zaposleni ulogovan;
-
-    public Login() {
-    }
-
-    public Zaposleni getUlogovan() {
-        return ulogovan;
-    }
+public class Login extends ApstraktneSistemskeOperacije<Zaposleni> {
 
     //NISAM SIGURAN DA LI JE TO TO ZA OVE DVE METODE ALI SE CINI DA JESTE ZA SADA
     //NISAM ZADOVOLJAN EXCEPTION HANDELINGOM 
     //MISLIM RADI ALI MI SE NE SVIDJA STO SE SALJE EXCEPTION SAM PO SEBI I STO NIJE SPECIFICAN
     //DODJE MI DA NAPRAVIM SVOJ TIP IZUZETKA SAMO ZA OVAJ PROJEKAT SAMO DA BI IZGLEDALO UREDNO I LEPO
     @Override
-    protected void execute(OpstiDomenskiObjekat odo) throws Exception {
+    protected Zaposleni execute(OpstiDomenskiObjekat odo) throws Exception {
         try {
             ArrayList<OpstiDomenskiObjekat> problem = DBB.getInstance().select(odo);
 
             ArrayList<Zaposleni> sviZaposleni = new ArrayList();
-            for (OpstiDomenskiObjekat o : problem) {
-                sviZaposleni.add((Zaposleni) o);
+            if(problem.isEmpty()){
+                throw new Exception("Ne postoji zaposleni s tim kredencijalima");
             }
-            
-            for (Zaposleni z : sviZaposleni) {
-                if (z.getKorisnickoIme().equals(ulogovan.getKorisnickoIme())&&z.getSifra().equals(ulogovan.getSifra())) {
-                    Zaposleni zaposleni=new Zaposleni(z.getIdZaposleni(), z.getIme(), z.getPrezime(), z.getKorisnickoIme(), z.getSifra());
-                    ServerControler.getInstance().getUlogovani().add(zaposleni);
-                    ulogovan=zaposleni;
-                    return;
-                }
-            }
+            Zaposleni zaposleni=(Zaposleni) odo;
+            return zaposleni;
         } catch (SQLException e) {
             throw new SQLException("greska pri selektovanju u dbb select "+e.getMessage());
         }
-        throw new Exception("Ne postoji zaposleni s tim kredencijalima");
-
-//        ArrayList<OpstiDomenskiObjekat> zaposleni=DBB.getInstance().select((Zaposleni)odo);
-        
-
     }
 
     @Override
@@ -72,8 +51,6 @@ public class Login extends ApstraktneSistemskeOperacije {
                 throw new Exception("Zaposleni je vec ulogovan");
             }
         }
-        ulogovan=zaposleni;
-
     }
 
 }

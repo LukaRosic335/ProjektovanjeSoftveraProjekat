@@ -38,9 +38,9 @@ public class ServerControler {
 
     public Zaposleni login(Zaposleni zaposleni) throws Exception {//OGROMAN CHECK ZA BUDUCNOST STO SE TICEC LISTE ULOGOVANIH U SERVERCONTROLER
         Login login = new Login();
-        login.executeTamplate(zaposleni);
+        Zaposleni z=login.executeTamplate(zaposleni);
         ulogovani.add(zaposleni);
-        return login.getUlogovan();
+        return z;
     }
 
     public void logout(Zaposleni zaposleni) {
@@ -52,23 +52,22 @@ public class ServerControler {
 
     public Zaposleni newZaposleni(Zaposleni zaposleni) throws Exception {
         NewZaposleni so = new NewZaposleni();
-        so.executeTamplate(zaposleni);
-        return so.getZaposleni();
+        Zaposleni novi=so.executeTamplate(zaposleni);
+        return novi;
     }
 
     public ArrayList<Zaposleni> getAllZaposleni() throws Exception {//razmatranje ovog kao opcije
         GetAllZaposleni so = new GetAllZaposleni();
-        so.executeTamplate(null);
-        return so.getZaposleni();
+        return so.executeTamplate(new Zaposleni());
     }
 
-    public void deleteZaposleni(Zaposleni zaposleni) throws Exception {//takodje eksperiment sa throws
+    public Zaposleni deleteZaposleni(Zaposleni zaposleni) throws Exception {//takodje eksperiment sa throws
         DeleteZaposleni so = new DeleteZaposleni();
-        so.executeTamplate(zaposleni);
+        return so.executeTamplate(zaposleni);
     }
     
-    public void updateZaposleni(Zaposleni zaposleni) throws Exception{//mozda treba da vrati zaposlenog kojeg je promenio???
+    public Zaposleni updateZaposleni(Zaposleni zaposleni) throws Exception{//mozda treba da vrati zaposlenog kojeg je promenio???
         UpdateZaposleni so=new UpdateZaposleni();
-        so.executeTamplate(zaposleni);
+        return so.executeTamplate(zaposleni);
     }
 }

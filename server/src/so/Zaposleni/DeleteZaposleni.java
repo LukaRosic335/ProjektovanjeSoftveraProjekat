@@ -14,20 +14,19 @@ import so.ApstraktneSistemskeOperacije;
  *
  * @author jevrozim
  */
-public class DeleteZaposleni extends ApstraktneSistemskeOperacije{
+public class DeleteZaposleni extends ApstraktneSistemskeOperacije<Zaposleni>{
 
     @Override
-    protected void execute(OpstiDomenskiObjekat odo) throws Exception {
+    protected Zaposleni execute(OpstiDomenskiObjekat odo) throws Exception {
         DBB.getInstance().delete(odo);
+        return (Zaposleni)odo;
     }
 
     @Override
     protected void validate(OpstiDomenskiObjekat odo) throws Exception {
-        //gleda samo da li zaposleni postoji
         if(!(odo instanceof Zaposleni)){
             throw new Exception("Nije prosledjen zaposleni");
         }
-        //nema tog zaposlenog u bazi podataka
         ArrayList<OpstiDomenskiObjekat> l=DBB.getInstance().select(odo);
         if(l.isEmpty()){
             throw new Exception("Taj zaposleni ne postoji u sistemu");

@@ -7,25 +7,23 @@ package so.Zaposleni;
 import dbb.DBB;
 import domain.OpstiDomenskiObjekat;
 import domain.Zaposleni;
+import java.util.ArrayList;
 import so.ApstraktneSistemskeOperacije;
 
 /**
  *
  * @author jevrozim
  */
-public class NewZaposleni extends ApstraktneSistemskeOperacije {
-
-    private Zaposleni z;
+public class NewZaposleni extends ApstraktneSistemskeOperacije<Zaposleni> {
 
     @Override
-    protected void execute(OpstiDomenskiObjekat odo) throws Exception {
+    protected Zaposleni execute(OpstiDomenskiObjekat odo) throws Exception {
         DBB.getInstance().insert(odo);
+        return (Zaposleni)odo;
     }
 
     @Override
     protected void validate(OpstiDomenskiObjekat odo) throws Exception {
-        //VALJDA JE TO TO STO SE TICE VALIDACIJE
-        
         if (!(odo instanceof Zaposleni)) {
             throw new Exception("Nije poslat zaposleni");
         }
@@ -33,12 +31,9 @@ public class NewZaposleni extends ApstraktneSistemskeOperacije {
         if(zaposleni.getIme().equals("")||zaposleni.getPrezime().equals("")||zaposleni.getKorisnickoIme().equals("")||zaposleni.getSifra().equals("")){
             throw new Exception("Nisu poslati validni argumetni");
         }
-        z=zaposleni;
-        
+        ArrayList<OpstiDomenskiObjekat> svi=DBB.getInstance().select(new Zaposleni(zaposleni.getKorisnickoIme()));
+        if(svi.size()!=0){
+            throw new Exception("Zaposleni s tim korisnickim imenom vec postoji");
+        }
     }
-
-    public Zaposleni getZaposleni() {
-        return z;
-    }
-
 }

@@ -14,28 +14,23 @@ import so.ApstraktneSistemskeOperacije;
  *
  * @author jevrozim
  */
-public class GetAllZaposleni extends ApstraktneSistemskeOperacije {
-
-    private ArrayList<Zaposleni> zaposleni;
+public class GetAllZaposleni extends ApstraktneSistemskeOperacije <ArrayList<Zaposleni>>{
 
     @Override
-    protected void execute(OpstiDomenskiObjekat odo) throws Exception {
+    protected ArrayList<Zaposleni> execute(OpstiDomenskiObjekat odo) throws Exception {
         Zaposleni za=new Zaposleni();
         ArrayList<OpstiDomenskiObjekat> z=DBB.getInstance().select(za);
         ArrayList<Zaposleni> zap=new ArrayList();
         for(OpstiDomenskiObjekat o:z){
             zap.add((Zaposleni)o);
         }
-        zaposleni=zap;
+        return zap;
     }
 
     @Override
     protected void validate(OpstiDomenskiObjekat odo) throws Exception {
-        
+        if(!(odo instanceof Zaposleni)){
+            throw new Exception("Nije prosledjen zaposleni");
+        }
     }
-
-    public ArrayList<Zaposleni> getZaposleni() {
-        return zaposleni;
-    }
-
 }

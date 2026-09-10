@@ -5,7 +5,6 @@
 package so;
 
 import domain.OpstiDomenskiObjekat;
-import transfer.util.Operation;
 import dbb.DBB;
 import java.sql.SQLException;
 
@@ -13,7 +12,7 @@ import java.sql.SQLException;
  *
  * @author jevrozim
  */
-public abstract class ApstraktneSistemskeOperacije {
+public abstract class ApstraktneSistemskeOperacije <T>{
     
 
 
@@ -22,15 +21,16 @@ public abstract class ApstraktneSistemskeOperacije {
     
     
     
-    protected abstract void execute(OpstiDomenskiObjekat odo) throws Exception;
+    protected abstract T execute(OpstiDomenskiObjekat odo) throws Exception;
 
     protected abstract void validate(OpstiDomenskiObjekat odo) throws Exception;
 
-    public void executeTamplate(OpstiDomenskiObjekat odo) throws Exception {
+    public T executeTamplate(OpstiDomenskiObjekat odo) throws Exception {
         try {
             validate(odo);
-            execute(odo);
+            T rosaVoda=execute(odo);
             commit();
+            return rosaVoda;
         } catch (Exception e) {
             rollback();
             throw e;

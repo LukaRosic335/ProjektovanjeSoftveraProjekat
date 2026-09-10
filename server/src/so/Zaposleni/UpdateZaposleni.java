@@ -14,11 +14,12 @@ import so.ApstraktneSistemskeOperacije;
  *
  * @author jevrozim
  */
-public class UpdateZaposleni extends ApstraktneSistemskeOperacije{ 
+public class UpdateZaposleni extends ApstraktneSistemskeOperacije<Zaposleni>{ 
 
     @Override
-    protected void execute(OpstiDomenskiObjekat odo) throws Exception {
+    protected Zaposleni execute(OpstiDomenskiObjekat odo) throws Exception {
         DBB.getInstance().update(odo);
+        return (Zaposleni)odo;
     }
 
     @Override
@@ -30,10 +31,10 @@ public class UpdateZaposleni extends ApstraktneSistemskeOperacije{
         if(zaposleni.getIme().equals("") || zaposleni.getPrezime().equals("")||zaposleni.getKorisnickoIme().equals("")||zaposleni.getSifra().equals("")){
             throw new Exception("Nepravilno postavljeni kredencijali");
         }
-        //nadji ga u bazi
+        //nadji ga u bazi nema potrebe
         Zaposleni id=new Zaposleni();
         id.setIdZaposleni(zaposleni.getIdZaposleni());
-        ArrayList<OpstiDomenskiObjekat> him=DBB.getInstance().select(id);//trazi ga samo po id
+        ArrayList<OpstiDomenskiObjekat> him=DBB.getInstance().select(id);//nadji ga samo po id
         if(him.isEmpty()){
             throw new Exception("Ne postoji taj zaposleni");
         }
