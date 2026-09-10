@@ -4,16 +4,32 @@
  */
 package domain;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  *
  * @author jevrozim
  */
-public class Roba {
+public class Roba extends OpstiDomenskiObjekat{
     private long idRoba;
     private int cena;
     private String naziv;
     private int stanjeUMagacinu;
 
+    public Roba(long idRoba, int cena, String naziv, int stanjeUMagacinu) {
+        this.idRoba = idRoba;
+        this.cena = cena;
+        this.naziv = naziv;
+        this.stanjeUMagacinu = stanjeUMagacinu;
+    }
+
+    public Roba() {
+    }
+
+    
+    
     public long getIdRoba() {
         return idRoba;
     }
@@ -44,6 +60,60 @@ public class Roba {
 
     public void setStanjeUMagacinu(int stanjeUMagacinu) {
         this.stanjeUMagacinu = stanjeUMagacinu;
+    }
+
+    @Override
+    public String getTableName() {
+        return "Roba";
+    }
+
+    @Override
+    public ArrayList<OpstiDomenskiObjekat> vratiListu(ResultSet rs) throws SQLException {
+        ArrayList<OpstiDomenskiObjekat> lista=new ArrayList();
+        while(rs.next()){
+            Roba roba=new Roba(rs.getLong("idRoba"), rs.getInt("cena"), rs.getString("naziv"), rs.getInt("stanjeUMagacinu"));
+            lista.add(roba);
+        }
+        rs.close();
+        return lista;
+    }
+
+    @Override
+    public String getInsertValues() {
+        return "(" + cena + ", '" + naziv + "', " + stanjeUMagacinu +")";
+    }
+
+    @Override
+    public String getColumnNames() {
+        return "cena, naziv, stanjeUMagacinu";
+    }
+
+    @Override
+    public String getUpdateValues() {
+        return "cena = "+cena+" naziv = '"+naziv+"' stanjeUMagacinu = "+stanjeUMagacinu; 
+    }
+
+    @Override
+    public String getWhere() {
+        return "idRoba = "+idRoba;
+    }
+
+    @Override
+    public String getSelectCondition() {
+        String query="";
+        if(idRoba!=0){
+            query+=idRoba;
+        }
+        if(cena!=0){
+            query+=cena;
+        }
+        if(naziv!=null){
+            query+=naziv;
+        }
+        if(stanjeUMagacinu!=0){
+            query+=stanjeUMagacinu;
+        }
+        return query;
     }
     
 }

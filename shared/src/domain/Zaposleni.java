@@ -113,9 +113,6 @@ public class Zaposleni extends OpstiDomenskiObjekat {
             list.add(zaposleni);
         }
         rs.close();
-        for (OpstiDomenskiObjekat z : list) {
-            System.out.println(z);
-        }
         return list;
     }
 
