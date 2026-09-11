@@ -92,13 +92,13 @@ public class Smena extends OpstiDomenskiObjekat {
     public String getSelectCondition() {
         String query="";
         if(idSmena!=0){
-            query+=idSmena;
+            query+=" AND idSmena="+idSmena;
         }
         if(pocetak!=null){
-            query+=pocetak;
+            query+=" AND pocetak="+pocetak;
         }
         if(kraj!=null){
-            query+=kraj;
+            query+=" And kraj="+kraj;
         }
         return query;
     }

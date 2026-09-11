@@ -19,7 +19,7 @@ public class Racun {
     private Zaposleni zaposleni;
     private Sto sto;
 
-    //getteri i steri
+    
     public long getIdRacun() {
         return idRacun;
     }

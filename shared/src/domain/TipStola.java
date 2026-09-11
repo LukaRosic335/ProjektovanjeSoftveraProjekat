@@ -82,10 +82,10 @@ public class TipStola extends OpstiDomenskiObjekat {
     public String getSelectCondition() {
         String query="";
         if(idTipStola!=0){
-            query+=idTipStola;
+            query+=" AND idTipStola="+idTipStola;
         }
         if(brMesta!=0){
-            query+=brMesta;
+            query+=" AND brMesta="+brMesta;
         }
         return query;
     }

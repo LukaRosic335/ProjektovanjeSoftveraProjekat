@@ -89,7 +89,7 @@ public class SmenaZaposlenog extends OpstiDomenskiObjekat {
     }
 
     @Override
-    public String getWhere() {  //OBAVEZNO BACITI POGLED NA OVU METODU
+    public String getWhere() {  //OBAVEZNO BACITI POGLED NA OVU METODU NISAM SIGURAN KAKO ZELIM DA JE ODRADIM
         return "";
     }
 

@@ -102,16 +102,16 @@ public class Roba extends OpstiDomenskiObjekat{
     public String getSelectCondition() {
         String query="";
         if(idRoba!=0){
-            query+=idRoba;
+            query+=" AND idRoba="+idRoba;
         }
         if(cena!=0){
-            query+=cena;
+            query+=" AND cena="+cena;
         }
         if(naziv!=null){
-            query+=naziv;
+            query+=" AND naziv='"+naziv+"'";
         }
         if(stanjeUMagacinu!=0){
-            query+=stanjeUMagacinu;
+            query+=" AND stanjeUMagacinu="+stanjeUMagacinu;
         }
         return query;
     }
