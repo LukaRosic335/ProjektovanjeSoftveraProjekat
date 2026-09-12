@@ -6,7 +6,7 @@ package domain;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
@@ -16,10 +16,10 @@ import java.util.ArrayList;
 public class Smena extends OpstiDomenskiObjekat {
 
     private long idSmena;
-    private LocalDateTime pocetak;
-    private LocalDateTime kraj;
+    private LocalTime pocetak;
+    private LocalTime kraj;
 
-    public Smena(long idSmena, LocalDateTime pocetak, LocalDateTime kraj) {
+    public Smena(long idSmena, LocalTime pocetak, LocalTime kraj) {
         this.idSmena = idSmena;
         this.pocetak = pocetak;
         this.kraj = kraj;
@@ -36,19 +36,19 @@ public class Smena extends OpstiDomenskiObjekat {
         this.idSmena = idSmena;
     }
 
-    public LocalDateTime getPocetak() {
+    public LocalTime getPocetak() {
         return pocetak;
     }
 
-    public void setPocetak(LocalDateTime pocetak) {
+    public void setPocetak(LocalTime pocetak) {
         this.pocetak = pocetak;
     }
 
-    public LocalDateTime getKraj() {
+    public LocalTime getKraj() {
         return kraj;
     }
 
-    public void setKraj(LocalDateTime kraj) {
+    public void setKraj(LocalTime kraj) {
         this.kraj = kraj;
     }
 
@@ -61,7 +61,7 @@ public class Smena extends OpstiDomenskiObjekat {
     public ArrayList<OpstiDomenskiObjekat> vratiListu(ResultSet rs) throws SQLException {
         ArrayList<OpstiDomenskiObjekat> lista = new ArrayList();
         while (rs.next()) {
-            Smena smena = new Smena(rs.getLong("idSmena"), rs.getTimestamp("pocetak").toLocalDateTime(), rs.getTimestamp("kraj").toLocalDateTime());
+            Smena smena = new Smena(rs.getLong("idSmena"), rs.getTime("pocetak").toLocalTime(), rs.getTime("kraj").toLocalTime());
             lista.add(smena);
         }
         rs.close();

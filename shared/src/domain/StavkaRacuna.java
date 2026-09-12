@@ -73,42 +73,69 @@ public class StavkaRacuna extends OpstiDomenskiObjekat{
 
     @Override
     public String getTableName() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "StavkaRacuna";
     }
 
     @Override
     public ArrayList<OpstiDomenskiObjekat> vratiListu(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<OpstiDomenskiObjekat> list=new ArrayList<>();
+        while(rs.next()){
+            //kreiram robu
+            Roba r=new Roba(rs.getLong("Roba.idRoba"), rs.getInt("Roba.cena"), rs.getString("Roba.naziv"), rs.getInt("Roba.stanjeUMagacinu"));
+            //kreiram racun SAMO SA ID
+            Racun idRacun=new Racun(rs.getLong("Racun.idRacun"));
+            //kreiram stavkuRacuna
+            StavkaRacuna stavka=new StavkaRacuna(idRacun, rs.getInt("StavkaRacuna.rb"), rs.getInt("StavkaRacuna.cena"), rs.getInt("StavkaRacuna.kolicina"), r);
+            list.add(stavka);
+        }
+        rs.close();
+        return list;
     }
 
     @Override
     public String getInsertValues() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "("+rb+", "+cena+", "+kolicina+", "+racun.getIdRacun()+", "+roba.getIdRoba()+")";
     }
 
     @Override
     public String getColumnNames() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "rb, cena, kolicina, idRacun, idRoba";
     }
 
     @Override
     public String getUpdateValues() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "rb="+rb+", cena="+cena+", kolicina="+kolicina+", idRacun="+racun.getIdRacun()+", idRoba="+roba.getIdRoba();
     }
 
     @Override
     public String getWhere() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "idRacun="+racun.getIdRacun()+" AND rb="+rb;
     }
 
     @Override
     public String getSelectCondition() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String query="";
+        if(rb!=0){
+            query+=" AND rb="+rb;
+        }
+        if(cena!=0){
+            query+=" AND cena="+cena;
+        }
+        if(kolicina!=0){
+            query+=" AND kolicina="+kolicina;
+        }
+        if(racun!=null){
+            query+=" AND idRacun="+racun.getIdRacun();
+        }
+        if(roba!=null){
+            query+=" AND idRoba="+roba.getIdRoba();
+        }
+        return query;
     }
 
     @Override
     public String getJoinCondition() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return " JOIN Racun ON StavkaRacuna.idRacun=Racun.idRacun JOIN Roba ON StavkaRacuna.idRoba=Roba.idRoba ";
     }
     
     

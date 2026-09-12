@@ -4,16 +4,19 @@
  */
 package domain;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 /**
  *
  * @author jevrozim
  */
-public class Sto {
+public class Sto extends OpstiDomenskiObjekat{
     private long idSto;
     private int brMusterija;
     private TipStola tipStola;
 
-    public Sto() {
+    public Sto(){
     }
 
     public Sto(long idSto, int brMusterija, TipStola tipStola) {
@@ -44,6 +47,65 @@ public class Sto {
 
     public void setTipStola(TipStola tipStola) {
         this.tipStola = tipStola;
+    }
+
+    @Override
+    public String getTableName() {
+        return "Sto";
+    }
+
+    @Override
+    public ArrayList<OpstiDomenskiObjekat> vratiListu(ResultSet rs) throws SQLException {
+        ArrayList<OpstiDomenskiObjekat>list=new ArrayList<>();
+        while(rs.next()){
+            //napravim tipstola
+            TipStola tip=new TipStola(rs.getLong("TipStola.idTipStola"), rs.getInt("TipStola.brMesta"));
+            //napravim astal
+            Sto sto=new Sto(rs.getLong("Sto.idSto"), rs.getInt("Sto.brMusterija"), tip);
+            list.add(sto);
+        }
+        rs.close();
+        return list;
+    }
+
+    @Override
+    public String getInsertValues() {
+        return "("+brMusterija+", "+tipStola.getIdTipStola()+")";
+    }
+
+    @Override
+    public String getColumnNames() {
+        return "brMusterija, idTipStola";
+    }
+
+    @Override
+    public String getUpdateValues() {
+        return " brMusterija="+brMusterija+", idTipStola="+tipStola.getIdTipStola();
+    }
+
+    @Override
+    public String getWhere() {
+        return " idSto="+idSto;
+    }
+
+    @Override
+    public String getSelectCondition() { //MOZDA KONKRETNO KOJI TIP STOLA ???
+        String query="";
+        if(idSto!=0){
+            query+=" AND Sto.idSto="+idSto;
+        }
+        if(brMusterija>0){
+            query+=" AND Sto.brMusterija="+brMusterija;
+        }
+        if(tipStola!=null){
+            query+=" AND Sto.idTipStola="+tipStola.getIdTipStola();
+        }
+        return query;
+    }
+
+    @Override
+    public String getJoinCondition() {
+        return "JOIN TipStola ON Sto.idTipStola=TipStola.idTipStola ";
     }
     
 }

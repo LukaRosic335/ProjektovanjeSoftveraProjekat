@@ -90,7 +90,7 @@ public class Roba extends OpstiDomenskiObjekat{
 
     @Override
     public String getUpdateValues() {
-        return "cena = "+cena+" naziv = '"+naziv+"' stanjeUMagacinu = "+stanjeUMagacinu; 
+        return "cena = "+cena+", naziv = '"+naziv+"', stanjeUMagacinu = "+stanjeUMagacinu; 
     }
 
     @Override
