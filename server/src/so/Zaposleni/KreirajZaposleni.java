@@ -14,7 +14,7 @@ import so.ApstraktneSistemskeOperacije;
  *
  * @author jevrozim
  */
-public class NewZaposleni extends ApstraktneSistemskeOperacije<Zaposleni> {
+public class KreirajZaposleni extends ApstraktneSistemskeOperacije<Zaposleni> {
 
     @Override
     protected Zaposleni execute(OpstiDomenskiObjekat odo) throws Exception {

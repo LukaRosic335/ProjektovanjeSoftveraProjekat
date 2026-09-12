@@ -15,7 +15,7 @@ import so.ApstraktneSistemskeOperacije;
  *
  * @author jevrozim
  */
-public class GetAllRacun extends ApstraktneSistemskeOperacije<ArrayList<Racun>> {
+public class VratiListuSviRacun extends ApstraktneSistemskeOperacije<ArrayList<Racun>> {
 
     @Override
     protected ArrayList<Racun> execute(OpstiDomenskiObjekat odo) throws Exception {
@@ -24,12 +24,12 @@ public class GetAllRacun extends ApstraktneSistemskeOperacije<ArrayList<Racun>> 
         for (OpstiDomenskiObjekat o : problem) {
             listaRacuna.add((Racun) o);
         }
-        //zabodi stavke racuna ovde
+        //zabodi stavke racuna
         for (Racun r : listaRacuna) {
             ArrayList<OpstiDomenskiObjekat> problem2 = DBB.getInstance().select(r);
             ArrayList<StavkaRacuna> stavke=new ArrayList<>();
             for(OpstiDomenskiObjekat o : problem2){
-                
+                stavke.add((StavkaRacuna)o);
             }
             r.setStavkeRacuna(stavke);
         }

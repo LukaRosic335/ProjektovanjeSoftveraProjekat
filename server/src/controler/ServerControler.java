@@ -7,10 +7,10 @@ package controler;
 import domain.Zaposleni;
 import java.util.ArrayList;
 import so.Login.Login;
-import so.Zaposleni.DeleteZaposleni;
-import so.Zaposleni.GetAllZaposleni;
-import so.Zaposleni.NewZaposleni;
-import so.Zaposleni.UpdateZaposleni;
+import so.Zaposleni.ObrisiZaposleni;
+import so.Zaposleni.VratiListuSviZaposleni;
+import so.Zaposleni.KreirajZaposleni;
+import so.Zaposleni.PromeniZaposleni;
 
 /**
  *
@@ -51,23 +51,23 @@ public class ServerControler {
     }
 
     public Zaposleni newZaposleni(Zaposleni zaposleni) throws Exception {
-        NewZaposleni so = new NewZaposleni();
+        KreirajZaposleni so = new KreirajZaposleni();
         Zaposleni novi=so.executeTamplate(zaposleni);
         return novi;
     }
 
     public ArrayList<Zaposleni> getAllZaposleni() throws Exception {//razmatranje ovog kao opcije
-        GetAllZaposleni so = new GetAllZaposleni();
+        VratiListuSviZaposleni so = new VratiListuSviZaposleni();
         return so.executeTamplate(new Zaposleni());
     }
 
     public Zaposleni deleteZaposleni(Zaposleni zaposleni) throws Exception {//takodje eksperiment sa throws
-        DeleteZaposleni so = new DeleteZaposleni();
+        ObrisiZaposleni so = new ObrisiZaposleni();
         return so.executeTamplate(zaposleni);
     }
     
     public Zaposleni updateZaposleni(Zaposleni zaposleni) throws Exception{//mozda treba da vrati zaposlenog kojeg je promenio???
-        UpdateZaposleni so=new UpdateZaposleni();
+        PromeniZaposleni so=new PromeniZaposleni();
         return so.executeTamplate(zaposleni);
     }
 }

@@ -14,17 +14,12 @@ import so.ApstraktneSistemskeOperacije;
  *
  * @author jevrozim
  */
-public class GetAllZaposleni extends ApstraktneSistemskeOperacije <ArrayList<Zaposleni>>{
+public class ObrisiZaposleni extends ApstraktneSistemskeOperacije<Zaposleni>{
 
     @Override
-    protected ArrayList<Zaposleni> execute(OpstiDomenskiObjekat odo) throws Exception {
-        Zaposleni za=new Zaposleni();
-        ArrayList<OpstiDomenskiObjekat> z=DBB.getInstance().select(za);
-        ArrayList<Zaposleni> zap=new ArrayList();
-        for(OpstiDomenskiObjekat o:z){
-            zap.add((Zaposleni)o);
-        }
-        return zap;
+    protected Zaposleni execute(OpstiDomenskiObjekat odo) throws Exception {
+        DBB.getInstance().delete(odo);
+        return (Zaposleni)odo;
     }
 
     @Override
@@ -32,5 +27,10 @@ public class GetAllZaposleni extends ApstraktneSistemskeOperacije <ArrayList<Zap
         if(!(odo instanceof Zaposleni)){
             throw new Exception("Nije prosledjen zaposleni");
         }
+        ArrayList<OpstiDomenskiObjekat> l=DBB.getInstance().select(odo);
+        if(l.isEmpty()){
+            throw new Exception("Taj zaposleni ne postoji u sistemu");
+        }
     }
+    
 }
