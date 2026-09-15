@@ -17,8 +17,10 @@ public class KreirajTipStola extends ApstraktneSistemskeOperacije<TipStola>{
 
     @Override
     protected TipStola execute(OpstiDomenskiObjekat odo) throws Exception {
-        DBB.getInstance().insert(odo);
-        return (TipStola)odo;
+        long id=DBB.getInstance().insert(odo);
+        TipStola ts=(TipStola)odo;
+        ts.setIdTipStola(id);
+        return ts;
     }
 
     @Override

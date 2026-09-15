@@ -17,8 +17,10 @@ public class KreirajSmena extends ApstraktneSistemskeOperacije<Smena>{
 
     @Override
     protected Smena execute(OpstiDomenskiObjekat odo) throws Exception {
-        DBB.getInstance().insert(odo);
-        return (Smena)odo;
+        long id=DBB.getInstance().insert(odo);
+        Smena smena=(Smena)odo;
+        smena.setIdSmena(id);
+        return smena;
     }
 
     @Override

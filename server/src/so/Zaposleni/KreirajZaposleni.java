@@ -18,8 +18,10 @@ public class KreirajZaposleni extends ApstraktneSistemskeOperacije<Zaposleni> {
 
     @Override
     protected Zaposleni execute(OpstiDomenskiObjekat odo) throws Exception {
-        DBB.getInstance().insert(odo);
-        return (Zaposleni)odo;
+        long id = DBB.getInstance().insert(odo);
+        Zaposleni zaposleni=(Zaposleni)odo;
+        zaposleni.setIdZaposleni(id);
+        return zaposleni;
     }
 
     @Override
@@ -27,12 +29,12 @@ public class KreirajZaposleni extends ApstraktneSistemskeOperacije<Zaposleni> {
         if (!(odo instanceof Zaposleni)) {
             throw new Exception("Nije poslat zaposleni");
         }
-        Zaposleni zaposleni = (Zaposleni)odo;
-        if(zaposleni.getIme().equals("")||zaposleni.getPrezime().equals("")||zaposleni.getKorisnickoIme().equals("")||zaposleni.getSifra().equals("")){
+        Zaposleni zaposleni = (Zaposleni) odo;
+        if (zaposleni.getIme().equals("") || zaposleni.getPrezime().equals("") || zaposleni.getKorisnickoIme().equals("") || zaposleni.getSifra().equals("")) {
             throw new Exception("Nisu poslati validni argumetni");
         }
-        ArrayList<OpstiDomenskiObjekat> svi=DBB.getInstance().select(new Zaposleni(zaposleni.getKorisnickoIme()));
-        if(svi.size()!=0){
+        ArrayList<OpstiDomenskiObjekat> svi = DBB.getInstance().select(new Zaposleni(zaposleni.getKorisnickoIme()));
+        if (svi.size() != 0) {
             throw new Exception("Zaposleni s tim korisnickim imenom vec postoji");
         }
     }

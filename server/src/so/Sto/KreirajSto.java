@@ -17,8 +17,10 @@ public class KreirajSto extends ApstraktneSistemskeOperacije<Sto> {
 
     @Override
     protected Sto execute(OpstiDomenskiObjekat odo) throws Exception {
-        DBB.getInstance().insert(odo);
-        return (Sto)odo;
+        long id=DBB.getInstance().insert(odo);
+        Sto sto=(Sto)odo;
+        sto.setIdSto(id);
+        return sto;
     }
 
     @Override

@@ -4,6 +4,9 @@
  */
 package so.Roba;
 
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import dbb.DBB;
 import domain.OpstiDomenskiObjekat;
 import domain.Roba;
@@ -17,8 +20,10 @@ public class KreirajRoba extends ApstraktneSistemskeOperacije<Roba>{
 
     @Override
     protected Roba execute(OpstiDomenskiObjekat odo) throws Exception {
-        DBB.getInstance().insert(odo);
-        return (Roba)odo;
+        long id=DBB.getInstance().insert(odo);
+        Roba roba=(Roba)odo;
+        roba.setIdRoba(id);
+        return roba;
     }
 
     @Override

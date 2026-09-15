@@ -19,13 +19,13 @@ public class KreirajRacun extends ApstraktneSistemskeOperacije<Racun>{
 
     @Override
     protected Racun execute(OpstiDomenskiObjekat odo) throws Exception {
+        long idRacun=DBB.getInstance().insert(odo);
         Racun racun=(Racun)odo;
-        ArrayList<StavkaRacuna>stavke=racun.getStavkeRacuna();
-        for(StavkaRacuna stavka:stavke){
+        racun.setIdRacun(idRacun);
+        for(StavkaRacuna stavka:racun.getStavkeRacuna()){
             DBB.getInstance().insert(stavka);
         }
-        DBB.getInstance().insert(odo);
-        return (Racun)odo;
+        return racun;
     }
 
     @Override
@@ -37,3 +37,14 @@ public class KreirajRacun extends ApstraktneSistemskeOperacije<Racun>{
     }
     
 }
+
+
+
+//
+//Racun racun=(Racun)odo;
+//        ArrayList<StavkaRacuna>stavke=racun.getStavkeRacuna();
+//        for(StavkaRacuna stavka:stavke){
+//            DBB.getInstance().insert(stavka);
+//        }
+//        DBB.getInstance().insert(odo);
+//        return (Racun)odo;
