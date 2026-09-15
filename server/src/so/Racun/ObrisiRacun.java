@@ -7,6 +7,7 @@ package so.Racun;
 import dbb.DBB;
 import domain.OpstiDomenskiObjekat;
 import domain.Racun;
+import domain.StavkaRacuna;
 import java.util.ArrayList;
 import so.ApstraktneSistemskeOperacije;
 
@@ -18,10 +19,14 @@ public class ObrisiRacun extends ApstraktneSistemskeOperacije<Racun>{
 
     @Override
     protected Racun execute(OpstiDomenskiObjekat odo) throws Exception {
+        
+        Racun racun=(Racun)odo;
+        for(StavkaRacuna stavka:racun.getStavkeRacuna()){
+            DBB.getInstance().delete(stavka);
+        }
         DBB.getInstance().delete(odo);
-        return (Racun)odo;
+        return racun;
     }
-
     @Override
     protected void validate(OpstiDomenskiObjekat odo) throws Exception {
         if(!(odo instanceof Racun)){
