@@ -8,7 +8,6 @@ import dbb.DBB;
 import domain.OpstiDomenskiObjekat;
 import domain.Racun;
 import domain.StavkaRacuna;
-import java.util.ArrayList;
 import so.ApstraktneSistemskeOperacije;
 
 /**

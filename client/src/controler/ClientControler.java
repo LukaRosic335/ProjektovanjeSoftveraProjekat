@@ -74,9 +74,9 @@ public class ClientControler {
         sendRequest(Operation.DELETE, pokojni);
     }
     
-    public void updateZaposleni(Zaposleni zaposleni)throws Exception{
+    public Zaposleni updateZaposleni(Zaposleni zaposleni)throws Exception{
         System.out.println("updatezaposleni CC");
-        sendRequest(Operation.UPDATE_ZAPOSLENI, zaposleni);
+        return (Zaposleni)sendRequest(Operation.UPDATE_ZAPOSLENI, zaposleni);
     }
 
     private synchronized Object sendRequest(Operation operation, Object data) throws Exception {

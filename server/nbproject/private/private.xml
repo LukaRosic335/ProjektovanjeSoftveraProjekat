@@ -2,6 +2,19 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group name="projektovanjeSoftveraProjekatSoftvera"/>
+        <group name="projektovanjeSoftveraProjekatSoftvera">
+            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/server/src/so/Roba/KreirajRoba.java</file>
+            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/server/src/dbb/DBB.java</file>
+            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/server/src/so/Smena/KreirajSmena.java</file>
+            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/server/src/so/SmenaZaposlenog/KreirajSmenaZaposlenog.java</file>
+            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/server/src/so/Sto/KreirajSto.java</file>
+            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/server/src/so/Zaposleni/KreirajZaposleni.java</file>
+            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/server/src/so/tipStola/KreirajTipStola.java</file>
+            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/server/src/so/Racun/KreirajRacun.java</file>
+            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/server/src/so/Roba/ObrisiRoba.java</file>
+            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/server/src/so/Roba/PretraziRoba.java</file>
+            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/server/src/so/Roba/PromeniRoba.java</file>
+            <file>file:/home/jevrozim/NetBeansProjects/projektovanjeSoftveraProjekatSoftvera/server/src/so/Roba/VratiListuSviRoba.java</file>
+        </group>
     </open-files>
 </project-private>

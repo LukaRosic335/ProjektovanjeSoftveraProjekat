@@ -7,7 +7,7 @@ package front;
 import domain.Zaposleni;
 import clientsession.Session;
 import controler.ClientControler;
-import front.panels.DeleteZaposleniPanel;
+import front.panels.ZaposleniPanel;
 import front.panels.NoviZaposleniPanel;
 import front.panels.PanelFrame;
 import javax.swing.JFrame;
@@ -20,11 +20,8 @@ import javax.swing.SwingConstants;
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    private PanelFrame interactionFrame;
-
     public MainFrame() {
         initComponents();
-        ClientControler.getInstance().getFrames().add(this);
         this.setVisible(true);
         ussertxt.setHorizontalAlignment(SwingConstants.CENTER);
         if (Session.getInstace().getUlogovani() != null) {
@@ -46,7 +43,8 @@ public class MainFrame extends javax.swing.JFrame {
         newZaposlenibtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         messagetxt = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        deleteZaposlenibtn = new javax.swing.JButton();
+        zaposlenibtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,10 +67,17 @@ public class MainFrame extends javax.swing.JFrame {
         messagetxt.setRows(5);
         jScrollPane1.setViewportView(messagetxt);
 
-        jButton1.setText("Obrisi zaposlenog");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        deleteZaposlenibtn.setText("Obrisi zaposlenog");
+        deleteZaposlenibtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                deleteZaposlenibtnActionPerformed(evt);
+            }
+        });
+
+        zaposlenibtn.setText("Zaposleni");
+        zaposlenibtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                zaposlenibtnActionPerformed(evt);
             }
         });
 
@@ -91,7 +96,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(newZaposlenibtn)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addComponent(deleteZaposlenibtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(zaposlenibtn)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -103,7 +110,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newZaposlenibtn)
-                    .addComponent(jButton1))
+                    .addComponent(deleteZaposlenibtn)
+                    .addComponent(zaposlenibtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -134,27 +142,36 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void newZaposlenibtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newZaposlenibtnActionPerformed
         NoviZaposleniPanel p=new NoviZaposleniPanel();
-        interactionFrame=new PanelFrame(p);
-        p.setFrame(interactionFrame);
+        PanelFrame f=new PanelFrame(p);
+        p.setFrame(f);
         this.dispose();
     }//GEN-LAST:event_newZaposlenibtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void deleteZaposlenibtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteZaposlenibtnActionPerformed
         // TODO add your handling code here:
         //bukv prekopiraj gore
-        DeleteZaposleniPanel p=new DeleteZaposleniPanel();
-        interactionFrame=new PanelFrame(p);
-        p.setFrame(interactionFrame);
+        ZaposleniPanel p=new ZaposleniPanel();
+        PanelFrame f=new PanelFrame(p);
+        p.setFrame(f);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_deleteZaposlenibtnActionPerformed
+
+    private void zaposlenibtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zaposlenibtnActionPerformed
+        // TODO add your handling code here:
+        ZaposleniPanel p=new ZaposleniPanel();
+        PanelFrame f=new PanelFrame(p);
+        p.setFrame(f);
+        this.dispose();
+    }//GEN-LAST:event_zaposlenibtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton deleteZaposlenibtn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton logoutbtn;
     private javax.swing.JTextArea messagetxt;
     private javax.swing.JButton newZaposlenibtn;
     private javax.swing.JLabel ussertxt;
+    private javax.swing.JButton zaposlenibtn;
     // End of variables declaration//GEN-END:variables
 }

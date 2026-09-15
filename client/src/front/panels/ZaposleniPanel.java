@@ -13,28 +13,28 @@ import javax.swing.JOptionPane;
  *
  * @author jevrozim
  */
-public class DeleteZaposleniPanel extends javax.swing.JPanel {
+public class ZaposleniPanel extends javax.swing.JPanel {
 
     private PanelFrame frame;
     private ZaposleniTableModel model;
-    private String poruka="privremeno resenje za slanje poruke za gresku";
+    private String poruka = "privremeno resenje za slanje poruke za gresku";//nisam siguran cemu ovo trenutni rosic je zaboravio sta je prosli rosic hteo da uradi
 
     /**
      * Creates new form DeleteZaposleniPanel
      */
-    public DeleteZaposleniPanel() {
-        try{
-        model = new ZaposleniTableModel();
-        initComponents();
-        table.setModel(model);
-        }catch(Exception e){
-            poruka=e.getMessage();
+    public ZaposleniPanel() {
+        try {
+            model = new ZaposleniTableModel();
+            initComponents();
+            table.setModel(model);
+        } catch (Exception e) {
+            poruka = e.getMessage();
         }
     }
 
     public void setFrame(PanelFrame p) {
         frame = p;
-        frame.setTitle("Brisanje zaposlenog");
+        frame.setTitle("Zaposleni akcije");
         frame.getMessagetxt().setText(poruka);
     }
 
@@ -49,8 +49,9 @@ public class DeleteZaposleniPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
-        deletebtn = new javax.swing.JButton();
+        obrisibtn = new javax.swing.JButton();
         izmenibtn = new javax.swing.JButton();
+        kreirajtbn = new javax.swing.JButton();
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -65,10 +66,10 @@ public class DeleteZaposleniPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(table);
 
-        deletebtn.setText("Ukloni");
-        deletebtn.addActionListener(new java.awt.event.ActionListener() {
+        obrisibtn.setText("Ukloni");
+        obrisibtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deletebtnActionPerformed(evt);
+                obrisibtnActionPerformed(evt);
             }
         });
 
@@ -76,6 +77,13 @@ public class DeleteZaposleniPanel extends javax.swing.JPanel {
         izmenibtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 izmenibtnActionPerformed(evt);
+            }
+        });
+
+        kreirajtbn.setText("Kreiraj");
+        kreirajtbn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kreirajtbnActionPerformed(evt);
             }
         });
 
@@ -88,8 +96,9 @@ public class DeleteZaposleniPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(deletebtn, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(izmenibtn, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(obrisibtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(izmenibtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(kreirajtbn, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -101,14 +110,16 @@ public class DeleteZaposleniPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addComponent(deletebtn)
+                        .addComponent(obrisibtn)
                         .addGap(18, 18, 18)
-                        .addComponent(izmenibtn)))
+                        .addComponent(izmenibtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(kreirajtbn)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed
+    private void obrisibtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obrisibtnActionPerformed
         // TODO add your handling code here:
 //        int row=table.getSelectedRow();
 //        Zaposleni pokojni=model.getZaposleni(row);
@@ -122,36 +133,56 @@ public class DeleteZaposleniPanel extends javax.swing.JPanel {
 //        table.setModel(model);
 //        frame.getMessagetxt().setText("Uspesno uklonjen "+pokojni);
 //        }
-        int row=table.getSelectedRow();
-        Zaposleni pokojni=model.getZaposleni(row);
-        int odgovor=JOptionPane.showConfirmDialog(frame, "Da li ste sigurni da zelite da uklonite "+pokojni,"", JOptionPane.YES_NO_OPTION);
-        
-        if(odgovor==JOptionPane.YES_OPTION){
-            try{
+        int row = table.getSelectedRow();
+        if(row==-1){
+            frame.getMessagetxt().setText("Nije oznacen ni jedan zaposleni za ukloniti");
+            return;
+        }
+        Zaposleni pokojni = model.getZaposleni(row);
+        int odgovor = JOptionPane.showConfirmDialog(frame, "Da li ste sigurni da zelite da uklonite " + pokojni, "", JOptionPane.YES_NO_OPTION);
+
+        if (odgovor == JOptionPane.YES_OPTION) {
+            try {
                 ClientControler.getInstance().deleteZaposleni(pokojni);
-                model=new ZaposleniTableModel();
+                model = new ZaposleniTableModel();
                 table.setModel(model);
-                frame.getMessagetxt().setText("Uspesno uklonjen "+pokojni);
-            }catch(Exception e){
+                frame.getMessagetxt().setText("Uspesno uklonjen " + pokojni);
+            } catch (Exception e) {
                 frame.getMessagetxt().setText(e.getMessage());
             }
         }
-    }//GEN-LAST:event_deletebtnActionPerformed
+    }//GEN-LAST:event_obrisibtnActionPerformed
 
     private void izmenibtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_izmenibtnActionPerformed
         // TODO add your handling code here:
         //izmeni stvari
-        int row=table.getSelectedRow();
-        Zaposleni izmenjeni=model.getZaposleni(row);
+        int row = table.getSelectedRow();
+        if(row==-1){
+            frame.getMessagetxt().setText("Nije odabran ni jedan zaposleni za izmeniti");
+            return;
+        }
+        Zaposleni izmenjeni = model.getZaposleni(row);
         //nesto nesto prikazi novi prozor koji menja zaposlenog
-        UpdateZaposleniFrame uf=new UpdateZaposleniFrame(izmenjeni.getIme(), izmenjeni.getPrezime(), izmenjeni.getSifra(), izmenjeni.getKorisnickoIme(), izmenjeni.getIdZaposleni());
+        UpdateZaposleniPanel uf = new UpdateZaposleniPanel(izmenjeni);
+        frame.dispose();//privremeno resenje moguce je samo na this frame da zakacim i rifresujem panel
     }//GEN-LAST:event_izmenibtnActionPerformed
+
+    private void kreirajtbnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kreirajtbnActionPerformed
+        // TODO add your handling code here:
+        //privremeno resenje za novog zaposlenog
+        NoviZaposleniPanel p=new NoviZaposleniPanel();
+        PanelFrame frame = new PanelFrame(p);
+        p.setFrame(frame);
+        this.frame.dispose();//privremeno resenje takodje je moguce da samo na this frame zakacim
+
+    }//GEN-LAST:event_kreirajtbnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton deletebtn;
     private javax.swing.JButton izmenibtn;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton kreirajtbn;
+    private javax.swing.JButton obrisibtn;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }
