@@ -44,6 +44,9 @@ public class ClientControler {
     public ArrayList<JFrame> getFrames() {
         return frames;
     }
+    public Zaposleni getUlogovani(){
+        return Session.getInstace().getUlogovani();
+    }
 
     public static void main(String[] args) {
         LoginForm login = new LoginForm();
@@ -218,6 +221,14 @@ public class ClientControler {
     }
 
     public Racun updateRacun(Racun racun) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Racun deleteRacun(Racun r) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Racun noviRacun(Racun racun) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

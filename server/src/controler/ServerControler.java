@@ -4,10 +4,12 @@
  */
 package controler;
 
+import domain.Racun;
 import domain.TipStola;
 import domain.Zaposleni;
 import java.util.ArrayList;
 import so.Login.Login;
+import so.Racun.VratiListuRacun;
 import so.Zaposleni.ObrisiZaposleni;
 import so.Zaposleni.VratiListuSviZaposleni;
 import so.Zaposleni.KreirajZaposleni;
@@ -94,6 +96,12 @@ public class ServerControler {
     public ArrayList<TipStola> getAllTipStola() throws Exception{
         VratiListuSviTipStola so=new VratiListuSviTipStola();
         return so.executeTamplate(new TipStola());
+    }
+    
+    //LEPO NAPRAVI OVO
+    public ArrayList<Racun> vratiListaRacun(Racun racun)throws Exception{
+        VratiListuRacun so=new VratiListuRacun();
+        return so.executeTamplate(racun);
     }
     
 }
