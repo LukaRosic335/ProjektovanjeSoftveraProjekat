@@ -6,7 +6,6 @@ package front.panels.smenaPaneli;
 
 import controler.ClientControler;
 import domain.Smena;
-import domain.TipStola;
 import front.panels.PanelFrame;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
