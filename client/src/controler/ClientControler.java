@@ -8,6 +8,7 @@ import java.io.IOException;
 import transfer.Request;
 import transfer.Response;
 import clientsession.Session;
+import domain.Smena;
 import domain.TipStola;
 import domain.Zaposleni;
 import front.LoginForm;
@@ -160,6 +161,18 @@ public class ClientControler {
 
     public TipStola deleteTipStola(TipStola pokojni) throws Exception{
         return (TipStola)sendRequest(Operation.DELETE_TIPSTOLA, pokojni);
+    }
+
+    public ArrayList<Smena> getAllSmena() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Smena deleteSmena(Smena pokojni) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Smena noviSmena(Smena novi) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     
