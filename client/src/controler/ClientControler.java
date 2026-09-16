@@ -8,6 +8,7 @@ import java.io.IOException;
 import transfer.Request;
 import transfer.Response;
 import clientsession.Session;
+import domain.Racun;
 import domain.Roba;
 import domain.Smena;
 import domain.Sto;
@@ -209,6 +210,16 @@ public class ClientControler {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    public ArrayList<Racun> getAllRacun() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    public Racun getRacun(Racun racun)throws Exception{
+        return (Racun)sendRequest(Operation.GET_RACUN, racun);
+    }
+
+    public Racun updateRacun(Racun racun) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 
 }

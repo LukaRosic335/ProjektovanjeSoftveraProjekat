@@ -94,6 +94,18 @@ public class TipStola extends OpstiDomenskiObjekat {
     public String getJoinCondition() {
         return "";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof TipStola)){
+            return false;
+        }
+        TipStola t=(TipStola)obj;
+        if(t.getIdTipStola()==idTipStola){
+            return true;
+        }
+        return false;
+    }
     
     
 

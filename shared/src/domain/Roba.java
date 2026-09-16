@@ -120,6 +120,18 @@ public class Roba extends OpstiDomenskiObjekat{
     public String getJoinCondition() {
         return "";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Roba)){
+            return false;
+        }
+        Roba r=(Roba)obj;
+        if(r.getIdRoba()==idRoba){
+            return true;
+        }
+        return false;
+    }
     
     
 }

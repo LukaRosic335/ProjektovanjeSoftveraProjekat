@@ -9,8 +9,8 @@ package transfer.util;
  * @author jevrozim
  */
 public enum Operation {
-    //kako mi bude trebalo tako cu ovde dopunjavati operacije koje su neophodne
     CONNECTIONCLOSE,
+    
     LOGIN,
     LOGOUT,
     NEW_ZAPOSLENI,
@@ -23,5 +23,6 @@ public enum Operation {
     DELETE_TIPSTOLA,
     GET_ALL_TIPSTOLA,
     
+    GET_RACUN,
     
 }
