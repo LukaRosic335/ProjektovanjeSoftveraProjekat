@@ -8,6 +8,7 @@ import java.io.IOException;
 import transfer.Request;
 import transfer.Response;
 import clientsession.Session;
+import domain.Roba;
 import domain.Smena;
 import domain.TipStola;
 import domain.Zaposleni;
@@ -172,6 +173,14 @@ public class ClientControler {
     }
 
     public Smena noviSmena(Smena novi) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Smena updateSmena(Smena novi) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public ArrayList<Roba> getAllRoba() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

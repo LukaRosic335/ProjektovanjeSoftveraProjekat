@@ -2,38 +2,39 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package front.panels.smenaPaneli;
+package front.panels.robaPaneli;
 
 import controler.ClientControler;
-import domain.Smena;
+import domain.Roba;
 import front.panels.PanelFrame;
-import front.tableModels.SmenaTableModel;
+import front.tableModels.RobaTableModel;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author jevrozim
  */
-public class SmenaPanel extends javax.swing.JPanel {
+public class RobaPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form SmenaPanel
-     */
-    
+    private RobaTableModel model;
     private PanelFrame frame;
-    private SmenaTableModel model;
-    public SmenaPanel() {
-        
-    }
     public void setFrame(PanelFrame frame){
         this.frame=frame;
         try{
-           model = new SmenaTableModel();
+           model = new RobaTableModel();
             initComponents();
             table.setModel(model);
         } catch (Exception e) {
             frame.getMessagetxt().setText(e.getMessage());
         }
+    }
+    
+    
+    /**
+     * Creates new form RobaPanel
+     */
+    public RobaPanel() {
+        initComponents();
     }
 
     /**
@@ -120,7 +121,7 @@ public class SmenaPanel extends javax.swing.JPanel {
     private void kreirajtbnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kreirajtbnActionPerformed
         // TODO add your handling code here:
         //privremeno resenje za novog zaposlenog
-        NoviSmenaPanel p=new NoviSmenaPanel();
+        NoviRobaPanel p=new NoviRobaPanel();
         PanelFrame frame = new PanelFrame(p);
         p.setFrame(frame);
         this.frame.dispose();//privremeno resenje takodje je moguce da samo na this frame zakacim
@@ -133,13 +134,13 @@ public class SmenaPanel extends javax.swing.JPanel {
             frame.getMessagetxt().setText("Nije oznacen ni jedan tip stola za ukloniti");
             return;
         }
-        Smena pokojni = model.getSmena(row);
+        Roba pokojni = model.getRoba(row);
         int odgovor = JOptionPane.showConfirmDialog(frame, "Da li ste sigurni da zelite da uklonite " + pokojni, "", JOptionPane.YES_NO_OPTION);
 
         if (odgovor == JOptionPane.YES_OPTION) {
             try {
-                Smena ts=ClientControler.getInstance().deleteSmena(pokojni);
-                model = new SmenaTableModel();
+                Roba ts=ClientControler.getInstance().deleteRoba(pokojni);
+                model = new RobaTableModel();
                 table.setModel(model);
                 frame.getMessagetxt().setText("Uspesno uklonjen " + pokojni);
             } catch (Exception e) {
@@ -153,12 +154,12 @@ public class SmenaPanel extends javax.swing.JPanel {
         //izmeni stvari
         int row = table.getSelectedRow();
         if(row==-1){
-            frame.getMessagetxt().setText("Nije odabran ni jedan zaposleni za izmeniti");
+            frame.getMessagetxt().setText("Nije odabrana ni jedana roba za izmeniti");
             return;
         }
-        Smena izmenjeni = model.getSmena(row);
+        Roba izmenjeni = model.getRoba(row);
         //nesto nesto prikazi novi prozor koji menja zaposlenog
-        UpdateSmenaPanel uf = new UpdateSmenaPanel(izmenjeni);
+        UpdateRobaPanel uf = new UpdateRobaPanel(izmenjeni);
         PanelFrame noviFrame=new PanelFrame(uf);
         uf.setFrame(noviFrame);
         frame.dispose();//privremeno resenje moguce je samo na this frame da zakacim i rifresujem panel
