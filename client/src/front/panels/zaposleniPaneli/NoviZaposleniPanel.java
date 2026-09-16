@@ -1,8 +1,9 @@
-package front.panels;
+package front.panels.zaposleniPaneli;
 
 import controler.ClientControler;
 import domain.Zaposleni;
 import front.MainFrame;
+import front.panels.PanelFrame;
 import java.awt.Window;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;

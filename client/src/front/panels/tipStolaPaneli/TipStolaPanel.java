@@ -2,40 +2,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package front.panels;
+package front.panels.tipStolaPaneli;
 
 import controler.ClientControler;
-import domain.Zaposleni;
-import front.tableModels.ZaposleniTableModel;
+import domain.TipStola;
+import front.panels.PanelFrame;
+import front.tableModels.TipStolaTableModel;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author jevrozim
  */
-public class ZaposleniPanel extends javax.swing.JPanel {
+public class TipStolaPanel extends javax.swing.JPanel {
 
     private PanelFrame frame;
-    private ZaposleniTableModel model;
-    private String poruka = "privremeno resenje za slanje poruke za gresku";//nisam siguran cemu ovo trenutni rosic je zaboravio sta je prosli rosic hteo da uradi
-
-    /**
-     * Creates new form DeleteZaposleniPanel
-     */
-    public ZaposleniPanel() {
+    private TipStolaTableModel model;
+    public TipStolaPanel() {
         try {
-            model = new ZaposleniTableModel();
+            model = new TipStolaTableModel();
             initComponents();
             table.setModel(model);
         } catch (Exception e) {
-            poruka = e.getMessage();
+            frame.getMessagetxt().setText(e.getMessage());
         }
     }
-
-    public void setFrame(PanelFrame p) {
-        frame = p;
-        frame.setTitle("Zaposleni akcije");
-        frame.getMessagetxt().setText(poruka);
+    public void setFrame(PanelFrame frame){
+        this.frame=frame;
     }
 
     /**
@@ -92,14 +85,14 @@ public class ZaposleniPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(118, 118, 118)
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(obrisibtn, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(izmenibtn, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(kreirajtbn, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                .addGap(97, 97, 97))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,36 +108,24 @@ public class ZaposleniPanel extends javax.swing.JPanel {
                         .addComponent(izmenibtn)
                         .addGap(18, 18, 18)
                         .addComponent(kreirajtbn)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void obrisibtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obrisibtnActionPerformed
         // TODO add your handling code here:
-//        int row=table.getSelectedRow();
-//        Zaposleni pokojni=model.getZaposleni(row);
-//        
-//        int odgovor=JOptionPane.showConfirmDialog(frame, "Da li ste sigurni da zelite da uklonite "+pokojni,"", JOptionPane.YES_NO_OPTION);
-//        
-//        if(odgovor==JOptionPane.YES_OPTION){
-//        ClientControler.getInstance().deleteZaposleni(pokojni);
-//        //VIDI STA VRATI KLIJENT KONTROLER JER MOZDA NEUSPESNO UKLONI ZAPOSLENOG
-//        model=new ZaposleniTableModel();
-//        table.setModel(model);
-//        frame.getMessagetxt().setText("Uspesno uklonjen "+pokojni);
-//        }
         int row = table.getSelectedRow();
         if(row==-1){
-            frame.getMessagetxt().setText("Nije oznacen ni jedan zaposleni za ukloniti");
+            frame.getMessagetxt().setText("Nije oznacen ni jedan tip stola za ukloniti");
             return;
         }
-        Zaposleni pokojni = model.getZaposleni(row);
+        TipStola pokojni = model.getTipStola(row);
         int odgovor = JOptionPane.showConfirmDialog(frame, "Da li ste sigurni da zelite da uklonite " + pokojni, "", JOptionPane.YES_NO_OPTION);
 
         if (odgovor == JOptionPane.YES_OPTION) {
             try {
-                ClientControler.getInstance().deleteZaposleni(pokojni);
-                model = new ZaposleniTableModel();
+                TipStola ts=ClientControler.getInstance().deleteTipStola(pokojni);
+                model = new TipStolaTableModel();
                 table.setModel(model);
                 frame.getMessagetxt().setText("Uspesno uklonjen " + pokojni);
             } catch (Exception e) {
@@ -161,20 +142,21 @@ public class ZaposleniPanel extends javax.swing.JPanel {
             frame.getMessagetxt().setText("Nije odabran ni jedan zaposleni za izmeniti");
             return;
         }
-        Zaposleni izmenjeni = model.getZaposleni(row);
+        TipStola izmenjeni = model.getTipStola(row);
         //nesto nesto prikazi novi prozor koji menja zaposlenog
-        UpdateZaposleniPanel uf = new UpdateZaposleniPanel(izmenjeni);
+        UpdateTipStolaPanel uf = new UpdateTipStolaPanel(izmenjeni);
+        PanelFrame noviFrame=new PanelFrame(uf);
+        uf.setFrame(noviFrame);
         frame.dispose();//privremeno resenje moguce je samo na this frame da zakacim i rifresujem panel
     }//GEN-LAST:event_izmenibtnActionPerformed
 
     private void kreirajtbnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kreirajtbnActionPerformed
         // TODO add your handling code here:
         //privremeno resenje za novog zaposlenog
-        NoviZaposleniPanel p=new NoviZaposleniPanel();
+        NoviTipStolaPanel p=new NoviTipStolaPanel();
         PanelFrame frame = new PanelFrame(p);
         p.setFrame(frame);
         this.frame.dispose();//privremeno resenje takodje je moguce da samo na this frame zakacim
-
     }//GEN-LAST:event_kreirajtbnActionPerformed
 
 

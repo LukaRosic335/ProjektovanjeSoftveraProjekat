@@ -2,11 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package front.panels;
+package front.panels.zaposleniPaneli;
 
 import controler.ClientControler;
 import domain.Zaposleni;
 import front.MainFrame;
+import front.panels.PanelFrame;
 
 /**
  *
@@ -24,6 +25,7 @@ public class UpdateZaposleniPanel extends javax.swing.JPanel {
         prezimetxt.setText(zaposleni.getPrezime());
         korisnickoImetxt.setText(zaposleni.getKorisnickoIme());
         sifratxt.setText(zaposleni.getSifra());
+        this.setVisible(true);
     }
     public void setFrame(PanelFrame frame){
         this.frame=frame;
@@ -142,6 +144,14 @@ public class UpdateZaposleniPanel extends javax.swing.JPanel {
         Zaposleni preporodjeni=new Zaposleni(zaposleni.getIdZaposleni(), imetxt.getText(), prezimetxt.getText(), korisnickoImetxt.getText(), sifratxt.getText());
         try {
             preporodjeni=ClientControler.getInstance().updateZaposleni(preporodjeni);
+            //set sve da umre
+            frame.getMessagetxt().setText("Promenjen je zaposleni " + preporodjeni);
+                imetxt.setEditable(false);
+                prezimetxt.setEditable(false);
+                sifratxt.setEditable(false);
+                korisnickoImetxt.setEditable(false);
+                updatebtn.setEnabled(false);
+                frame.getcacnelbtn().setText("Izadji");
         } catch (Exception ex) {
             frame.getMessagetxt().setText(ex.getMessage());
         }

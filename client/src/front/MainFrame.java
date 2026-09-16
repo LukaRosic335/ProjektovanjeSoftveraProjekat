@@ -7,8 +7,8 @@ package front;
 import domain.Zaposleni;
 import clientsession.Session;
 import controler.ClientControler;
-import front.panels.ZaposleniPanel;
-import front.panels.NoviZaposleniPanel;
+import front.panels.zaposleniPaneli.ZaposleniPanel;
+import front.panels.zaposleniPaneli.NoviZaposleniPanel;
 import front.panels.PanelFrame;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
@@ -40,11 +40,10 @@ public class MainFrame extends javax.swing.JFrame {
 
         ussertxt = new javax.swing.JLabel();
         logoutbtn = new javax.swing.JButton();
-        newZaposlenibtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         messagetxt = new javax.swing.JTextArea();
-        deleteZaposlenibtn = new javax.swing.JButton();
         zaposlenibtn = new javax.swing.JButton();
+        tipstolabtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,24 +54,10 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        newZaposlenibtn.setText("Dodaj novog zaposlenog");
-        newZaposlenibtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newZaposlenibtnActionPerformed(evt);
-            }
-        });
-
         messagetxt.setEditable(false);
         messagetxt.setColumns(20);
         messagetxt.setRows(5);
         jScrollPane1.setViewportView(messagetxt);
-
-        deleteZaposlenibtn.setText("Obrisi zaposlenog");
-        deleteZaposlenibtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteZaposlenibtnActionPerformed(evt);
-            }
-        });
 
         zaposlenibtn.setText("Zaposleni");
         zaposlenibtn.addActionListener(new java.awt.event.ActionListener() {
@@ -80,6 +65,8 @@ public class MainFrame extends javax.swing.JFrame {
                 zaposlenibtnActionPerformed(evt);
             }
         });
+
+        tipstolabtn.setText("Tip Stola");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,16 +76,14 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 569, Short.MAX_VALUE)
                         .addComponent(logoutbtn))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(newZaposlenibtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(deleteZaposlenibtn)
-                        .addGap(18, 18, 18)
                         .addComponent(zaposlenibtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(tipstolabtn)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -107,12 +92,11 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ussertxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(newZaposlenibtn)
-                    .addComponent(deleteZaposlenibtn)
-                    .addComponent(zaposlenibtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                    .addComponent(zaposlenibtn)
+                    .addComponent(tipstolabtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(logoutbtn)
@@ -140,22 +124,6 @@ public class MainFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_logoutbtnActionPerformed
 
-    private void newZaposlenibtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newZaposlenibtnActionPerformed
-        NoviZaposleniPanel p=new NoviZaposleniPanel();
-        PanelFrame f=new PanelFrame(p);
-        p.setFrame(f);
-        this.dispose();
-    }//GEN-LAST:event_newZaposlenibtnActionPerformed
-
-    private void deleteZaposlenibtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteZaposlenibtnActionPerformed
-        // TODO add your handling code here:
-        //bukv prekopiraj gore
-        ZaposleniPanel p=new ZaposleniPanel();
-        PanelFrame f=new PanelFrame(p);
-        p.setFrame(f);
-        this.dispose();
-    }//GEN-LAST:event_deleteZaposlenibtnActionPerformed
-
     private void zaposlenibtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zaposlenibtnActionPerformed
         // TODO add your handling code here:
         ZaposleniPanel p=new ZaposleniPanel();
@@ -166,11 +134,10 @@ public class MainFrame extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton deleteZaposlenibtn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton logoutbtn;
     private javax.swing.JTextArea messagetxt;
-    private javax.swing.JButton newZaposlenibtn;
+    private javax.swing.JButton tipstolabtn;
     private javax.swing.JLabel ussertxt;
     private javax.swing.JButton zaposlenibtn;
     // End of variables declaration//GEN-END:variables

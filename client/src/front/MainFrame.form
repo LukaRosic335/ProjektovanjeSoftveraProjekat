@@ -27,17 +27,15 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="569" max="32767" attributes="0"/>
                       <Component id="logoutbtn" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="newZaposlenibtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="deleteZaposlenibtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="zaposlenibtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="tipstolabtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -50,13 +48,12 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="ussertxt" min="-2" pref="30" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="newZaposlenibtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="deleteZaposlenibtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="zaposlenibtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tipstolabtn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="116" max="32767" attributes="0"/>
+              <EmptySpace pref="122" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="logoutbtn" min="-2" max="-2" attributes="0"/>
@@ -82,14 +79,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logoutbtnActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="newZaposlenibtn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Dodaj novog zaposlenog"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newZaposlenibtnActionPerformed"/>
-      </Events>
-    </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -106,14 +95,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="deleteZaposlenibtn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Obrisi zaposlenog"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteZaposlenibtnActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="zaposlenibtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Zaposleni"/>
@@ -121,6 +102,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="zaposlenibtnActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="tipstolabtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tip Stola"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

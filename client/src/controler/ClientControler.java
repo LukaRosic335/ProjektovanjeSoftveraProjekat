@@ -8,6 +8,7 @@ import java.io.IOException;
 import transfer.Request;
 import transfer.Response;
 import clientsession.Session;
+import domain.TipStola;
 import domain.Zaposleni;
 import front.LoginForm;
 import java.util.ArrayList;
@@ -78,6 +79,11 @@ public class ClientControler {
         System.out.println("updatezaposleni CC");
         return (Zaposleni)sendRequest(Operation.UPDATE_ZAPOSLENI, zaposleni);
     }
+    
+    
+    public ArrayList<TipStola> getAllTipStola() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
     private synchronized Object sendRequest(Operation operation, Object data) throws Exception {
         //ukoliko nesto nije kako treba trenutno vraca null
@@ -140,5 +146,15 @@ public class ClientControler {
         return null;
 
     }
+
+    public TipStola noviTipStola(TipStola novi) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void updateTipStola(TipStola ts) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    
 
 }
