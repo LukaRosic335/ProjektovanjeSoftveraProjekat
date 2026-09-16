@@ -15,6 +15,13 @@ public enum Operation {
     LOGOUT,
     NEW_ZAPOSLENI,
     GET_ALL_ZAPOSLENI,
-    DELETE,
+    DELETE_ZAPOSLENI,
     UPDATE_ZAPOSLENI,
+    
+    NEW_TIPSTOLA,
+    UPDATE_TIPSTOLA,
+    DELETE_TIPSTOLA,
+    GET_ALL_TIPSTOLA,
+    
+    
 }

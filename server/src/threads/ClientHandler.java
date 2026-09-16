@@ -5,6 +5,7 @@
 package threads;
 
 import controler.ServerControler;
+import domain.TipStola;
 import domain.Zaposleni;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -100,7 +101,7 @@ public class ClientHandler extends Thread {
                     ArrayList<Zaposleni> sviZaposleni = ServerControler.getInstance().getAllZaposleni();
                     res.setData(sviZaposleni);
                     return res;
-                case DELETE:
+                case DELETE_ZAPOSLENI:
                     System.out.println("Delete zaposleni metoda");
                     ServerControler.getInstance().deleteZaposleni((Zaposleni)req.getData());
                     return res;
@@ -108,6 +109,19 @@ public class ClientHandler extends Thread {
                 case UPDATE_ZAPOSLENI:
                     System.out.println("Update zaposleni metoda");
                     ServerControler.getInstance().updateZaposleni((Zaposleni) req.getData());
+                    return res;
+                case NEW_TIPSTOLA:
+                    System.out.println("New TipStola metoda");
+                    res.setData(ServerControler.getInstance().newTipStola((TipStola)req.getData()));
+                    return res;
+                case UPDATE_TIPSTOLA:
+                    res.setData(ServerControler.getInstance().updateTipStola((TipStola)req.getData()));
+                    return res;
+                case DELETE_TIPSTOLA:
+                    res.setData(ServerControler.getInstance().deleteTipStola((TipStola)req.getData()));
+                    return res;
+                case GET_ALL_TIPSTOLA:
+                    res.setData(ServerControler.getInstance().getAllTipStola());
                     return res;
                 default:
                     System.out.println("handleRequest u client handler zakinuo");

@@ -4,6 +4,7 @@
  */
 package controler;
 
+import domain.TipStola;
 import domain.Zaposleni;
 import java.util.ArrayList;
 import so.Login.Login;
@@ -11,6 +12,10 @@ import so.Zaposleni.ObrisiZaposleni;
 import so.Zaposleni.VratiListuSviZaposleni;
 import so.Zaposleni.KreirajZaposleni;
 import so.Zaposleni.PromeniZaposleni;
+import so.tipStola.KreirajTipStola;
+import so.tipStola.ObrisiTipStola;
+import so.tipStola.PromeniTIpStola;
+import so.tipStola.VratiListuSviTipStola;
 
 /**
  *
@@ -70,4 +75,25 @@ public class ServerControler {
         PromeniZaposleni so=new PromeniZaposleni();
         return so.executeTamplate(zaposleni);
     }
+
+    public TipStola newTipStola(TipStola tipStola)throws Exception {
+        KreirajTipStola so=new KreirajTipStola();
+        return so.executeTamplate(tipStola);
+    }
+
+    public TipStola deleteTipStola(TipStola tipStola)throws Exception {
+        ObrisiTipStola so=new ObrisiTipStola();
+        return so.executeTamplate(tipStola);
+    }
+
+    public TipStola updateTipStola(TipStola tipStola)throws Exception {
+        PromeniTIpStola so=new PromeniTIpStola();
+        return so.executeTamplate(tipStola);
+    }
+
+    public ArrayList<TipStola> getAllTipStola() throws Exception{
+        VratiListuSviTipStola so=new VratiListuSviTipStola();
+        return so.executeTamplate(new TipStola());
+    }
+    
 }

@@ -16,17 +16,18 @@ public class UpdateTipStolaPanel extends javax.swing.JPanel {
 
     private PanelFrame frame;
     private TipStola tipStola;
+
     /**
      * Creates new form UpdateTipStolaPanel
      */
     public UpdateTipStolaPanel(TipStola ts) {
-        tipStola=ts;
+        tipStola = ts;
         initComponents();
         jTextField1.setText(String.valueOf(tipStola.getBrMesta()));
     }
-    
-    public void setFrame(PanelFrame frame){
-        this.frame=frame;
+
+    public void setFrame(PanelFrame frame) {
+        this.frame = frame;
     }
 
     /**
@@ -82,14 +83,19 @@ public class UpdateTipStolaPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(jTextField1.getText().matches("\\d+")){
+        if (!jTextField1.getText().matches("\\d+")) {
             frame.getMessagetxt().setText("Mora se uneti cifra");
             return;
         }
-        TipStola ts=new TipStola(tipStola.getIdTipStola(), Integer.parseInt(jTextField1.getText()));
-        ClientControler.getInstance().updateTipStola(ts);
-        jButton1.setEnabled(false);
-        jTextField1.setEditable(false);
+        TipStola ts = new TipStola(tipStola.getIdTipStola(), Integer.parseInt(jTextField1.getText()));
+        try {
+            ClientControler.getInstance().updateTipStola(ts);
+            jButton1.setEnabled(false);
+            jTextField1.setEditable(false);
+        } catch (Exception ex) {
+            frame.getMessagetxt().setText(ex.getMessage());
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

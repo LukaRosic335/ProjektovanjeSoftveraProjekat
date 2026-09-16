@@ -8,8 +8,8 @@ import domain.Zaposleni;
 import clientsession.Session;
 import controler.ClientControler;
 import front.panels.zaposleniPaneli.ZaposleniPanel;
-import front.panels.zaposleniPaneli.NoviZaposleniPanel;
 import front.panels.PanelFrame;
+import front.panels.tipStolaPaneli.TipStolaPanel;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
@@ -67,6 +67,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         tipstolabtn.setText("Tip Stola");
+        tipstolabtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipstolabtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,6 +136,14 @@ public class MainFrame extends javax.swing.JFrame {
         p.setFrame(f);
         this.dispose();
     }//GEN-LAST:event_zaposlenibtnActionPerformed
+
+    private void tipstolabtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipstolabtnActionPerformed
+        // TODO add your handling code here:
+        TipStolaPanel p=new TipStolaPanel();
+        PanelFrame f=new PanelFrame(p);
+        p.setFrame(f);
+        this.dispose();
+    }//GEN-LAST:event_tipstolabtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -80,15 +80,19 @@ public class NoviTipStolaPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(jTextField1.getText().matches("\\d+")){
+        if(!jTextField1.getText().matches("\\d+")){
             frame.getMessagetxt().setText("Mora se uneti cifra");
             return;
         }
         TipStola novi=new TipStola(0, Integer.parseInt(jTextField1.getText()));
+        try{
         TipStola info=ClientControler.getInstance().noviTipStola(novi);
         frame.getMessagetxt().setText("Kreiran je novi tip stola sa id "+info.getIdTipStola());
         jButton1.setEnabled(false);
         jTextField1.setEditable(false);
+        }catch(Exception e){
+            frame.getMessagetxt().setText(e.getMessage());
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

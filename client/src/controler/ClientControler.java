@@ -72,7 +72,7 @@ public class ClientControler {
 
     public void deleteZaposleni(Zaposleni pokojni) throws Exception {
         System.out.println("deleteZaposleni CC");
-        sendRequest(Operation.DELETE, pokojni);
+        sendRequest(Operation.DELETE_ZAPOSLENI, pokojni);
     }
     
     public Zaposleni updateZaposleni(Zaposleni zaposleni)throws Exception{
@@ -81,9 +81,7 @@ public class ClientControler {
     }
     
     
-    public ArrayList<TipStola> getAllTipStola() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 
     private synchronized Object sendRequest(Operation operation, Object data) throws Exception {
         //ukoliko nesto nije kako treba trenutno vraca null
@@ -146,13 +144,22 @@ public class ClientControler {
         return null;
 
     }
-
-    public TipStola noviTipStola(TipStola novi) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+    public ArrayList<TipStola> getAllTipStola() throws Exception{
+        ArrayList<TipStola> z = (ArrayList<TipStola>) sendRequest(Operation.GET_ALL_TIPSTOLA, null);
+        return z;
     }
 
-    public void updateTipStola(TipStola ts) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public TipStola noviTipStola(TipStola novi) throws Exception {
+       return (TipStola)sendRequest(Operation.NEW_TIPSTOLA, novi);
+    }
+
+    public void updateTipStola(TipStola ts) throws Exception{
+        sendRequest(Operation.UPDATE_TIPSTOLA, ts);
+    }
+
+    public TipStola deleteTipStola(TipStola pokojni) throws Exception{
+        return (TipStola)sendRequest(Operation.DELETE_TIPSTOLA, pokojni);
     }
 
     

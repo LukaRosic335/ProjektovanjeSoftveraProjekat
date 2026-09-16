@@ -6,7 +6,6 @@ package front.tableModels;
 
 import controler.ClientControler;
 import domain.TipStola;
-import domain.Zaposleni;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
@@ -14,7 +13,7 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author jevrozim
  */
-public class TipStolaTableModel extends AbstractTableModel{
+public class TipStolaTableModel extends AbstractTableModel{  //NAVODNO JE LISTA NULL
     private ArrayList<TipStola> lista = new ArrayList(); 
     private final String[] kolone = {"Id", "brMesta"};
 

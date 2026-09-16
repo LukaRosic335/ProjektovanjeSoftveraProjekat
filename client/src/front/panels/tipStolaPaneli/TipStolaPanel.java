@@ -19,16 +19,17 @@ public class TipStolaPanel extends javax.swing.JPanel {
     private PanelFrame frame;
     private TipStolaTableModel model;
     public TipStolaPanel() {
-        try {
-            model = new TipStolaTableModel();
+        
+    }
+    public void setFrame(PanelFrame frame){
+        this.frame=frame;
+        try{
+           model = new TipStolaTableModel();
             initComponents();
             table.setModel(model);
         } catch (Exception e) {
             frame.getMessagetxt().setText(e.getMessage());
         }
-    }
-    public void setFrame(PanelFrame frame){
-        this.frame=frame;
     }
 
     /**

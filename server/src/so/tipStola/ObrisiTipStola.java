@@ -23,7 +23,9 @@ public class ObrisiTipStola extends ApstraktneSistemskeOperacije<TipStola>{
 
     @Override
     protected void validate(OpstiDomenskiObjekat odo) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(!(odo instanceof TipStola) ){
+            throw new Exception("Nije prosledjen Tip Stola");
+        }
     }
     
 }
