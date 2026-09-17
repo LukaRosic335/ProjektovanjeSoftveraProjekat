@@ -23,8 +23,12 @@ public class StavkaRacunaTableModel extends AbstractTableModel {
 
     public StavkaRacunaTableModel(Racun r) throws Exception {
         racun = r;
-        lista = ClientControler.getInstance().getRacun(racun).get(0).getStavkeRacuna();
-        System.out.println("NESTO NESTO JAKO BITNO TAKODJE"+ClientControler.getInstance().getRacun(racun).get(0).getStavkeRacuna());
+        ArrayList<Racun> s=ClientControler.getInstance().getRacun(racun);
+        if(s.size()==0){
+            System.out.println("return?????????????????????????????????/");
+            return;
+        }
+        lista = s.get(0).getStavkeRacuna();
         lista.sort(Comparator.comparingInt(StavkaRacuna::getRb));
         System.out.println("BROJ ELEMENATA U LISTI STAVKARACUIATEBALEMODEL" + lista.size());
         fireTableDataChanged();

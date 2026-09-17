@@ -7,6 +7,7 @@ package so.Racun;
 import dbb.DBB;
 import domain.OpstiDomenskiObjekat;
 import domain.Racun;
+import java.util.ArrayList;
 import so.ApstraktneSistemskeOperacije;
 
 /**
@@ -17,7 +18,17 @@ public class PretraziRacun extends ApstraktneSistemskeOperacije<Racun>{
 
     @Override
     protected Racun execute(OpstiDomenskiObjekat odo) throws Exception {
+        System.out.println("1");
+        ArrayList<OpstiDomenskiObjekat>asd=DBB.getInstance().select(odo);
+        System.out.println("2");
+        if(asd.size()==0){
+            System.out.println("2.5");
+
+            return null;
+        }
+        System.out.println("3");
         Racun racun=(Racun)DBB.getInstance().select(odo).get(0);
+        System.out.println("4");
         return racun;
     }
 

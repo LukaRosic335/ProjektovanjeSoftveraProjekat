@@ -34,14 +34,14 @@ public class PromeniRacun extends ApstraktneSistemskeOperacije<Racun> {
         System.out.println(stari.size() + "VEOMA STARI");
         System.out.println(novi.size() + "VEOMA NOVI");
 
-        if (novi.size() == stari.size()) {
+        if (novi.size() == stari.size()) {//updatre
             for (StavkaRacuna s : novi) {
                 s.setCena(s.getKolicina() * s.getRoba().getCena());
 
                 DBB.getInstance().update(s);
             }
         }
-        if (novi.size() < stari.size()) {
+        if (novi.size() < stari.size()) {//brisanje
             for (StavkaRacuna s : stari) {
                 if (!novi.contains(s)) {
                     DBB.getInstance().delete(s);
@@ -53,7 +53,7 @@ public class PromeniRacun extends ApstraktneSistemskeOperacije<Racun> {
                 }
             }
         }
-        if (novi.size() > stari.size()) {
+        if (novi.size() > stari.size()) { //insert
             novi.get(stari.size()).setCena(novi.get(stari.size()).getKolicina()*novi.get(stari.size()).getRoba().getCena());
             DBB.getInstance().insert(novi.get(stari.size()));
         }

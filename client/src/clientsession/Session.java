@@ -12,12 +12,13 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import transfer.Request;
 import transfer.Response;
+import transfer.util.ResponseStatus;
 
 /**
  *
  * @author jevrozim
  */
-public class Session {
+public class Session extends Thread {
 
     private Socket socket;
     private static Session instance;
@@ -41,7 +42,6 @@ public class Session {
         return socket;
     }
 
-
     public ObjectOutputStream getOut() {
         return out;
     }
@@ -64,30 +64,41 @@ public class Session {
         }
         return instance;
     }
-//      nekada u buducnosti cu se zezam s ovim trenutno radi sve dokle god radi konekcija s obe strane
-//    @Override
-//    public void run() {
-//        while(!socket.isClosed()){
-//            //slusaj server
-//        }
-//    }
 
-    
-    
-    public void send(Request request) throws IOException{
-        //posalje serveru request
-        if(socket.isClosed()){
-         socket=new Socket("localhost", 7259);
+    @Override
+    public void run() {
+        while (!socket.isClosed()) {
+            try {
+                //slusaj server
+                Response res = recieve();
+                if (res.getStatus().equals(ResponseStatus.ConnectionClose)) {
+                    //NESTO NESTO UMRE KONEKCIJA ZATVORIM SOKET I OBAVESTIM KONTROLERA DA JE UMRLA KONEKCJA, 
+                } else {
+                    
+                }
+            } catch (IOException ex) {
+                System.getLogger(Session.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            } catch (ClassNotFoundException ex) {
+                System.getLogger(Session.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+
         }
-        System.out.println("Klijent salje "+request.getData()+" "+request.getOperation());
-            out.reset();
-            out.writeObject(request);
-            out.flush();
     }
-    
-    public Response recieve() throws IOException, ClassNotFoundException{
-        Response res=(Response)in.readObject();
-        System.out.println("Klijent primio "+res.getData()+" "+res.getStatus());
+
+    public void send(Request request) throws IOException {
+        //posalje serveru request
+        if (socket.isClosed()) {
+            socket = new Socket("localhost", 7259);
+        }
+        System.out.println("Klijent salje " + request.getData() + " " + request.getOperation());
+        out.reset();
+        out.writeObject(request);
+        out.flush();
+    }
+
+    public Response recieve() throws IOException, ClassNotFoundException {
+        Response res = (Response) in.readObject();
+        System.out.println("Klijent primio " + res.getData() + " " + res.getStatus());
         return res;
     }
 
