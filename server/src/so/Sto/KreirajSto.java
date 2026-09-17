@@ -8,6 +8,8 @@ import domain.OpstiDomenskiObjekat;
 import domain.Sto;
 import so.ApstraktneSistemskeOperacije;
 import dbb.DBB;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -17,17 +19,21 @@ public class KreirajSto extends ApstraktneSistemskeOperacije<Sto> {
 
     @Override
     protected Sto execute(OpstiDomenskiObjekat odo) throws Exception {
-        long id=DBB.getInstance().insert(odo);
-        Sto sto=(Sto)odo;
-        sto.setIdSto(id);
+        PreparedStatement ps = DBB.getInstance().insert(odo);
+        ResultSet rs = ps.getGeneratedKeys();
+        rs.next();
+        long ret = rs.getLong(1);
+        rs.close();
+        Sto sto = (Sto) odo;
+        sto.setIdSto(ret);
         return sto;
     }
 
     @Override
     protected void validate(OpstiDomenskiObjekat odo) throws Exception {
-        if(!(odo instanceof Sto)){
+        if (!(odo instanceof Sto)) {
             throw new Exception("Nije prosledjen Sto");
         }
     }
-    
+
 }

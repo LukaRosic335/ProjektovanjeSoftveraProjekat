@@ -41,7 +41,6 @@ public class RacunPanel extends javax.swing.JPanel {
             this.setVisible(true);
         } catch (Exception ex) {
             frame.getMessagetxt().setText(ex.getMessage());
-            deselectbtn.setEnabled(false);
             dodajStavkubtn.setEnabled(false);
             obrisiRacunbtn.setEnabled(false);
             prikaziStavkebtn.setEnabled(false);
@@ -68,14 +67,9 @@ public class RacunPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         racuntab = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        stavkaracunatab = new javax.swing.JTable();
         prikaziStavkebtn = new javax.swing.JButton();
         dodajStavkubtn = new javax.swing.JButton();
         obrisiRacunbtn = new javax.swing.JButton();
-        deselectbtn = new javax.swing.JButton();
-        izmenistavkubtn = new javax.swing.JButton();
-        obrisistavkubtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
@@ -102,19 +96,6 @@ public class RacunPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(racuntab);
 
-        stavkaracunatab.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(stavkaracunatab);
-
         prikaziStavkebtn.setText("prikazi stavke");
         prikaziStavkebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,27 +114,6 @@ public class RacunPanel extends javax.swing.JPanel {
         obrisiRacunbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 obrisiRacunbtnActionPerformed(evt);
-            }
-        });
-
-        deselectbtn.setText("deselektuj racun");
-        deselectbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deselectbtnActionPerformed(evt);
-            }
-        });
-
-        izmenistavkubtn.setText("izmeni stavku");
-        izmenistavkubtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                izmenistavkubtnActionPerformed(evt);
-            }
-        });
-
-        obrisistavkubtn.setText("obrisi stavku");
-        obrisistavkubtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                obrisistavkubtnActionPerformed(evt);
             }
         });
 
@@ -182,7 +142,8 @@ public class RacunPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -197,28 +158,17 @@ public class RacunPanel extends javax.swing.JPanel {
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabel5)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(izmenistavkubtn, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(obrisistavkubtn, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(prikaziStavkebtn, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(dodajStavkubtn, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(obrisiRacunbtn, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(deselectbtn, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))))
+                                .addComponent(jButton2)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(prikaziStavkebtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dodajStavkubtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(obrisiRacunbtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(79, 79, 79)
@@ -232,46 +182,37 @@ public class RacunPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(prikaziStavkebtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(dodajStavkubtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(obrisiRacunbtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(deselectbtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
-                .addGap(100, 100, 100)
+                .addContainerGap(212, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(izmenistavkubtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(obrisistavkubtn))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(177, Short.MAX_VALUE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addComponent(prikaziStavkebtn)
+                .addGap(18, 18, 18)
+                .addComponent(dodajStavkubtn)
+                .addGap(18, 18, 18)
+                .addComponent(obrisiRacunbtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -282,18 +223,10 @@ public class RacunPanel extends javax.swing.JPanel {
             frame.getMessagetxt().setText("Mora biti selektovan neki red");
             return;
         }
-        try {
-            modelStavka = new StavkaRacunaTableModel(modelRacun.getRacun(row));
-            stavkaracunatab.setModel(modelStavka);
-            this.revalidate();
-            this.repaint();
-        } catch (Exception ex) {
-            frame.getMessagetxt().setText(ex.getMessage());
-            deselectbtn.setEnabled(false);
-            dodajStavkubtn.setEnabled(false);
-            obrisiRacunbtn.setEnabled(false);
-            prikaziStavkebtn.setEnabled(false);
-        }
+        StavkeRacunaPanel o=new StavkeRacunaPanel(modelRacun.getRacun(row));
+        PanelFrame p=new PanelFrame(o);
+        o.setFrame(p);
+        frame.dispose();
 
     }//GEN-LAST:event_prikaziStavkebtnActionPerformed
 
@@ -309,60 +242,6 @@ public class RacunPanel extends javax.swing.JPanel {
         p.setFrame(frame);
         this.frame.dispose();
     }//GEN-LAST:event_dodajStavkubtnActionPerformed
-
-    private void deselectbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deselectbtnActionPerformed
-        // TODO add your handling code here:
-        try {
-            StavkaRacunaTableModel model2 = new StavkaRacunaTableModel(new Racun(0, 0, null, 0, 0, null, null, new ArrayList<>()));
-            stavkaracunatab.setModel(model2);
-            this.repaint();
-            this.revalidate();
-        } catch (Exception e) {
-            frame.getMessagetxt().setText(e.getMessage());
-        }
-
-    }//GEN-LAST:event_deselectbtnActionPerformed
-
-    private void izmenistavkubtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_izmenistavkubtnActionPerformed
-        // TODO add your handling code here:
-        int row = stavkaracunatab.getSelectedRow();
-        if (row == -1) {
-            frame.getMessagetxt().setText("Mora biti selektovana neka stavka racuna");
-            return;
-        }
-        UpdateStavkaPanel p = new UpdateStavkaPanel(modelStavka.getStavkaRacuna(row));
-        PanelFrame f = new PanelFrame(p);
-        p.setFrame(f);
-        frame.dispose();
-    }//GEN-LAST:event_izmenistavkubtnActionPerformed
-
-    private void obrisistavkubtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obrisistavkubtnActionPerformed
-        // TODO add your handling code here:
-        int row = stavkaracunatab.getSelectedRow();
-        if (row == -1) {
-            frame.getMessagetxt().setText("Mora nesto biti selektovano u tabeli stavke racuna");
-            return;
-        }
-        StavkaRacuna stavka = modelStavka.getStavkaRacuna(row);
-        int rowR = racuntab.getSelectedRow();
-        if (rowR == -1) {
-            frame.getMessagetxt().setText("Mora nesto biti selektovano u tabeli racuna");
-            return;
-        }
-        Racun racun = modelRacun.getRacun(rowR);
-        racun.getStavkeRacuna().remove(stavka);
-        Racun info = ClientControler.getInstance().updateRacun(racun);
-        frame.getMessagetxt().setText("uspesno uklonjena stavka racuna");
-        try {
-            modelStavka = new StavkaRacunaTableModel(info);
-            stavkaracunatab.setModel(modelRacun);
-        } catch (Exception e) {
-            frame.getMessagetxt().setText(e.getMessage());
-
-        }
-        this.repaint();
-        this.revalidate();
-    }//GEN-LAST:event_obrisistavkubtnActionPerformed
 
     private void obrisiRacunbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obrisiRacunbtnActionPerformed
         // TODO add your handling code here:
@@ -409,9 +288,7 @@ public class RacunPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton deselectbtn;
     private javax.swing.JButton dodajStavkubtn;
-    private javax.swing.JButton izmenistavkubtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<Sto> jComboBox1;
@@ -421,15 +298,12 @@ public class RacunPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JButton obrisiRacunbtn;
-    private javax.swing.JButton obrisistavkubtn;
     private javax.swing.JButton prikaziStavkebtn;
     private javax.swing.JTable racuntab;
-    private javax.swing.JTable stavkaracunatab;
     // End of variables declaration//GEN-END:variables
 }

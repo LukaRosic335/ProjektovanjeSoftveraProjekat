@@ -18,12 +18,15 @@ import javax.swing.table.AbstractTableModel;
 public class StavkaRacunaTableModel extends AbstractTableModel {
 
     private ArrayList<StavkaRacuna> lista = new ArrayList(); //KAO LISTA JE NULL NE ZNAM ZASTO
-    private final String[] kolone = {"rb", "id Racuna", "roba","kolicina","cena"};//nesto nalik ovom
+    private final String[] kolone = {"rb", "id Racuna", "roba", "kolicina", "cena"};//nesto nalik ovom
     private Racun racun;
+
     public StavkaRacunaTableModel(Racun r) throws Exception {
-        racun=r;
-        lista =ClientControler.getInstance().getRacun(racun).getStavkeRacuna();
+        racun = r;
+        lista = ClientControler.getInstance().getRacun(racun).get(0).getStavkeRacuna();
+        System.out.println("NESTO NESTO JAKO BITNO TAKODJE"+ClientControler.getInstance().getRacun(racun).get(0).getStavkeRacuna());
         lista.sort(Comparator.comparingInt(StavkaRacuna::getRb));
+        System.out.println("BROJ ELEMENATA U LISTI STAVKARACUIATEBALEMODEL" + lista.size());
         fireTableDataChanged();
     }
 
@@ -64,5 +67,5 @@ public class StavkaRacunaTableModel extends AbstractTableModel {
                 throw new AssertionError();
         }
     }
-    
+
 }

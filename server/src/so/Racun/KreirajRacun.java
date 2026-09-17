@@ -8,36 +8,41 @@ import dbb.DBB;
 import domain.OpstiDomenskiObjekat;
 import domain.Racun;
 import domain.StavkaRacuna;
+import java.sql.ResultSet;
 import so.ApstraktneSistemskeOperacije;
+import java.sql.PreparedStatement;
 
 /**
  *
  * @author jevrozim
  */
-public class KreirajRacun extends ApstraktneSistemskeOperacije<Racun>{
+public class KreirajRacun extends ApstraktneSistemskeOperacije<Racun> {
 
     @Override
     protected Racun execute(OpstiDomenskiObjekat odo) throws Exception {
-        long idRacun=DBB.getInstance().insert(odo);
-        Racun racun=(Racun)odo;
-        racun.setIdRacun(idRacun);
-        for(StavkaRacuna stavka:racun.getStavkeRacuna()){
+        PreparedStatement ps = DBB.getInstance().insert(odo);
+        ResultSet rs = ps.getGeneratedKeys();
+        rs.next();
+        long ret = rs.getLong(1);
+        rs.close();
+        Racun racun = (Racun) odo;
+        racun.setIdRacun(ret);
+        for (StavkaRacuna stavka : racun.getStavkeRacuna()) {
             DBB.getInstance().insert(stavka);
         }
+        racun.setPocetniIznos(ret);
         return racun;
     }
 
     @Override
     protected void validate(OpstiDomenskiObjekat odo) throws Exception {
-        if(!(odo instanceof Racun)){
+        if (!(odo instanceof Racun)) {
             throw new Exception("Nije prosledjen racun");
         }
-        
+
     }
-    
+
 }
-
-
 
 //
 //Racun racun=(Racun)odo;

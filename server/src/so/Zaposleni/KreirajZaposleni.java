@@ -9,6 +9,8 @@ import domain.OpstiDomenskiObjekat;
 import domain.Zaposleni;
 import java.util.ArrayList;
 import so.ApstraktneSistemskeOperacije;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -18,9 +20,13 @@ public class KreirajZaposleni extends ApstraktneSistemskeOperacije<Zaposleni> {
 
     @Override
     protected Zaposleni execute(OpstiDomenskiObjekat odo) throws Exception {
-        long id = DBB.getInstance().insert(odo);
-        Zaposleni zaposleni=(Zaposleni)odo;
-        zaposleni.setIdZaposleni(id);
+        PreparedStatement ps = DBB.getInstance().insert(odo);
+        ResultSet rs = ps.getGeneratedKeys();
+        rs.next();
+        long ret = rs.getLong(1);
+        rs.close();
+        Zaposleni zaposleni = (Zaposleni) odo;
+        zaposleni.setIdZaposleni(ret);
         return zaposleni;
     }
 

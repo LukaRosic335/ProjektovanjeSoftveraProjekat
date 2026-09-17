@@ -59,6 +59,7 @@ public class ClientHandler extends Thread {
 
         } catch (IOException ex) {
             System.out.println("IO izuzetak klijent handler " + ex.getMessage());
+            ex.printStackTrace();
         } catch (ClassNotFoundException e) {
             System.out.println("Klasa nije nadjena klijent handler readObject " + e.getMessage());
         }
@@ -131,6 +132,8 @@ public class ClientHandler extends Thread {
                     res.setData(ServerControler.getInstance().getAllRacun());
                     return res;
                 case UPDATE_RACUN:
+                    Racun r=(Racun)req.getData();
+                    System.out.println(r.getStavkeRacuna().size());
                     res.setData(ServerControler.getInstance().updateRacun((Racun)req.getData()));
                     return res;
                 case NEW_RACUN:

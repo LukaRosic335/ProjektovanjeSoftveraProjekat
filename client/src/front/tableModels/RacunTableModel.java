@@ -52,8 +52,10 @@ public class RacunTableModel extends AbstractTableModel {
             case 1:
                 return lista.get(i).getPocetniIznos();
             case 2:
-                return lista.get(i).getPopust();
+                lista.get(i).getSat();
             case 3:
+                return lista.get(i).getPopust();
+            case 4:
                 return lista.get(i).getKrajnjiIznos();
             default:
                 throw new AssertionError();

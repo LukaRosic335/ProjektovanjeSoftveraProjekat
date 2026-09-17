@@ -30,6 +30,10 @@ public class StavkaRacuna extends OpstiDomenskiObjekat{
         this.roba = roba;
     }
     
+    public StavkaRacuna(Racun racun){
+        this.racun=racun;
+    }
+    
 
     public Racun getRacun() {
         return racun;
@@ -109,7 +113,7 @@ public class StavkaRacuna extends OpstiDomenskiObjekat{
 
     @Override
     public String getWhere() {
-        return "idRacun="+racun.getIdRacun()+" AND rb="+rb;
+        return "StavkaRacuna.idRacun="+racun.getIdRacun()+" AND rb="+rb;
     }
 
     @Override
@@ -125,10 +129,10 @@ public class StavkaRacuna extends OpstiDomenskiObjekat{
             query+=" AND kolicina="+kolicina;
         }
         if(racun!=null){
-            query+=" AND idRacun="+racun.getIdRacun();
+            query+=" AND StavkaRacuna.idRacun="+racun.getIdRacun();
         }
         if(roba!=null){
-            query+=" AND idRoba="+roba.getIdRoba();
+            query+=" AND StavkaRacuna.idRoba="+roba.getIdRoba();
         }
         return query;
     }

@@ -8,26 +8,32 @@ import dbb.DBB;
 import domain.OpstiDomenskiObjekat;
 import domain.Smena;
 import so.ApstraktneSistemskeOperacije;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
  * @author jevrozim
  */
-public class KreirajSmena extends ApstraktneSistemskeOperacije<Smena>{
+public class KreirajSmena extends ApstraktneSistemskeOperacije<Smena> {
 
     @Override
     protected Smena execute(OpstiDomenskiObjekat odo) throws Exception {
-        long id=DBB.getInstance().insert(odo);
-        Smena smena=(Smena)odo;
-        smena.setIdSmena(id);
+        PreparedStatement ps = DBB.getInstance().insert(odo);
+        ResultSet rs = ps.getGeneratedKeys();
+        rs.next();
+        long ret = rs.getLong(1);
+        rs.close();
+        Smena smena = (Smena) odo;
+        smena.setIdSmena(ret);
         return smena;
     }
 
     @Override
     protected void validate(OpstiDomenskiObjekat odo) throws Exception {
-        if(!(odo instanceof Smena)){
+        if (!(odo instanceof Smena)) {
             throw new Exception("Nije prosledjena Smena");
         }
     }
-    
+
 }

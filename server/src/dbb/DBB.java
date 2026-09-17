@@ -55,16 +55,12 @@ public class DBB {
     }
 
     //Trenutno insert vraca PS kao tip podatka jos uvek nisam siguran da li mi se to svidja
-    public long insert(OpstiDomenskiObjekat odo) throws SQLException {
+    public PreparedStatement insert(OpstiDomenskiObjekat odo) throws SQLException {
         String query = "INSERT INTO " + odo.getTableName() + " (" + odo.getColumnNames() + ") VALUES " + odo.getInsertValues() + ";";
         System.out.println(query);
         PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         ps.executeUpdate();
-        ResultSet rs=ps.getGeneratedKeys();
-        rs.next();
-        long ret=rs.getLong(1);
-        rs.close();
-        return ret;
+        return ps;
     }
 
     public void update(OpstiDomenskiObjekat odo) throws SQLException {

@@ -4,7 +4,6 @@
  */
 package so.Roba;
 
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import dbb.DBB;
@@ -16,21 +15,25 @@ import so.ApstraktneSistemskeOperacije;
  *
  * @author jevrozim
  */
-public class KreirajRoba extends ApstraktneSistemskeOperacije<Roba>{
+public class KreirajRoba extends ApstraktneSistemskeOperacije<Roba> {
 
     @Override
     protected Roba execute(OpstiDomenskiObjekat odo) throws Exception {
-        long id=DBB.getInstance().insert(odo);
-        Roba roba=(Roba)odo;
-        roba.setIdRoba(id);
+        PreparedStatement ps = DBB.getInstance().insert(odo);
+        ResultSet rs = ps.getGeneratedKeys();
+        rs.next();
+        long ret = rs.getLong(1);
+        rs.close();
+        Roba roba = (Roba) odo;
+        roba.setIdRoba(ret);
         return roba;
     }
 
     @Override
     protected void validate(OpstiDomenskiObjekat odo) throws Exception {
-        if(!(odo instanceof Roba)){
+        if (!(odo instanceof Roba)) {
             throw new Exception("Nije prosledjena Roba");
         }
     }
-    
+
 }

@@ -70,7 +70,7 @@ public class Smena extends OpstiDomenskiObjekat {
 
     @Override
     public String getInsertValues() {
-        return "(" + pocetak + ", " + kraj + ")";
+        return "('" + pocetak.withNano(0) + "', '" + kraj.withNano(0) + "')";
     }
 
     @Override
@@ -80,7 +80,7 @@ public class Smena extends OpstiDomenskiObjekat {
 
     @Override
     public String getUpdateValues() {
-        return "pocetak = "+pocetak+" kraj = "+kraj;
+        return "pocetak = '"+pocetak.withNano(0)+"', kraj = '"+kraj.withNano(0)+"'";
     }
 
     @Override
@@ -95,10 +95,10 @@ public class Smena extends OpstiDomenskiObjekat {
             query+=" AND idSmena="+idSmena;
         }
         if(pocetak!=null){
-            query+=" AND pocetak="+pocetak;
+            query+=" AND pocetak='"+pocetak.withNano(0)+"'";
         }
         if(kraj!=null){
-            query+=" And kraj="+kraj;
+            query+=" And kraj='"+kraj.withNano(0)+"'";
         }
         return query;
     }

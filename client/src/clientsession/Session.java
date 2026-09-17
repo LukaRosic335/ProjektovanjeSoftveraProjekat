@@ -80,6 +80,7 @@ public class Session {
          socket=new Socket("localhost", 7259);
         }
         System.out.println("Klijent salje "+request.getData()+" "+request.getOperation());
+            out.reset();
             out.writeObject(request);
             out.flush();
     }

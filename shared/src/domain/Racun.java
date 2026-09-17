@@ -131,7 +131,7 @@ public class Racun extends OpstiDomenskiObjekat{
 
     @Override
     public String getInsertValues() {
-        return "("+pocetniIznos+", "+sat+", "+popust+", "+krajnjiIznos+", "+zaposleni.getIdZaposleni()+", "+sto.getIdSto()+")";
+        return "("+pocetniIznos+", '"+sat.withNano(0)+"', "+popust+", "+krajnjiIznos+", "+zaposleni.getIdZaposleni()+", "+sto.getIdSto()+")";
     }
 
     @Override
@@ -141,7 +141,7 @@ public class Racun extends OpstiDomenskiObjekat{
 
     @Override
     public String getUpdateValues() {
-        return" pocetniIznos="+pocetniIznos+", sat="+sat+", popust="+popust+", krajnjiIznos="+krajnjiIznos+", idZaposleni="+zaposleni.getIdZaposleni()+", idSto="+sto.getIdSto();
+        return" pocetniIznos="+pocetniIznos+", sat='"+sat.withNano(0)+"', popust="+popust+", krajnjiIznos="+krajnjiIznos+", idZaposleni="+zaposleni.getIdZaposleni()+", idSto="+sto.getIdSto();
     }
 
     @Override
@@ -156,22 +156,22 @@ public class Racun extends OpstiDomenskiObjekat{
             query+=" AND idRacun="+idRacun;
         }
         if(pocetniIznos!=0){
-            query+=" AND pocetniIznos="+pocetniIznos;
+            query+=" AND Racun.pocetniIznos="+pocetniIznos;
         }
         if(sat!=null){
-            query+=" AND sat="+sat;
+            query+=" AND Racun.sat='"+sat.withNano(0)+"'";
         }
         if(popust!=0){
-            query+=" AND popust="+popust;
+            query+=" AND Racun.popust="+popust;
         }
         if(krajnjiIznos!=0){
-            query+=" AND krajnjiIznos="+krajnjiIznos;
+            query+=" AND Racun.krajnjiIznos="+krajnjiIznos;
         }
         if(zaposleni!=null){
-            query+=" AND idZaposleni="+zaposleni.getIdZaposleni();
+            query+=" AND Racun.idZaposleni="+zaposleni.getIdZaposleni();
         }
         if(sto!=null){
-            query+=" AND idSto="+sto.getIdSto();
+            query+=" AND Racun.idSto="+sto.getIdSto();
         }
         return query;
     }

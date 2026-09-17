@@ -26,7 +26,7 @@ public class VratiListuSviRacun extends ApstraktneSistemskeOperacije<ArrayList<R
         }
         //zabodi stavke racuna
         for (Racun r : listaRacuna) {
-            ArrayList<OpstiDomenskiObjekat> problem2 = DBB.getInstance().select(r);
+            ArrayList<OpstiDomenskiObjekat> problem2 = DBB.getInstance().select(new StavkaRacuna(r, 0, 0, 0, null));
             ArrayList<StavkaRacuna> stavke=new ArrayList<>();
             for(OpstiDomenskiObjekat o : problem2){
                 stavke.add((StavkaRacuna)o);

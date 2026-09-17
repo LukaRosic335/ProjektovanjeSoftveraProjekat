@@ -31,7 +31,7 @@ public class Login extends ApstraktneSistemskeOperacije<Zaposleni> {
             if(problem.isEmpty()){
                 throw new Exception("Ne postoji zaposleni s tim kredencijalima");
             }
-            Zaposleni zaposleni=(Zaposleni) odo;
+            Zaposleni zaposleni=(Zaposleni)problem.get(0);
             return zaposleni;
         } catch (SQLException e) {
             throw new SQLException("greska pri selektovanju u dbb select "+e.getMessage());

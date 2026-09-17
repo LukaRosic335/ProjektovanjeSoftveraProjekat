@@ -57,6 +57,7 @@ public class ClientControler {
     public Zaposleni login(Zaposleni z) throws Exception {
         //ovo pozivam iz forme za login
         Zaposleni za = (Zaposleni) sendRequest(Operation.LOGIN, z);
+        Session.getInstace().setUlogovani(za);
         return za;
     }
 
@@ -215,24 +216,25 @@ public class ClientControler {
 
     }
 
-    public ArrayList<Racun> getAllRacun() throws Exception{
-        ArrayList<Racun>r=(ArrayList<Racun>)sendRequest(Operation.GET_ALL_RACUN, new Racun());
+    public ArrayList<Racun> getAllRacun() throws Exception {
+        ArrayList<Racun> r = (ArrayList<Racun>) sendRequest(Operation.GET_ALL_RACUN, new Racun());
         return r;
     }
 
-    public Racun getRacun(Racun racun) throws Exception {
-        return (Racun) sendRequest(Operation.GET_RACUN, racun);
+    public ArrayList<Racun> getRacun(Racun racun) throws Exception {
+        return (ArrayList<Racun>) sendRequest(Operation.GET_RACUN, racun);
     }
 
-    public Racun updateRacun(Racun racun)throws Exception {
+    public Racun updateRacun(Racun racun) throws Exception {
+        System.out.println(racun.getStavkeRacuna().size());
         return (Racun) sendRequest(Operation.UPDATE_RACUN, racun);
     }
 
-    public Racun deleteRacun(Racun r) throws Exception{
+    public Racun deleteRacun(Racun r) throws Exception {
         return (Racun) sendRequest(Operation.DELETE_RACUN, r);
     }
 
-    public Racun noviRacun(Racun racun) throws Exception{
+    public Racun noviRacun(Racun racun) throws Exception {
         return (Racun) sendRequest(Operation.NEW_RACUN, racun);
     }
 

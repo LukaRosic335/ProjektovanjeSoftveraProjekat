@@ -7,6 +7,7 @@ package so.Racun;
 import dbb.DBB;
 import domain.OpstiDomenskiObjekat;
 import domain.Racun;
+import domain.StavkaRacuna;
 import java.util.ArrayList;
 import so.ApstraktneSistemskeOperacije;
 
@@ -19,12 +20,20 @@ public class VratiListuRacun extends ApstraktneSistemskeOperacije<ArrayList<Racu
     @Override
     protected ArrayList<Racun> execute(OpstiDomenskiObjekat odo) throws Exception {
 //        nesto nesto uzmi racun i baci jedan select i samo vrati tu listu
-        ArrayList<OpstiDomenskiObjekat>list=DBB.getInstance().select(odo);
-        ArrayList<Racun>lista=new ArrayList<>();
-        for(OpstiDomenskiObjekat o:list){
-            lista.add((Racun)o);
+        ArrayList<OpstiDomenskiObjekat> list = DBB.getInstance().select(odo);
+        ArrayList<Racun> lista = new ArrayList<>();
+        for (OpstiDomenskiObjekat o : list) {
+            lista.add((Racun) o);
         }
-    return lista;
+        for (Racun r : lista) {
+            ArrayList<OpstiDomenskiObjekat> mrk = DBB.getInstance().select(new StavkaRacuna(r));
+            ArrayList<StavkaRacuna> stavke = new ArrayList<>();
+            for (OpstiDomenskiObjekat o:mrk ){
+                stavke.add((StavkaRacuna)o);
+            }
+            r.setStavkeRacuna(stavke);
+        }
+        return lista;
     }
 
     @Override
