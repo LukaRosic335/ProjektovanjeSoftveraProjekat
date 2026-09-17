@@ -129,7 +129,9 @@ public class StavkaRacuna extends OpstiDomenskiObjekat {
             query += " AND kolicina=" + kolicina;
         }
         if (racun != null) {
-            query += " AND StavkaRacuna.idRacun=" + racun.getIdRacun();
+            if (racun.getIdRacun() != 0) {
+                query += " AND StavkaRacuna.idRacun=" + racun.getIdRacun();
+            }
         }
         if (roba != null) {
             if (roba.getIdRoba() != 0) {
