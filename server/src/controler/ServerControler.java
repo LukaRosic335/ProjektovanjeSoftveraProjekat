@@ -6,6 +6,7 @@ package controler;
 
 import domain.*;
 import java.util.ArrayList;
+import javax.swing.SpringLayout;
 import so.Login.Login;
 import so.Racun.KreirajRacun;
 import so.Racun.ObrisiRacun;
@@ -203,7 +204,9 @@ public class ServerControler {
     }
 
     public Racun deleteRacun(Racun racun) throws Exception {
+        System.out.println("A");
         ObrisiRacun l = new ObrisiRacun();
+        System.out.println("B");
         return l.executeTamplate(racun);
     }
 

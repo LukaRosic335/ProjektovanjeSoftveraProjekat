@@ -141,6 +141,7 @@ public class ClientHandler extends Thread {
                     return res;
                 case DELETE_RACUN:
                     res.setData(ServerControler.getInstance().deleteRacun((Racun) req.getData()));
+                    System.out.println("C");
                     return res;
                 case GET_RACUN:
                     res.setData(ServerControler.getInstance().getRacun((Racun) req.getData()));

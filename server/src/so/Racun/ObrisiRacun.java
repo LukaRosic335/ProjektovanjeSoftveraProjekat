@@ -19,12 +19,16 @@ public class ObrisiRacun extends ApstraktneSistemskeOperacije<Racun>{
 
     @Override
     protected Racun execute(OpstiDomenskiObjekat odo) throws Exception {
-        
+        System.out.println("1");
         Racun racun=(Racun)odo;
         for(StavkaRacuna stavka:racun.getStavkeRacuna()){
+            System.out.println("2");
             DBB.getInstance().delete(stavka);
+            System.out.println("3");
         }
+        System.out.println("4");
         DBB.getInstance().delete(odo);
+        System.out.println("5");
         return racun;
     }
     @Override
@@ -32,10 +36,7 @@ public class ObrisiRacun extends ApstraktneSistemskeOperacije<Racun>{
         if(!(odo instanceof Racun)){
             throw new Exception("Nije prosledjen racun");
         }
-        ArrayList<OpstiDomenskiObjekat> ra= DBB.getInstance().select(odo);
-        if(ra.size()==0){
-            throw new Exception("Ne postoji takav racun");
-        }
+
     }
     
 }
