@@ -37,7 +37,13 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="tipstolabtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="stobtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="robabtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="racunbtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="smenabtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -54,7 +60,10 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="zaposlenibtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tipstolabtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="robabtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="racunbtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="stobtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="smenabtn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="122" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -114,12 +123,36 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tipstolabtnActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="robabtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Roba"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="robabtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="racunbtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Racun"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="racunbtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="stobtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Sto"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stobtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="smenabtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Smena"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="smenabtnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

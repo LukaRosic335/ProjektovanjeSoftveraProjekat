@@ -4,12 +4,26 @@
  */
 package controler;
 
-import domain.Racun;
-import domain.TipStola;
-import domain.Zaposleni;
+import domain.*;
 import java.util.ArrayList;
 import so.Login.Login;
+import so.Racun.KreirajRacun;
+import so.Racun.ObrisiRacun;
+import so.Racun.PromeniRacun;
 import so.Racun.VratiListuRacun;
+import so.Racun.VratiListuSviRacun;
+import so.Roba.KreirajRoba;
+import so.Roba.ObrisiRoba;
+import so.Roba.PromeniRoba;
+import so.Roba.VratiListuSviRoba;
+import so.Smena.KreirajSmena;
+import so.Smena.ObrisiSmena;
+import so.Smena.PromeniSmena;
+import so.Smena.VratiListuSviSmena;
+import so.Sto.KreirajSto;
+import so.Sto.ObrisiSto;
+import so.Sto.PromeniSto;
+import so.Sto.VratiListuSviSto;
 import so.Zaposleni.ObrisiZaposleni;
 import so.Zaposleni.VratiListuSviZaposleni;
 import so.Zaposleni.KreirajZaposleni;
@@ -103,5 +117,92 @@ public class ServerControler {
         VratiListuRacun so=new VratiListuRacun();
         return so.executeTamplate(racun);
     }
+
+    public ArrayList<Racun> getAllRacun() throws Exception{
+        VratiListuSviRacun so=new VratiListuSviRacun();
+        ArrayList<Racun> svi=so.executeTamplate(new Racun());
+        return svi;
+    }
+
+    public Racun updateRacun(Racun r) throws Exception{
+        PromeniRacun so=new PromeniRacun();
+        return so.executeTamplate(r);
+    }
+
+    public Racun newRacun(Racun r)throws Exception {
+        KreirajRacun so=new KreirajRacun();
+        return so.executeTamplate(r);
+    }
+
+    public ArrayList<Roba> getAllRoba() throws Exception{
+        VratiListuSviRoba so=new VratiListuSviRoba();
+        return so.executeTamplate(new Roba());
+    }
+
+    public Roba updateRoba(Roba r)throws Exception {
+        PromeniRoba spo=new PromeniRoba();
+        return spo.executeTamplate(r);
+    }
+
+    public Roba deleteRoba(Roba r)throws Exception {
+        ObrisiRoba so=new ObrisiRoba();
+        return so.executeTamplate(r);
+    }
+
+    public Roba newRoba(Roba r) throws Exception {
+        KreirajRoba s=new KreirajRoba();
+        return s.executeTamplate(r);
+    }
+
+    public ArrayList<Smena> getAllSmena() throws Exception{
+        VratiListuSviSmena so=new VratiListuSviSmena();
+        return so.executeTamplate(new Smena());
+    }
+
+    public Smena updateSmena(Smena s)throws Exception {
+        PromeniSmena so=new PromeniSmena();
+        return so.executeTamplate(s);
+    }
+
+    public Smena deleteSmena(Smena s)throws Exception {
+        ObrisiSmena so=new ObrisiSmena();
+        return so.executeTamplate(s);
+    }
+
+    public Smena newSmena(Smena s)throws Exception {
+        KreirajSmena so=new KreirajSmena();
+        return so.executeTamplate(s);
+    }
+
+    public ArrayList<Sto> getAllSto() throws Exception{
+        VratiListuSviSto so=new VratiListuSviSto();
+        return so.executeTamplate(new Sto());
+    }
+
+    public Sto updateSto(Sto s)throws Exception {
+        PromeniSto so=new PromeniSto();
+        return so.executeTamplate(s);
+    }
+
+    public Sto deleteSto(Sto s)throws Exception {
+        ObrisiSto so=new ObrisiSto();
+        return so.executeTamplate(s);
+    }
+
+    public Sto newSto(Sto s)throws Exception {
+        KreirajSto so=new KreirajSto();
+        return so.executeTamplate(s);
+    }
+
+    public ArrayList<Racun> getRacun(Racun r)throws Exception {
+        VratiListuRacun so=new VratiListuRacun();
+        return so.executeTamplate(r);
+    }
+
+    public Racun deleteRacun(Racun racun) throws Exception{
+        ObrisiRacun l=new ObrisiRacun();
+        return l.executeTamplate(racun);
+    }
+
     
 }

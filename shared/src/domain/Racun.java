@@ -180,5 +180,24 @@ public class Racun extends OpstiDomenskiObjekat{
     public String getJoinCondition() {
         return " JOIN Zaposleni ON Racun.idZaposleni=Zaposleni.idZaposlenog JOIN Sto ON Sto.idSto=Racun.idSto JOIN TipStola ON Sto.idTipStola=TipStola.idTipStola ";
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(idRacun);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Racun)){
+            return false;
+        }
+        Racun x=(Racun)obj;
+        if(idRacun==x.getIdRacun()){
+            return true;
+        }
+        return false;
+    }
+    
+    
     
 }

@@ -9,7 +9,10 @@ import clientsession.Session;
 import controler.ClientControler;
 import front.panels.zaposleniPaneli.ZaposleniPanel;
 import front.panels.PanelFrame;
+import front.panels.racunPaleni.RacunPanel;
 import front.panels.robaPaneli.RobaPanel;
+import front.panels.smenaPaneli.SmenaPanel;
+import front.panels.stoPaneli.StoPanel;
 import front.panels.tipStolaPaneli.TipStolaPanel;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
@@ -45,7 +48,10 @@ public class MainFrame extends javax.swing.JFrame {
         messagetxt = new javax.swing.JTextArea();
         zaposlenibtn = new javax.swing.JButton();
         tipstolabtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        robabtn = new javax.swing.JButton();
+        racunbtn = new javax.swing.JButton();
+        stobtn = new javax.swing.JButton();
+        smenabtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,10 +81,31 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Roba");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        robabtn.setText("Roba");
+        robabtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                robabtnActionPerformed(evt);
+            }
+        });
+
+        racunbtn.setText("Racun");
+        racunbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                racunbtnActionPerformed(evt);
+            }
+        });
+
+        stobtn.setText("Sto");
+        stobtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stobtnActionPerformed(evt);
+            }
+        });
+
+        smenabtn.setText("Smena");
+        smenabtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smenabtnActionPerformed(evt);
             }
         });
 
@@ -99,7 +126,13 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(tipstolabtn)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addComponent(stobtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(robabtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(racunbtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(smenabtn)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -112,7 +145,10 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(zaposlenibtn)
                     .addComponent(tipstolabtn)
-                    .addComponent(jButton1))
+                    .addComponent(robabtn)
+                    .addComponent(racunbtn)
+                    .addComponent(stobtn)
+                    .addComponent(smenabtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -143,34 +179,61 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void zaposlenibtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zaposlenibtnActionPerformed
         // TODO add your handling code here:
-        ZaposleniPanel p=new ZaposleniPanel();
-        PanelFrame f=new PanelFrame(p);
+        ZaposleniPanel p = new ZaposleniPanel();
+        PanelFrame f = new PanelFrame(p);
         p.setFrame(f);
         this.dispose();
     }//GEN-LAST:event_zaposlenibtnActionPerformed
 
     private void tipstolabtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipstolabtnActionPerformed
         // TODO add your handling code here:
-        TipStolaPanel p=new TipStolaPanel();
-        PanelFrame f=new PanelFrame(p);
+        TipStolaPanel p = new TipStolaPanel();
+        PanelFrame f = new PanelFrame(p);
         p.setFrame(f);
         this.dispose();
     }//GEN-LAST:event_tipstolabtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void robabtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_robabtnActionPerformed
         // TODO add your handling code here:
-        RobaPanel p=new RobaPanel();
+        RobaPanel p = new RobaPanel();
+        PanelFrame f = new PanelFrame(p);
+        p.setFrame(f);
+        this.dispose();
+    }//GEN-LAST:event_robabtnActionPerformed
+
+    private void stobtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stobtnActionPerformed
+        // TODO add your handling code here:
+        StoPanel p = new StoPanel();
+        PanelFrame f = new PanelFrame(p);
+        p.setFrame(f);
+        this.dispose();
+    }//GEN-LAST:event_stobtnActionPerformed
+
+    private void racunbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_racunbtnActionPerformed
+        // TODO add your handling code here:
+        RacunPanel p = new RacunPanel();
+        PanelFrame f = new PanelFrame(p);
+        p.setFrame(f);
+        this.dispose();
+    }//GEN-LAST:event_racunbtnActionPerformed
+
+    private void smenabtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smenabtnActionPerformed
+        // TODO add your handling code here:
+        SmenaPanel p=new SmenaPanel();
         PanelFrame f=new PanelFrame(p);
         p.setFrame(f);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_smenabtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton logoutbtn;
     private javax.swing.JTextArea messagetxt;
+    private javax.swing.JButton racunbtn;
+    private javax.swing.JButton robabtn;
+    private javax.swing.JButton smenabtn;
+    private javax.swing.JButton stobtn;
     private javax.swing.JButton tipstolabtn;
     private javax.swing.JLabel ussertxt;
     private javax.swing.JButton zaposlenibtn;

@@ -107,6 +107,21 @@ public class Smena extends OpstiDomenskiObjekat {
     public String getJoinCondition() {
         return "";
     }
-    
 
+    @Override
+    public String toString() {
+        return String.valueOf(idSmena);
+    }
+        public boolean equals(Object obj) {
+        if(!(obj instanceof Smena)){
+            return false;
+        }
+        Smena x=(Smena)obj;
+        if(idSmena==x.getIdSmena()){
+            return true;
+        }
+        return false;
+    }
+
+    
 }

@@ -107,5 +107,19 @@ public class Sto extends OpstiDomenskiObjekat{
     public String getJoinCondition() {
         return "JOIN TipStola ON Sto.idTipStola=TipStola.idTipStola ";
     }
-    
+
+    @Override
+    public String toString() {
+        return String.valueOf(idSto);
+    }
+        public boolean equals(Object obj) {
+        if(!(obj instanceof Sto)){
+            return false;
+        }
+        Sto x=(Sto)obj;
+        if(idSto==x.getIdSto()){
+            return true;
+        }
+        return false;
+    }
 }

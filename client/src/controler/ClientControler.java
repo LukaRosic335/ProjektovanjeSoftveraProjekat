@@ -44,7 +44,8 @@ public class ClientControler {
     public ArrayList<JFrame> getFrames() {
         return frames;
     }
-    public Zaposleni getUlogovani(){
+
+    public Zaposleni getUlogovani() {
         return Session.getInstace().getUlogovani();
     }
 
@@ -81,14 +82,11 @@ public class ClientControler {
         System.out.println("deleteZaposleni CC");
         sendRequest(Operation.DELETE_ZAPOSLENI, pokojni);
     }
-    
-    public Zaposleni updateZaposleni(Zaposleni zaposleni)throws Exception{
+
+    public Zaposleni updateZaposleni(Zaposleni zaposleni) throws Exception {
         System.out.println("updatezaposleni CC");
-        return (Zaposleni)sendRequest(Operation.UPDATE_ZAPOSLENI, zaposleni);
+        return (Zaposleni) sendRequest(Operation.UPDATE_ZAPOSLENI, zaposleni);
     }
-    
-    
-    
 
     private synchronized Object sendRequest(Operation operation, Object data) throws Exception {
         //ukoliko nesto nije kako treba trenutno vraca null
@@ -151,86 +149,91 @@ public class ClientControler {
         return null;
 
     }
-    
-    public ArrayList<TipStola> getAllTipStola() throws Exception{
+
+    public ArrayList<TipStola> getAllTipStola() throws Exception {
         ArrayList<TipStola> z = (ArrayList<TipStola>) sendRequest(Operation.GET_ALL_TIPSTOLA, null);
         return z;
     }
 
     public TipStola noviTipStola(TipStola novi) throws Exception {
-       return (TipStola)sendRequest(Operation.NEW_TIPSTOLA, novi);
+        return (TipStola) sendRequest(Operation.NEW_TIPSTOLA, novi);
     }
 
-    public void updateTipStola(TipStola ts) throws Exception{
+    public void updateTipStola(TipStola ts) throws Exception {
         sendRequest(Operation.UPDATE_TIPSTOLA, ts);
     }
 
-    public TipStola deleteTipStola(TipStola pokojni) throws Exception{
-        return (TipStola)sendRequest(Operation.DELETE_TIPSTOLA, pokojni);
+    public TipStola deleteTipStola(TipStola pokojni) throws Exception {
+        return (TipStola) sendRequest(Operation.DELETE_TIPSTOLA, pokojni);
     }
 
-    public ArrayList<Smena> getAllSmena() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ArrayList<Smena> getAllSmena() throws Exception {
+        ArrayList<Smena> z = (ArrayList<Smena>) sendRequest(Operation.GET_ALL_SMENA, null);
+        return z;
     }
 
-    public Smena deleteSmena(Smena pokojni) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Smena deleteSmena(Smena pokojni) throws Exception {
+        return (Smena) sendRequest(Operation.DELETE_SMENA, pokojni);
     }
 
-    public Smena noviSmena(Smena novi) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Smena noviSmena(Smena novi) throws Exception {
+        return (Smena) sendRequest(Operation.NEW_SMENA, novi);
     }
 
-    public Smena updateSmena(Smena novi) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Smena updateSmena(Smena novi) throws Exception {
+        return (Smena) sendRequest(Operation.UPDATE_SMENA, novi);
     }
 
-    public ArrayList<Roba> getAllRoba() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ArrayList<Roba> getAllRoba() throws Exception {
+        ArrayList<Roba> r = (ArrayList<Roba>) sendRequest(Operation.GET_ALL_ROBA, new Roba());
+        return r;
     }
 
-    public Roba noviRoba(Roba novi) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Roba noviRoba(Roba novi) throws Exception {
+        return (Roba) sendRequest(Operation.NEW_ROBA, novi);
     }
 
-    public Roba updateRoba(Roba novi) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Roba updateRoba(Roba novi) throws Exception {
+        return (Roba) sendRequest(Operation.UPDATE_ROBA, novi);
     }
 
-    public Roba deleteRoba(Roba pokojni) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Roba deleteRoba(Roba pokojni) throws Exception {
+        return (Roba) sendRequest(Operation.DELETE_ROBA, pokojni);
     }
 
-    public ArrayList<Sto> getAllSto() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ArrayList<Sto> getAllSto() throws Exception {
+        ArrayList<Sto> stolovp = (ArrayList<Sto>) sendRequest(Operation.GET_ALL_STO, new Sto());
+        return stolovp;
     }
 
-    public Sto noviSto(Sto novi) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Sto noviSto(Sto novi) throws Exception {
+        return (Sto) sendRequest(Operation.NEW_STO, novi);
     }
 
-    public Sto deleteSto(Sto pokojni) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Sto deleteSto(Sto pokojni) throws Exception {
+        return (Sto) sendRequest(Operation.DELETE_STO, pokojni);
+
     }
 
-    public ArrayList<Racun> getAllRacun() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    public Racun getRacun(Racun racun)throws Exception{
-        return (Racun)sendRequest(Operation.GET_RACUN, racun);
+    public ArrayList<Racun> getAllRacun() throws Exception{
+        ArrayList<Racun>r=(ArrayList<Racun>)sendRequest(Operation.GET_ALL_RACUN, new Racun());
+        return r;
     }
 
-    public Racun updateRacun(Racun racun) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Racun getRacun(Racun racun) throws Exception {
+        return (Racun) sendRequest(Operation.GET_RACUN, racun);
     }
 
-    public Racun deleteRacun(Racun r) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Racun updateRacun(Racun racun)throws Exception {
+        return (Racun) sendRequest(Operation.UPDATE_RACUN, racun);
     }
 
-    public Racun noviRacun(Racun racun) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Racun deleteRacun(Racun r) throws Exception{
+        return (Racun) sendRequest(Operation.DELETE_RACUN, r);
     }
-    
+
+    public Racun noviRacun(Racun racun) throws Exception{
+        return (Racun) sendRequest(Operation.NEW_RACUN, racun);
+    }
 
 }

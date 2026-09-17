@@ -137,6 +137,21 @@ public class StavkaRacuna extends OpstiDomenskiObjekat{
     public String getJoinCondition() {
         return " JOIN Racun ON StavkaRacuna.idRacun=Racun.idRacun JOIN Roba ON StavkaRacuna.idRoba=Roba.idRoba ";
     }
+
+    @Override
+    public String toString() {
+        return "Racun: "+racun.getIdRacun()+" redni broj stavke:"+rb;
+    }
+        public boolean equals(Object obj) {
+        if(!(obj instanceof StavkaRacuna)){
+            return false;
+        }
+        StavkaRacuna x=(StavkaRacuna)obj;
+        if(rb==x.getRb()&&racun.getIdRacun()==x.getRacun().getIdRacun()){
+            return true;
+        }
+        return false;
+    }
     
-    
+ 
 }

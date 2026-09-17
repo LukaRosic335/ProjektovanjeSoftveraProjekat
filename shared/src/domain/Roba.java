@@ -122,6 +122,13 @@ public class Roba extends OpstiDomenskiObjekat{
     }
 
     @Override
+    public String toString() {
+        return naziv;
+    }
+
+    
+    
+    @Override
     public boolean equals(Object obj) {
         if(!(obj instanceof Roba)){
             return false;

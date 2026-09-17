@@ -5,6 +5,10 @@
 package threads;
 
 import controler.ServerControler;
+import domain.Racun;
+import domain.Roba;
+import domain.Smena;
+import domain.Sto;
 import domain.TipStola;
 import domain.Zaposleni;
 import java.io.IOException;
@@ -103,7 +107,7 @@ public class ClientHandler extends Thread {
                     return res;
                 case DELETE_ZAPOSLENI:
                     System.out.println("Delete zaposleni metoda");
-                    ServerControler.getInstance().deleteZaposleni((Zaposleni)req.getData());
+                    ServerControler.getInstance().deleteZaposleni((Zaposleni) req.getData());
                     return res;
 
                 case UPDATE_ZAPOSLENI:
@@ -112,16 +116,67 @@ public class ClientHandler extends Thread {
                     return res;
                 case NEW_TIPSTOLA:
                     System.out.println("New TipStola metoda");
-                    res.setData(ServerControler.getInstance().newTipStola((TipStola)req.getData()));
+                    res.setData(ServerControler.getInstance().newTipStola((TipStola) req.getData()));
                     return res;
                 case UPDATE_TIPSTOLA:
-                    res.setData(ServerControler.getInstance().updateTipStola((TipStola)req.getData()));
+                    res.setData(ServerControler.getInstance().updateTipStola((TipStola) req.getData()));
                     return res;
                 case DELETE_TIPSTOLA:
-                    res.setData(ServerControler.getInstance().deleteTipStola((TipStola)req.getData()));
+                    res.setData(ServerControler.getInstance().deleteTipStola((TipStola) req.getData()));
                     return res;
                 case GET_ALL_TIPSTOLA:
                     res.setData(ServerControler.getInstance().getAllTipStola());
+                    return res;
+                case GET_ALL_RACUN:
+                    res.setData(ServerControler.getInstance().getAllRacun());
+                    return res;
+                case UPDATE_RACUN:
+                    res.setData(ServerControler.getInstance().updateRacun((Racun)req.getData()));
+                    return res;
+                case NEW_RACUN:
+                    res.setData(ServerControler.getInstance().newRacun((Racun)req.getData()));
+                    return res;
+                case DELETE_RACUN:
+                    res.setData(ServerControler.getInstance().deleteRacun((Racun)req.getData()));
+                    return res;
+                case GET_RACUN:
+                    res.setData(ServerControler.getInstance().getRacun((Racun)req.getData()));
+                    return res;
+                case GET_ALL_ROBA:
+                    res.setData(ServerControler.getInstance().getAllRoba());
+                    return res;
+                case UPDATE_ROBA:
+                    res.setData(ServerControler.getInstance().updateRoba((Roba)req.getData()));
+                    return res;
+                case DELETE_ROBA:
+                    res.setData(ServerControler.getInstance().deleteRoba((Roba)req.getData()));
+                    return res;
+                case NEW_ROBA:
+                    res.setData(ServerControler.getInstance().newRoba((Roba)req.getData()));
+                    return res;
+                case GET_ALL_SMENA:
+                    res.setData(ServerControler.getInstance().getAllSmena());
+                    return res;
+                case UPDATE_SMENA:
+                    res.setData(ServerControler.getInstance().updateSmena((Smena)req.getData()));
+                    return res;
+                case DELETE_SMENA:
+                    res.setData(ServerControler.getInstance().deleteSmena((Smena)req.getData()));
+                    return res;
+                case NEW_SMENA:
+                    res.setData(ServerControler.getInstance().newSmena((Smena)req.getData()));
+                    return res;
+                case GET_ALL_STO:
+                    res.setData(ServerControler.getInstance().getAllSto());
+                    return res;
+                case UPDATE_STO:
+                    res.setData(ServerControler.getInstance().updateSto((Sto)req.getData()));
+                    return res;
+                case DELETE_STO:
+                    res.setData(ServerControler.getInstance().deleteSto((Sto)req.getData()));
+                    return res;
+                case NEW_STO:
+                    res.setData(ServerControler.getInstance().newSto((Sto)req.getData()));
                     return res;
                 default:
                     System.out.println("handleRequest u client handler zakinuo");
@@ -129,8 +184,8 @@ public class ClientHandler extends Thread {
                     res.setData(null);
                     return res;
             }
-        }catch(Exception e){
-            System.out.println("Izasao je izuzetak u Clienthadnler "+e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Izasao je izuzetak u Clienthadnler " + e.getMessage());
             res.setStatus(ResponseStatus.Exception);
             res.setData(e);
             return res;

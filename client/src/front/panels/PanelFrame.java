@@ -17,6 +17,7 @@ public class PanelFrame extends javax.swing.JFrame {
     
     public PanelFrame(JPanel panel) {
         jPanel1=panel;
+        this.setResizable(true);
         initComponents();
         this.setVisible(true);
         this.setTitle("Proba proba");

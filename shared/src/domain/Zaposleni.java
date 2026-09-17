@@ -94,9 +94,6 @@ public class Zaposleni extends OpstiDomenskiObjekat {
 
     @Override
     public String toString() {
-        if(this==null){
-            return "Niko";
-        }
         return ime + " " + prezime;
     }
 

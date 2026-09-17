@@ -113,11 +113,11 @@ public class NoviRobaPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         try {
-            if (!cenatxt.getText().matches("\\+d")) {
+            if (!cenatxt.getText().matches("\\d+")) {
                 frame.getMessagetxt().setText("Cena mora biti broj");
                 return;
             }
-            if (!stanjetxt.getText().matches("\\+d")) {
+            if (!stanjetxt.getText().matches("\\d+")) {
                 frame.getMessagetxt().setText("Stanje u magacinu mora biti broj");
                 return;
             }
