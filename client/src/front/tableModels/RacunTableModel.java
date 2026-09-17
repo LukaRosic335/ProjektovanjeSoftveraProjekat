@@ -16,11 +16,15 @@ import javax.swing.table.AbstractTableModel;
 public class RacunTableModel extends AbstractTableModel {
 
     private ArrayList<Racun> lista = new ArrayList(); //KAO LISTA JE NULL NE ZNAM ZASTO
-    private final String[] kolone = {"Id", "pocetni iznos", "sat","popust","krajnji iznos"};//nesto nalik ovom
+    private final String[] kolone = {"Id", "pocetni iznos", "sat", "popust", "krajnji iznos", "zaposleni", "sto"};//nesto nalik ovom
 
     public RacunTableModel() throws Exception {
-        
+
         lista = ClientControler.getInstance().getAllRacun();
+        fireTableDataChanged();
+    }
+    public RacunTableModel(ArrayList<Racun>laLista){
+        lista=laLista;
         fireTableDataChanged();
     }
 
@@ -57,11 +61,13 @@ public class RacunTableModel extends AbstractTableModel {
                 return lista.get(i).getPopust();
             case 4:
                 return lista.get(i).getKrajnjiIznos();
+            case 5:
+                return lista.get(i).getZaposleni();
+            case 6:
+                return lista.get(i).getSto();
             default:
                 throw new AssertionError();
         }
     }
 
-    
-    
 }

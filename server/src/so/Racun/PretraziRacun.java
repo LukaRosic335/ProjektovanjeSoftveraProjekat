@@ -7,7 +7,6 @@ package so.Racun;
 import dbb.DBB;
 import domain.OpstiDomenskiObjekat;
 import domain.Racun;
-import java.util.ArrayList;
 import so.ApstraktneSistemskeOperacije;
 
 /**

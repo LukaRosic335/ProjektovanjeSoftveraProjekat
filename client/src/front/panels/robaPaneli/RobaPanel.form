@@ -35,13 +35,13 @@
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="jTextField2" min="-2" pref="74" max="-2" attributes="0"/>
+                              <Component id="idtxt" min="-2" pref="74" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jTextField1" min="-2" pref="74" max="-2" attributes="0"/>
+                              <Component id="cenatxt" min="-2" pref="74" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jTextField3" min="-2" pref="74" max="-2" attributes="0"/>
+                              <Component id="nazivtxt" min="-2" pref="74" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jTextField4" max="32767" attributes="0"/>
+                              <Component id="stanjetxt" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -84,10 +84,10 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nazivtxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cenatxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="idtxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="stanjetxt" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -152,14 +152,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="pretrazi po"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="cenatxt">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="idtxt">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField3">
+    <Component class="javax.swing.JTextField" name="nazivtxt">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField4">
+    <Component class="javax.swing.JTextField" name="stanjetxt">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>

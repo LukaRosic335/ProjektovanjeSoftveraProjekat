@@ -28,20 +28,24 @@ public enum Operation {
     GET_ALL_RACUN,
     DELETE_RACUN,
     NEW_RACUN,
+    GET_RACUNLIST,
     
     
     GET_ALL_SMENA,
     DELETE_SMENA,
     NEW_SMENA,
     UPDATE_SMENA,
+    GET_SMENALIST,
     
     GET_ALL_ROBA,
     NEW_ROBA,
     UPDATE_ROBA,
     DELETE_ROBA,
+    GET_ROBALIST,
     
     GET_ALL_STO,
     NEW_STO,
     UPDATE_STO,
     DELETE_STO,
+    GET_STOLIST
 }

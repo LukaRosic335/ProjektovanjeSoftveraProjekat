@@ -8,6 +8,9 @@ import controler.ClientControler;
 import domain.Smena;
 import front.panels.PanelFrame;
 import front.tableModels.SmenaTableModel;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,16 +22,17 @@ public class SmenaPanel extends javax.swing.JPanel {
     /**
      * Creates new form SmenaPanel
      */
-    
     private PanelFrame frame;
     private SmenaTableModel model;
+
     public SmenaPanel() {
-        
+
     }
-    public void setFrame(PanelFrame frame){
-        this.frame=frame;
-        try{
-           model = new SmenaTableModel();
+
+    public void setFrame(PanelFrame frame) {
+        this.frame = frame;
+        try {
+            model = new SmenaTableModel();
             initComponents();
             table.setModel(model);
         } catch (Exception e) {
@@ -93,6 +97,11 @@ public class SmenaPanel extends javax.swing.JPanel {
         });
 
         jButton1.setText("pretrazi po");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("id");
 
@@ -166,7 +175,7 @@ public class SmenaPanel extends javax.swing.JPanel {
     private void kreirajtbnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kreirajtbnActionPerformed
         // TODO add your handling code here:
         //privremeno resenje za novog zaposlenog
-        NoviSmenaPanel p=new NoviSmenaPanel();
+        NoviSmenaPanel p = new NoviSmenaPanel();
         PanelFrame frame = new PanelFrame(p);
         p.setFrame(frame);
         this.frame.dispose();//privremeno resenje takodje je moguce da samo na this frame zakacim
@@ -175,7 +184,7 @@ public class SmenaPanel extends javax.swing.JPanel {
     private void obrisibtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obrisibtnActionPerformed
         // TODO add your handling code here:
         int row = table.getSelectedRow();
-        if(row==-1){
+        if (row == -1) {
             frame.getMessagetxt().setText("Nije oznacen ni jedan tip stola za ukloniti");
             return;
         }
@@ -184,7 +193,7 @@ public class SmenaPanel extends javax.swing.JPanel {
 
         if (odgovor == JOptionPane.YES_OPTION) {
             try {
-                Smena ts=ClientControler.getInstance().deleteSmena(pokojni);
+                Smena ts = ClientControler.getInstance().deleteSmena(pokojni);
                 model = new SmenaTableModel();
                 table.setModel(model);
                 frame.getMessagetxt().setText("Uspesno uklonjen " + pokojni);
@@ -198,17 +207,39 @@ public class SmenaPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         //izmeni stvari
         int row = table.getSelectedRow();
-        if(row==-1){
+        if (row == -1) {
             frame.getMessagetxt().setText("Nije odabran ni jedan zaposleni za izmeniti");
             return;
         }
         Smena izmenjeni = model.getSmena(row);
         //nesto nesto prikazi novi prozor koji menja zaposlenog
         UpdateSmenaPanel uf = new UpdateSmenaPanel(izmenjeni);
-        PanelFrame noviFrame=new PanelFrame(uf);
+        PanelFrame noviFrame = new PanelFrame(uf);
         uf.setFrame(noviFrame);
         frame.dispose();//privremeno resenje moguce je samo na this frame da zakacim i rifresujem panel
     }//GEN-LAST:event_izmenibtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        long id = jTextField1.getText().equals("") ? 0 : Long.parseLong(jTextField1.getText());
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime pocetak = jTextField2.getText().equals("") ? null : LocalTime.parse(jTextField2.getText(), format);
+        LocalTime kraj = jTextField3.getText().equals("") ? null : LocalTime.parse(jTextField3.getText(), format);
+
+        Smena smena = new Smena(id, pocetak, kraj);
+        try{
+        ArrayList<Smena> smene = ClientControler.getInstance().getSmenaList(smena);
+        model=new SmenaTableModel(smene);
+        this.repaint();
+        this.revalidate();
+        }catch(Exception e){
+            frame.getMessagetxt().setText(e.getMessage());
+            jButton1.setEnabled(false);
+            izmenibtn.setEnabled(false);
+            kreirajtbn.setEnabled(false);
+            obrisibtn.setEnabled(false);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -13,7 +13,8 @@ import java.util.ArrayList;
  *
  * @author jevrozim
  */
-public class Racun extends OpstiDomenskiObjekat{
+public class Racun extends OpstiDomenskiObjekat {
+
     private long idRacun;
     private double pocetniIznos;
     private LocalTime sat;
@@ -36,8 +37,9 @@ public class Racun extends OpstiDomenskiObjekat{
         this.sto = sto;
         this.stavkeRacuna = stavkeRacuna;
     }
-    public Racun(long idRacun){
-        this.idRacun=idRacun;
+
+    public Racun(long idRacun) {
+        this.idRacun = idRacun;
     }
 
     public long getIdRacun() {
@@ -103,7 +105,6 @@ public class Racun extends OpstiDomenskiObjekat{
     public void setStavkeRacuna(ArrayList<StavkaRacuna> stavkeRacuna) {
         this.stavkeRacuna = stavkeRacuna;
     }
-    
 
     @Override
     public String getTableName() {
@@ -112,16 +113,16 @@ public class Racun extends OpstiDomenskiObjekat{
 
     @Override
     public ArrayList<OpstiDomenskiObjekat> vratiListu(ResultSet rs) throws SQLException {
-        ArrayList<OpstiDomenskiObjekat> list=new ArrayList<>();
-        while(rs.next()){
+        ArrayList<OpstiDomenskiObjekat> list = new ArrayList<>();
+        while (rs.next()) {
             //kreiraj zaposlenog
-            Zaposleni z=new Zaposleni(rs.getLong("Zaposleni.idZaposlenog"), rs.getString("Zaposleni.ime"), rs.getString("Zaposleni.prezime"), rs.getString("Zaposleni.korisnickoIme"), rs.getString("Zaposleni.sifra"));
+            Zaposleni z = new Zaposleni(rs.getLong("Zaposleni.idZaposlenog"), rs.getString("Zaposleni.ime"), rs.getString("Zaposleni.prezime"), rs.getString("Zaposleni.korisnickoIme"), rs.getString("Zaposleni.sifra"));
             //evidentno kreiram i tip stola jeeej
-            TipStola ts=new TipStola(rs.getLong("TipStola.idTipStola"), rs.getInt("TipStola.brMesta"));
+            TipStola ts = new TipStola(rs.getLong("TipStola.idTipStola"), rs.getInt("TipStola.brMesta"));
             //kreiraj sto
-            Sto s=new Sto(rs.getLong("Sto.idSto"), rs.getInt("Sto.brMusterija"), ts);
+            Sto s = new Sto(rs.getLong("Sto.idSto"), rs.getInt("Sto.brMusterija"), ts);
             //kreiraj racun
-            Racun racun=new Racun(rs.getLong("Racun.idRacun"), rs.getDouble("Racun.pocetniIznos"), rs.getTime("Racun.sat").toLocalTime(), rs.getDouble("Racun.popust"), rs.getDouble("Racun.krajnjiIznos"), z, s, new ArrayList<>());
+            Racun racun = new Racun(rs.getLong("Racun.idRacun"), rs.getDouble("Racun.pocetniIznos"), rs.getTime("Racun.sat").toLocalTime(), rs.getDouble("Racun.popust"), rs.getDouble("Racun.krajnjiIznos"), z, s, new ArrayList<>());
             //privremeno resenje za kreiranje stavki racuna je new ArrayList()
             list.add(racun);
         }
@@ -131,7 +132,7 @@ public class Racun extends OpstiDomenskiObjekat{
 
     @Override
     public String getInsertValues() {
-        return "("+pocetniIznos+", '"+sat.withNano(0)+"', "+popust+", "+krajnjiIznos+", "+zaposleni.getIdZaposleni()+", "+sto.getIdSto()+")";
+        return "(" + pocetniIznos + ", '" + sat.withNano(0) + "', " + popust + ", " + krajnjiIznos + ", " + zaposleni.getIdZaposleni() + ", " + sto.getIdSto() + ")";
     }
 
     @Override
@@ -141,44 +142,53 @@ public class Racun extends OpstiDomenskiObjekat{
 
     @Override
     public String getUpdateValues() {
-        return" pocetniIznos="+pocetniIznos+", sat='"+sat.withNano(0)+"', popust="+popust+", krajnjiIznos="+krajnjiIznos+", idZaposleni="+zaposleni.getIdZaposleni()+", idSto="+sto.getIdSto();
+        return " pocetniIznos=" + pocetniIznos + ", sat='" + sat.withNano(0) + "', popust=" + popust + ", krajnjiIznos=" + krajnjiIznos + ", idZaposleni=" + zaposleni.getIdZaposleni() + ", idSto=" + sto.getIdSto();
     }
 
     @Override
     public String getWhere() {
-        return " idRacun="+idRacun;
+        return " idRacun=" + idRacun;
     }
 
     @Override
     public String getSelectCondition() {
-        String query="";
-        if(idRacun!=0){
-            query+=" AND idRacun="+idRacun;
+        String query = "";
+        if (idRacun != 0) {
+            query += " AND Racun.idRacun=" + idRacun;
         }
-        if(pocetniIznos!=0){
-            query+=" AND Racun.pocetniIznos="+pocetniIznos;
+        if (pocetniIznos != 0) {
+            query += " AND Racun.pocetniIznos=" + pocetniIznos;
         }
-        if(sat!=null){
-            query+=" AND Racun.sat='"+sat.withNano(0)+"'";
+        if (sat != null) {
+            query += " AND Racun.sat='" + sat.withNano(0) + "'";
         }
-        if(popust!=0){
-            query+=" AND Racun.popust="+popust;
+        if (popust != 0) {
+            query += " AND Racun.popust=" + popust;
         }
-        if(krajnjiIznos!=0){
-            query+=" AND Racun.krajnjiIznos="+krajnjiIznos;
+        if (krajnjiIznos != 0) {
+            query += " AND Racun.krajnjiIznos=" + krajnjiIznos;
         }
-        if(zaposleni!=null){
-            query+=" AND Racun.idZaposleni="+zaposleni.getIdZaposleni();
+        if (zaposleni != null) {
+            if (zaposleni.getIdZaposleni() != 0) {
+                query += " AND Racun.idZaposleni=" + zaposleni.getIdZaposleni();
+            }
         }
-        if(sto!=null){
-            query+=" AND Racun.idSto="+sto.getIdSto();
+        if (sto != null) {
+            if (sto.getIdSto() != 0) {
+                query += " AND Racun.idSto=" + sto.getIdSto();
+            }
+        }
+        if (stavkeRacuna != null) {
+            if (stavkeRacuna.get(0).getRoba() != null && stavkeRacuna.get(0).getRoba().getIdRoba() != 0) {
+                query += " AND idRoba=" + stavkeRacuna.get(0).getRoba().getIdRoba();
+            }
         }
         return query;
     }
 
     @Override
     public String getJoinCondition() {
-        return " JOIN Zaposleni ON Racun.idZaposleni=Zaposleni.idZaposlenog JOIN Sto ON Sto.idSto=Racun.idSto JOIN TipStola ON Sto.idTipStola=TipStola.idTipStola ";
+        return " JOIN Zaposleni ON Racun.idZaposleni=Zaposleni.idZaposlenog JOIN Sto ON Sto.idSto=Racun.idSto JOIN TipStola ON Sto.idTipStola=TipStola.idTipStola LEFT JOIN StavkaRacuna ON Racun.idRacun=StavkaRacuna.idRacun ";
     }
 
     @Override
@@ -188,16 +198,14 @@ public class Racun extends OpstiDomenskiObjekat{
 
     @Override
     public boolean equals(Object obj) {
-        if(!(obj instanceof Racun)){
+        if (!(obj instanceof Racun)) {
             return false;
         }
-        Racun x=(Racun)obj;
-        if(idRacun==x.getIdRacun()){
+        Racun x = (Racun) obj;
+        if (idRacun == x.getIdRacun()) {
             return true;
         }
         return false;
     }
-    
-    
-    
+
 }

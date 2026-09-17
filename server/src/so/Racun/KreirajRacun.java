@@ -28,6 +28,7 @@ public class KreirajRacun extends ApstraktneSistemskeOperacije<Racun> {
         Racun racun = (Racun) odo;
         racun.setIdRacun(ret);
         for (StavkaRacuna stavka : racun.getStavkeRacuna()) {
+            stavka.setCena(stavka.getKolicina()*stavka.getRoba().getCena());
             DBB.getInstance().insert(stavka);
         }
         racun.setPocetniIznos(ret);

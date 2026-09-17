@@ -13,19 +13,23 @@ import so.ApstraktneSistemskeOperacije;
  *
  * @author jevrozim
  */
-public class PromeniSto extends ApstraktneSistemskeOperacije<Sto>{
+public class PromeniSto extends ApstraktneSistemskeOperacije<Sto> {
 
     @Override
     protected Sto execute(OpstiDomenskiObjekat odo) throws Exception {
         DBB.getInstance().update(odo);
-        return (Sto)odo;
+        return (Sto) odo;
     }
 
     @Override
     protected void validate(OpstiDomenskiObjekat odo) throws Exception {
-        if(!(odo instanceof Sto)){
+        if (!(odo instanceof Sto)) {
             throw new Exception("Nije prosledjen Sto");
         }
+        Sto sto = (Sto) odo;
+        if (sto.getBrMusterija() > sto.getTipStola().getBrMesta()) {
+            throw new Exception("Sto ne moze imati vise musterija nego sto ima mesta");
+        }
     }
-    
+
 }

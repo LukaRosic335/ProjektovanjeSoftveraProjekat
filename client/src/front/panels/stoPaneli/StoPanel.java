@@ -6,8 +6,10 @@ package front.panels.stoPaneli;
 
 import controler.ClientControler;
 import domain.Sto;
+import domain.TipStola;
 import front.panels.PanelFrame;
 import front.tableModels.StoTableModel;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,15 +18,17 @@ import javax.swing.JOptionPane;
  */
 public class StoPanel extends javax.swing.JPanel {
 
-        private PanelFrame frame;
+    private PanelFrame frame;
     private StoTableModel model;
+
     public StoPanel() {
-        
+
     }
-    public void setFrame(PanelFrame frame){
-        this.frame=frame;
-        try{
-           model = new StoTableModel();
+
+    public void setFrame(PanelFrame frame) {
+        this.frame = frame;
+        try {
+            model = new StoTableModel();
             initComponents();
             table.setModel(model);
         } catch (Exception e) {
@@ -88,13 +92,12 @@ public class StoPanel extends javax.swing.JPanel {
             }
         });
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("pretrazi po");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-
-        jButton1.setText("pretrazi po");
 
         jLabel1.setText("id");
 
@@ -168,7 +171,7 @@ public class StoPanel extends javax.swing.JPanel {
     private void kreirajtbnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kreirajtbnActionPerformed
         // TODO add your handling code here:
         //privremeno resenje za novog zaposlenog
-        NoviStoPanel p=new NoviStoPanel();
+        NoviStoPanel p = new NoviStoPanel();
         PanelFrame frame = new PanelFrame(p);
         p.setFrame(frame);
         this.frame.dispose();//privremeno resenje takodje je moguce da samo na this frame zakacim
@@ -177,7 +180,7 @@ public class StoPanel extends javax.swing.JPanel {
     private void obrisibtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obrisibtnActionPerformed
         // TODO add your handling code here:
         int row = table.getSelectedRow();
-        if(row==-1){
+        if (row == -1) {
             frame.getMessagetxt().setText("Nije oznacen ni jedan tip stola za ukloniti");
             return;
         }
@@ -186,7 +189,7 @@ public class StoPanel extends javax.swing.JPanel {
 
         if (odgovor == JOptionPane.YES_OPTION) {
             try {
-                Sto ts=ClientControler.getInstance().deleteSto(pokojni);
+                Sto ts = ClientControler.getInstance().deleteSto(pokojni);
                 model = new StoTableModel();
                 table.setModel(model);
                 frame.getMessagetxt().setText("Uspesno uklonjen " + pokojni);
@@ -200,21 +203,39 @@ public class StoPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         //izmeni stvari
         int row = table.getSelectedRow();
-        if(row==-1){
+        if (row == -1) {
             frame.getMessagetxt().setText("Nije odabran ni jedan zaposleni za izmeniti");
             return;
         }
         Sto izmenjeni = model.getSto(row);
         //nesto nesto prikazi novi prozor koji menja zaposlenog
         UpdateStoPanel uf = new UpdateStoPanel(izmenjeni);
-        PanelFrame noviFrame=new PanelFrame(uf);
+        PanelFrame noviFrame = new PanelFrame(uf);
         uf.setFrame(noviFrame);
         frame.dispose();//privremeno resenje moguce je samo na this frame da zakacim i rifresujem panel
     }//GEN-LAST:event_izmenibtnActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+        long id = jTextField1.getText().equals("") ? 0 : Long.parseLong(jTextField1.getText());
+        int brM = jTextField2.getText().equals("") ? 0 : Integer.parseInt(jTextField2.getText());
+        long idT = jTextField3.getText().equals("") ? 0 : Long.parseLong(jTextField3.getText());
+
+        Sto sto = new Sto(id, brM, new TipStola(idT, 0));
+        try{
+        ArrayList<Sto> stolovi = ClientControler.getInstance().getStoLista(sto);
+        model=new StoTableModel(stolovi);
+        table.setModel(model);
+        this.repaint();
+        this.revalidate();
+        }catch(Exception e){
+            frame.getMessagetxt().setText(e.getMessage());
+            jButton1.setEnabled(false);
+            kreirajtbn.setEnabled(false);
+            obrisibtn.setEnabled(false);
+            izmenibtn.setEnabled(false);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

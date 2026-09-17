@@ -34,6 +34,10 @@ public class KreirajSto extends ApstraktneSistemskeOperacije<Sto> {
         if (!(odo instanceof Sto)) {
             throw new Exception("Nije prosledjen Sto");
         }
+        Sto sto=(Sto)odo;
+        if(sto.getBrMusterija()>sto.getTipStola().getBrMesta()){
+            throw new Exception("Sto ne moze imati vise musterija nego sto ima mesta");
+        }
     }
 
 }

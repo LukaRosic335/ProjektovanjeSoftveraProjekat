@@ -7,16 +7,18 @@ package domain;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 /**
  *
  * @author jevrozim
  */
-public class Sto extends OpstiDomenskiObjekat{
+public class Sto extends OpstiDomenskiObjekat {
+
     private long idSto;
     private int brMusterija;
     private TipStola tipStola;
 
-    public Sto(){
+    public Sto() {
     }
 
     public Sto(long idSto, int brMusterija, TipStola tipStola) {
@@ -56,12 +58,12 @@ public class Sto extends OpstiDomenskiObjekat{
 
     @Override
     public ArrayList<OpstiDomenskiObjekat> vratiListu(ResultSet rs) throws SQLException {
-        ArrayList<OpstiDomenskiObjekat>list=new ArrayList<>();
-        while(rs.next()){
+        ArrayList<OpstiDomenskiObjekat> list = new ArrayList<>();
+        while (rs.next()) {
             //napravim tipstola
-            TipStola tip=new TipStola(rs.getLong("TipStola.idTipStola"), rs.getInt("TipStola.brMesta"));
+            TipStola tip = new TipStola(rs.getLong("TipStola.idTipStola"), rs.getInt("TipStola.brMesta"));
             //napravim astal
-            Sto sto=new Sto(rs.getLong("Sto.idSto"), rs.getInt("Sto.brMusterija"), tip);
+            Sto sto = new Sto(rs.getLong("Sto.idSto"), rs.getInt("Sto.brMusterija"), tip);
             list.add(sto);
         }
         rs.close();
@@ -70,7 +72,7 @@ public class Sto extends OpstiDomenskiObjekat{
 
     @Override
     public String getInsertValues() {
-        return "("+brMusterija+", "+tipStola.getIdTipStola()+")";
+        return "(" + brMusterija + ", " + tipStola.getIdTipStola() + ")";
     }
 
     @Override
@@ -80,25 +82,27 @@ public class Sto extends OpstiDomenskiObjekat{
 
     @Override
     public String getUpdateValues() {
-        return " brMusterija="+brMusterija+", idTipStola="+tipStola.getIdTipStola();
+        return " brMusterija=" + brMusterija + ", idTipStola=" + tipStola.getIdTipStola();
     }
 
     @Override
     public String getWhere() {
-        return " idSto="+idSto;
+        return " idSto=" + idSto;
     }
 
     @Override
     public String getSelectCondition() { //MOZDA KONKRETNO KOJI TIP STOLA ???
-        String query="";
-        if(idSto!=0){
-            query+=" AND Sto.idSto="+idSto;
+        String query = "";
+        if (idSto != 0) {
+            query += " AND Sto.idSto=" + idSto;
         }
-        if(brMusterija>0){
-            query+=" AND Sto.brMusterija="+brMusterija;
+        if (brMusterija > 0) {
+            query += " AND Sto.brMusterija=" + brMusterija;
         }
-        if(tipStola!=null){
-            query+=" AND Sto.idTipStola="+tipStola.getIdTipStola();
+        if (tipStola != null) {
+            if (tipStola.getIdTipStola() != 0) {
+                query += " AND Sto.idTipStola=" + tipStola.getIdTipStola();
+            }
         }
         return query;
     }
@@ -112,12 +116,13 @@ public class Sto extends OpstiDomenskiObjekat{
     public String toString() {
         return String.valueOf(idSto);
     }
-        public boolean equals(Object obj) {
-        if(!(obj instanceof Sto)){
+
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Sto)) {
             return false;
         }
-        Sto x=(Sto)obj;
-        if(idSto==x.getIdSto()){
+        Sto x = (Sto) obj;
+        if (idSto == x.getIdSto()) {
             return true;
         }
         return false;

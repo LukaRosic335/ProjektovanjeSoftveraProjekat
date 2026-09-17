@@ -23,6 +23,11 @@ public class RobaTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
+    public RobaTableModel(ArrayList<Roba> robe) {
+        lista = robe;
+        fireTableDataChanged();
+    }
+
     @Override
     public String getColumnName(int column) {
         return kolone[column];

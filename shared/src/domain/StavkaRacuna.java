@@ -12,7 +12,8 @@ import java.util.ArrayList;
  *
  * @author jevrozim
  */
-public class StavkaRacuna extends OpstiDomenskiObjekat{
+public class StavkaRacuna extends OpstiDomenskiObjekat {
+
     private Racun racun;
     private int rb;
     private int cena;
@@ -29,11 +30,10 @@ public class StavkaRacuna extends OpstiDomenskiObjekat{
         this.kolicina = kolicina;
         this.roba = roba;
     }
-    
-    public StavkaRacuna(Racun racun){
-        this.racun=racun;
+
+    public StavkaRacuna(Racun racun) {
+        this.racun = racun;
     }
-    
 
     public Racun getRacun() {
         return racun;
@@ -82,14 +82,14 @@ public class StavkaRacuna extends OpstiDomenskiObjekat{
 
     @Override
     public ArrayList<OpstiDomenskiObjekat> vratiListu(ResultSet rs) throws SQLException {
-        ArrayList<OpstiDomenskiObjekat> list=new ArrayList<>();
-        while(rs.next()){
+        ArrayList<OpstiDomenskiObjekat> list = new ArrayList<>();
+        while (rs.next()) {
             //kreiram robu
-            Roba r=new Roba(rs.getLong("Roba.idRoba"), rs.getInt("Roba.cena"), rs.getString("Roba.naziv"), rs.getInt("Roba.stanjeUMagacinu"));
+            Roba r = new Roba(rs.getLong("Roba.idRoba"), rs.getInt("Roba.cena"), rs.getString("Roba.naziv"), rs.getInt("Roba.stanjeUMagacinu"));
             //kreiram racun SAMO SA ID
-            Racun idRacun=new Racun(rs.getLong("Racun.idRacun"));
+            Racun idRacun = new Racun(rs.getLong("Racun.idRacun"));
             //kreiram stavkuRacuna
-            StavkaRacuna stavka=new StavkaRacuna(idRacun, rs.getInt("StavkaRacuna.rb"), rs.getInt("StavkaRacuna.cena"), rs.getInt("StavkaRacuna.kolicina"), r);
+            StavkaRacuna stavka = new StavkaRacuna(idRacun, rs.getInt("StavkaRacuna.rb"), rs.getInt("StavkaRacuna.cena"), rs.getInt("StavkaRacuna.kolicina"), r);
             list.add(stavka);
         }
         rs.close();
@@ -98,7 +98,7 @@ public class StavkaRacuna extends OpstiDomenskiObjekat{
 
     @Override
     public String getInsertValues() {
-        return "("+rb+", "+cena+", "+kolicina+", "+racun.getIdRacun()+", "+roba.getIdRoba()+")";
+        return "(" + rb + ", " + cena + ", " + kolicina + ", " + racun.getIdRacun() + ", " + roba.getIdRoba() + ")";
     }
 
     @Override
@@ -108,31 +108,33 @@ public class StavkaRacuna extends OpstiDomenskiObjekat{
 
     @Override
     public String getUpdateValues() {
-        return "rb="+rb+", cena="+cena+", kolicina="+kolicina+", idRacun="+racun.getIdRacun()+", idRoba="+roba.getIdRoba();
+        return "rb=" + rb + ", cena=" + cena + ", kolicina=" + kolicina + ", idRacun=" + racun.getIdRacun() + ", idRoba=" + roba.getIdRoba();
     }
 
     @Override
     public String getWhere() {
-        return "StavkaRacuna.idRacun="+racun.getIdRacun()+" AND rb="+rb;
+        return "StavkaRacuna.idRacun=" + racun.getIdRacun() + " AND rb=" + rb;
     }
 
     @Override
     public String getSelectCondition() {
-        String query="";
-        if(rb!=0){
-            query+=" AND rb="+rb;
+        String query = "";
+        if (rb != 0) {
+            query += " AND rb=" + rb;
         }
-        if(cena!=0){
-            query+=" AND cena="+cena;
+        if (cena != 0) {
+            query += " AND cena=" + cena;
         }
-        if(kolicina!=0){
-            query+=" AND kolicina="+kolicina;
+        if (kolicina != 0) {
+            query += " AND kolicina=" + kolicina;
         }
-        if(racun!=null){
-            query+=" AND StavkaRacuna.idRacun="+racun.getIdRacun();
+        if (racun != null) {
+            query += " AND StavkaRacuna.idRacun=" + racun.getIdRacun();
         }
-        if(roba!=null){
-            query+=" AND StavkaRacuna.idRoba="+roba.getIdRoba();
+        if (roba != null) {
+            if (roba.getIdRoba() != 0) {
+                query += " AND StavkaRacuna.idRoba=" + roba.getIdRoba();
+            }
         }
         return query;
     }
@@ -144,18 +146,18 @@ public class StavkaRacuna extends OpstiDomenskiObjekat{
 
     @Override
     public String toString() {
-        return "Racun: "+racun.getIdRacun()+" redni broj stavke:"+rb;
+        return "Racun: " + racun.getIdRacun() + " redni broj stavke:" + rb;
     }
-        public boolean equals(Object obj) {
-        if(!(obj instanceof StavkaRacuna)){
+
+    public boolean equals(Object obj) {
+        if (!(obj instanceof StavkaRacuna)) {
             return false;
         }
-        StavkaRacuna x=(StavkaRacuna)obj;
-        if(rb==x.getRb()&&racun.getIdRacun()==x.getRacun().getIdRacun()){
+        StavkaRacuna x = (StavkaRacuna) obj;
+        if (rb == x.getRb() && racun.getIdRacun() == x.getRacun().getIdRacun()) {
             return true;
         }
         return false;
     }
-    
- 
+
 }

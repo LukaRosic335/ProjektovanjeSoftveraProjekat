@@ -23,6 +23,11 @@ public class SmenaTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
+    public SmenaTableModel(ArrayList<Smena> smene) {
+        lista=smene;
+        fireTableDataChanged();
+    }
+
     @Override
     public String getColumnName(int column) {
         return kolone[column];

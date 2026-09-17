@@ -8,6 +8,7 @@ import controler.ClientControler;
 import domain.Roba;
 import front.panels.PanelFrame;
 import front.tableModels.RobaTableModel;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -52,10 +53,10 @@ public class RobaPanel extends javax.swing.JPanel {
         obrisibtn = new javax.swing.JButton();
         izmenibtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        cenatxt = new javax.swing.JTextField();
+        idtxt = new javax.swing.JTextField();
+        nazivtxt = new javax.swing.JTextField();
+        stanjetxt = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -96,6 +97,11 @@ public class RobaPanel extends javax.swing.JPanel {
         });
 
         jButton1.setText("pretrazi po");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("id");
 
@@ -126,13 +132,13 @@ public class RobaPanel extends javax.swing.JPanel {
                                 .addGap(61, 61, 61)
                                 .addComponent(jLabel4))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(idtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cenatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(nazivtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField4)))))
+                                .addComponent(stanjetxt)))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -162,10 +168,10 @@ public class RobaPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nazivtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cenatxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stanjetxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -224,8 +230,31 @@ public class RobaPanel extends javax.swing.JPanel {
         frame.dispose();//privremeno resenje moguce je samo na this frame da zakacim i rifresujem panel
     }//GEN-LAST:event_izmenibtnActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int cena=cenatxt.getText().equals("") ? 0 :Integer.parseInt(cenatxt.getText());
+        int stanje=stanjetxt.getText().equals("") ? 0 :Integer.parseInt(stanjetxt.getText());
+        long id=idtxt.getText().equals("") ? 0 :Long.parseLong(idtxt.getText());
+        Roba roba=new Roba(id, cena,nazivtxt.getText() , stanje);
+        try{
+        ArrayList<Roba>robe=ClientControler.getInstance().getRobaList(roba);
+        model=new RobaTableModel(robe);
+        table.setModel(model);
+        this.repaint();
+        this.revalidate();
+        }catch(Exception e){
+            frame.getMessagetxt().setText(e.getMessage());
+            jButton1.setEnabled(false);
+            izmenibtn.setEnabled(false);
+            obrisibtn.setEnabled(false);
+            kreirajtbn.setEnabled(false);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField cenatxt;
+    private javax.swing.JTextField idtxt;
     private javax.swing.JButton izmenibtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -233,12 +262,10 @@ public class RobaPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JButton kreirajtbn;
+    private javax.swing.JTextField nazivtxt;
     private javax.swing.JButton obrisibtn;
+    private javax.swing.JTextField stanjetxt;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

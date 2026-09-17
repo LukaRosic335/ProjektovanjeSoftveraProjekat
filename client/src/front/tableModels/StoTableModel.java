@@ -23,6 +23,11 @@ public class StoTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
+    public StoTableModel(ArrayList<Sto> stolovi) {
+        lista=stolovi;
+        fireTableDataChanged();
+    }
+
     @Override
     public String getColumnName(int column) {
         return kolone[column];

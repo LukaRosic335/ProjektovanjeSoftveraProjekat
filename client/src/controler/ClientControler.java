@@ -238,4 +238,23 @@ public class ClientControler {
         return (Racun) sendRequest(Operation.NEW_RACUN, racun);
     }
 
+    public ArrayList<Racun> getRacunList(Racun r) throws Exception {
+        return (ArrayList<Racun>) sendRequest(Operation.GET_RACUNLIST, r);
+    }
+
+    public ArrayList<Roba> getRobaList(Roba roba) throws Exception {
+        return (ArrayList<Roba>) sendRequest(Operation.GET_ROBALIST, roba);
+
+    }
+
+    public ArrayList<Smena> getSmenaList(Smena smena) throws Exception {
+        return (ArrayList<Smena>) sendRequest(Operation.GET_SMENALIST, smena);
+
+    }
+
+    public ArrayList<Sto> getStoLista(Sto sto) throws Exception{
+                return (ArrayList<Sto>)sendRequest(Operation.GET_STOLIST, sto);
+
+    }
+
 }

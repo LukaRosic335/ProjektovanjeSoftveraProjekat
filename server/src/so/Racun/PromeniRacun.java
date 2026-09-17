@@ -31,43 +31,42 @@ public class PromeniRacun extends ApstraktneSistemskeOperacije<Racun> {
 
         stari.sort(Comparator.comparingInt(StavkaRacuna::getRb));
         novi.sort(Comparator.comparingInt(StavkaRacuna::getRb));
-        System.out.println(stari.size()+"VEOMA STARI");
-        System.out.println(novi.size()+"VEOMA NOVI");
+        System.out.println(stari.size() + "VEOMA STARI");
+        System.out.println(novi.size() + "VEOMA NOVI");
 
-        if(novi.size()==stari.size()){
-            for(StavkaRacuna s:novi){
+        if (novi.size() == stari.size()) {
+            for (StavkaRacuna s : novi) {
+                s.setCena(s.getKolicina() * s.getRoba().getCena());
+
                 DBB.getInstance().update(s);
             }
         }
-        if(novi.size()<stari.size()){
-            for(StavkaRacuna s:stari){
-                if(!novi.contains(s)){
+        if (novi.size() < stari.size()) {
+            for (StavkaRacuna s : stari) {
+                if (!novi.contains(s)) {
                     DBB.getInstance().delete(s);
                 }
-                for(int i=0;i<novi.size()+0;i++){
+                for (int i = 0; i < novi.size() + 0; i++) {
                     novi.get(i).setRb(i);
+                    novi.get(i).setCena(novi.get(i).getKolicina() * novi.get(i).getRoba().getCena());
                     DBB.getInstance().update(novi.get(i));
                 }
             }
         }
-        if(novi.size()>stari.size()){
-            System.out.println("JAKO BITNOSAOFDSAJDSDAIDSPOKADASJDPSJDAD");
+        if (novi.size() > stari.size()) {
+            novi.get(stari.size()).setCena(novi.get(stari.size()).getKolicina()*novi.get(stari.size()).getRoba().getCena());
             DBB.getInstance().insert(novi.get(stari.size()));
         }
-        
-        
 
         //ima u starim nema u novim=>delete
         //nema u starim ima u novim=>insert
         //ima u starim ima u novim=>update
-//        double suma=0;
-//        for(StavkaRacuna s: novi){
-//            suma+=s.getCena()*s.getKolicina();
-//        }
-//        racun.setPocetniIznos(suma);
-//        racun.setKrajnjiIznos(suma*racun.getPopust());
-
-
+        double suma = 0;
+        for (StavkaRacuna s : novi) {
+            suma += s.getCena() * s.getKolicina();
+        }
+        racun.setPocetniIznos(suma);
+        racun.setKrajnjiIznos(suma * racun.getPopust());
 
         DBB.getInstance().update(odo);
         return (Racun) odo;
